@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет Life5+</title>
+    <link rel="stylesheet" href="waw.css">
+</head>
+<body>
+    <header>
+        <img src="logo.jpg" class="logo">
+        <h1>Личный кабинет Life5+</h1>
+        <nav>
+            <a href="index.html">Главная</a>
+
+            <a href="messenger.html">Мессенджер</a>
+            <a href="profile.html">Личный кабинет</a>
+            <a href="blogs.html">Блоги</a>
+            <a href="about.html">О создателях</a>
+        </nav>
+    </header>
+
+    <!-- Добавьте этот код в ваш profile.html вместо существующего содержимого контейнера -->
+
+<!-- Добавьте этот код в ваш profile.html вместо существующего содержимого контейнера -->
+
+<div class="container">
+    <h2>Мини профиль</h2>
+    <div id="miniProfile" style="display: none; border: 1px solid #ccc; padding: 10px; max-width: 300px; text-align: center;">
+        <img id="profilePicture" src="default.jpg" alt="Профиль" style="width: 100%; border-radius: 50%; margin-bottom: 10px;">
+        <h3 id="fullName">ФИО пользователя</h3>
+    </div>
+    
+    <h2>Ваши данные</h2>
+    <div id="inputFields">
+        <input type="text" id="lastName" placeholder="Фамилия" required>
+        <input type="text" id="firstName" placeholder="Имя" required>
+        <input type="text" id="middleName" placeholder="Отчество" required>
+        <button type="button" id="saveButton">Сохранить изменения</button>
+    </div>
+    <p>Ваши посты и блоги будут отображаться здесь.</p>
+</div>
+
+<script>
+    document.getElementById("saveButton").addEventListener("click", () => {
+        // Получение значений из полей ввода
+        const lastName = document.getElementById("lastName").value.trim();
+        const firstName = document.getElementById("firstName").value.trim();
+        const middleName = document.getElementById("middleName").value.trim();
+
+        if (lastName && firstName && middleName) {
+            // Обновление мини профиля
+            document.getElementById("fullName").innerText = `${lastName} ${firstName} ${middleName}`;
+            // Отображение мини профиля
+            document.getElementById("miniProfile").style.display = "block";
+            // Скрытие полей ввода
+            document.getElementById("inputFields").style.display = "none";
+        } else {
+            alert("Пожалуйста, заполните все обязательные поля.");
+        }
+    });
+</script>
+
+
+<script>
+    document.getElementById("saveButton").addEventListener("click", () => {
+        // Получение значений из полей ввода
+        const lastName = document.getElementById("lastName").value.trim();
+        const firstName = document.getElementById("firstName").value.trim();
+        const middleName = document.getElementById("middleName").value.trim();
+
+        if (lastName && firstName && middleName) {
+            // Обновление мини профиля
+            document.getElementById("fullName").innerText = `${lastName} ${firstName} ${middleName}`;
+            // Отображение мини профиля
+            document.getElementById("miniProfile").style.display = "block";
+        } else {
+            alert("Пожалуйста, заполните все обязательные поля.");
+        }
+    });
+</script>
+
+
+    <footer>
+        <p>© 2023 Life5+. Все права защищены.</p>
+    </footer>
+</body>
+</html>

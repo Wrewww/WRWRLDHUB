@@ -1,0 +1,244 @@
+body{
+    display: flex;
+    flex-direction: column;
+}
+header{
+    position: sticky;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 84px;
+    background-color: #87ADB6;
+    justify-content: space-between;
+    align-items: center;
+}
+.headerdiv{
+    margin: 0px 45px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+header p{
+    text-wrap: nowrap;
+    font: 12px 'Roboto-midle';
+    padding: 0% 40px;
+}
+.logo{
+    width: 109px;
+    height: 28px;
+}
+.buy{
+    width: 20px;
+    height: 25px;
+}
+
+
+main{
+    background-image: url(Rectangle.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+main{
+ width: 100%;
+ height: 1190px;
+}
+main h1, main p{
+    color: #fff;
+}
+main h1{
+    font: 55px 'Roboto-end';
+}
+main p{
+    font: 20px 'Roboto-start';
+}
+main button{
+    width: 260px;
+    height: 52px;
+       
+    font: 14px 'Roboto-end';
+    justify-content: center;
+    text-align: center;
+    background-color: black;
+    color: #fff;
+}
+.onlyfans{
+    margin-left: 115px;
+    margin-top: 300px;
+}
+.onlyfans1{
+    margin-left: 150px;
+    margin-top: 250px;
+}
+.top-down{
+    position: relative;
+    margin-top: 380px;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    width: 100%;
+}
+.top-down>div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.top-down>div, .top-down>button{
+    margin: 0px 20px;
+    padding: 0px 20px;
+}
+.top-down>button{
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    font: 14px 'Roboto-start';
+    border-radius: 0.5vw;
+}
+.top-down h1, .top-down p{
+    margin: 0px 10px;
+
+    color: #fff;
+}
+.top-down p{
+    font: 16px 'Roboto-start';
+}
+footer{
+    background-image: url(Rectangle_footer.png);
+    background-size: cover;
+    width: 100%;
+    height: 800px;
+}
+footer h1{
+    color: #fff;
+    font: 55px 'Roboto-midle';
+}
+footer button{
+    width: 260px;
+    height: 52px;
+       
+    font: 14px 'Roboto-start';
+    justify-content: center;
+    text-align: center;
+    background-color: black;
+    color: #fff;
+}
+.someone{
+    width: 100%;
+    height: 844px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.someone1{
+    width: 100%;
+    height: 844px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #F1FAF6;
+}
+.someone2{
+    width: 100%;
+    height: 844px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #FCF2F0;
+}
+.somes{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    padding: 0px 20px;
+}
+.somes1{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    padding: 0px 20px;
+}
+.somes2{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    margin-left: 600px;
+}
+.someone img{
+    padding: 0px 50px;
+    width: 492px;
+    height: 487px;
+}
+.someone1 img{
+    padding: 0px 50px;
+    width: 492px;
+    height: 487px;
+}
+.someone2 img{
+    width: 492px;
+    height: 487px;
+    margin-left: -300px;
+}
+.someone h2, .someone p, .someone1 h2, .someone1 p, .someone2 p, .someone2 h2{
+    text-align: left;
+    color: black;
+}
+
+.someone h2, .someone1 h2, .someone2 h2{
+    font: 40px 'Roboto-midle';
+}
+.someone p, .someone1 p, .someone2 p{
+    font: 20px 'Roboto-midle';
+}
+
+.someone button, .someone1 button, .someone2 button{
+    width: 250px;
+    height: 52px;
+       
+    font: 14px 'Roboto-start';
+    justify-content: center;
+    text-align: center;
+    border-radius: 0.1vw;
+    border: solid 2px;
+    background-color: #000000;
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    border-color: black;
+}
+.someone2 button{
+    width: 250px;
+    height: 52px;
+       
+    font: 16px 'Roboto-start';
+    font-weight: bolder;
+    justify-content: center;
+    text-align: center;
+    border-radius: 0.1vw;
+    border-top: #000000;
+    border-right: #000000;
+    border-left: #000000;
+    background-color: #FCF2F0;
+    color: #000000;
+    text-align: left;
+}
+@font-face {
+    font-family: 'Roboto-start';
+    src: url(./шрифты/Roboto-Light.ttf);
+}
+@font-face {
+    font-family: 'Roboto-midle';
+    src: url(./шрифты/Roboto-Medium.ttf);
+}
+
+@font-face {
+    font-family: 'Roboto-end';
+    src: url(./шрифты/Roboto-Black.ttf);
+}

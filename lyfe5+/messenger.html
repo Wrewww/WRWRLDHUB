@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мессенджер Lif5+</title>
+    <link rel="stylesheet" href="waw.css">
+</head>
+<body>
+    <header>
+        <img src="logo.jpg" class="logo">
+        <h1>Мессенджер Life5+</h1>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="messenger.html">Мессенджер</a>
+            <a href="profile.html">Личный кабинет</a>
+            <a href="blogs.html">Блоги</a>
+            <a href="about.html">О создателях</a>
+        </nav>
+    </header>
+<!-- Добавьте этот код в ваш HTML файл на странице мессенджера -->
+
+<div class="container">
+    <h2>Создать диалог</h2>
+    <input type="text" id="phoneNumber" placeholder="Введите Id пользователя (через #)" required>
+    <button type="button" id="createChatButton">Создать чат</button>
+
+    <div id="chatEntry" style="display: none; margin-top: 20px;">
+        <h3>Чат с <span id="chatPhoneNumber"></span></h3>
+        <p>Добро пожаловать в чат!</p>
+        <!-- Здесь можно добавить функционал чата -->
+    </div>
+</div>
+
+<script>
+    document.getElementById("createChatButton").addEventListener("click", () => {
+        const phoneNumber = document.getElementById("phoneNumber").value.trim();
+
+        if (phoneNumber) {
+            // Отображение мини входа в чат
+            document.getElementById("chatPhoneNumber").innerText = phoneNumber;
+            document.getElementById("chatEntry").style.display = "block";
+            // Очистка поля ввода
+            document.getElementById("phoneNumber").value = "";
+        } else {
+            alert("Пожалуйста, введите номер телефона.");
+        }
+    });
+</script>
+
+    <footer>
+        <p>© 2023 Life5+. Все права защищены.</p>
+    </footer>
+    
+</body>
+</html>

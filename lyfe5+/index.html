@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life5+</title>
+    <link rel="stylesheet" href="waw.css">
+
+</head>
+<body>
+    <header>
+        <img src="logo.jpg" class="logo">
+        <h1>Социальная сеть Life5+</h1>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="messenger.html">Мессенджер</a>
+            <a href="profile.html">Личный кабинет</a>
+            <a href="blogs.html">Блоги</a>
+            <a href="about.html">О создателях</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Вход в систему</h2>
+        <input type="text" placeholder="Логин" required>
+        <input type="password" placeholder="Пароль" required>
+        <button type="button">Войти</button>
+        <p><a href="#">Договор пользователя</a></p>
+        <p><a href="#">Правила социальной сети</a></p>
+    </div>
+
+    <footer>
+        <p>© 2023 Life5+. Все права защищены.</p>
+    </footer>
+    <!-- Добавьте этот скрипт в конце body на вашей главной странице (index.html) -->
+
+<script>
+    document.querySelector("button[type='button']").addEventListener("click", () => {
+        // Получаем все input внутри контейнера
+        const inputs = document.querySelectorAll(".container input[required]");
+        // Проверяем, что все поля заполнены (не пустые)
+        const allFilled = Array.from(inputs).every(input => input.value.trim() !== "");
+
+        if (allFilled) {
+            // Переходим на страницу профиля
+            window.location.href = "profile.html";
+        } else {
+            // Можно показывать предупреждение (опционально)
+            alert("Пожалуйста, заполните все обязательные поля.");
+        }
+    });
+</script>
+
+</body>
+</html>
