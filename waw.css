@@ -11,7 +11,9 @@ body {
     min-height: 100vh;
 }
 
+
 header {
+    position: relative;
     background-color: black;
     color: #ff3232;
     padding: 0px 0;
@@ -34,11 +36,11 @@ header nav a{
 }
 
 .logo{
-    width: 200px;
+    width: 120px;
     float: left;
 }
 .logo1{
-    width: 200px;
+    width: 120px;
     float: right;
 }
 
@@ -68,7 +70,7 @@ nav a::after {
 }
 
 nav a:hover, nav a:focus {
-    color: #33ff00;
+    color: #000000;
 }
 
 nav a:hover::after, nav a:focus::after {
@@ -171,4 +173,85 @@ footer {
 
 .href{
     text-align: center;
+}
+header h1{
+    margin-right: 120px;
+}
+header p{
+    margin-right: 0px;
+}
+
+#nav-toggle {
+    background: #ff0000;
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+
+
+  /* Скрываем навигацию из-под header и задаем эффект появления */
+  nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #000000;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-out;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  /* При активном классе меню выезжает */
+  nav.show {
+    max-height: 300px;  /* Подберите подходящую высоту */
+    transition: max-height 0.3s ease-in;
+  }
+
+  nav a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #333;
+    border-bottom: 1px solid #eee;
+  }
+
+  nav a:hover {
+    background: #ffffff;
+  }
+
+  /* Остальные стили страницы */
+  .container {
+    padding: 20px;
+    text-align: center;
+  }
+
+  footer {
+    text-align: center;
+    padding: 10px;
+    background: #000000;
+    font-size: 12px;
+    color: #ff0000;
+  }
+
+
+@media screen and (min-width: 280px) and (max-width: 912px){
+    nav a{
+        font-size: 20px;
+    }
+    .logo{
+        max-width: 20%;
+    }
+    .logo1{
+        max-width: 20%;
+    }
+    header h1{
+        margin-right: 0px;
+    }
+    header p{
+        margin-right: 0px;
+    }
 }
