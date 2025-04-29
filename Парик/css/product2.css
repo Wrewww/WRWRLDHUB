@@ -1,0 +1,163 @@
+main {
+    background: #ffffff;
+    margin-top: 10%;
+    margin-right: 10%;
+    margin-bottom: 10%;
+    margin-left: 10%;
+	height: 100%;
+    font-family: Inter, sans-serif;
+    color: rgb(0, 0, 0);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+.product-image {
+    width: 300px;
+
+}
+
+h2 {
+    text-align: center;
+    font-size: 32px;
+}
+
+.stars {
+    color: #ffee00;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0.5%;
+    
+}
+
+.reviews{
+    font-weight: bold;
+    text-align: left;
+    margin-left: 20px;
+}
+
+.review{
+    margin-top: 3%;
+}
+
+ul {
+    list-style: none;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+li {
+    margin-top: 2.5%;
+}
+
+.cost {
+    font-size: 32px;
+    font-weight: bold;
+    color: rgb(255, 0, 0);
+}
+
+.buy {
+    background-color: #4CAF50;
+    font-weight: bold;
+    color: white;
+    padding: 24px 32px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 24px;
+    margin: 8px 0;
+    transition: transform 0.5s;
+}
+
+.buy:hover {
+    background-color: #45a049;
+    transform: scale(1.1);
+}
+
+.main-for-mobile {
+    display: none;
+    visibility: hidden;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+
+    main{
+        margin-top: 25vh;
+        margin-bottom: 10vh;
+        margin-left: 0%;
+        margin-right: 0%;
+    }
+
+    .container {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-image {
+        width: 30vh;
+    }
+
+    .main-for-desktop {
+        display: none;
+        visibility: hidden;
+    }
+
+    .main-for-mobile {
+        visibility: visible;
+        display: grid;
+    }
+
+    .description {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+
+    main{
+        margin-top: 25vh;
+        margin-left: 0%;
+        margin-right: 0%;
+    }
+         
+    .container {
+        width: 90vw;
+    }
+
+    .description {
+        margin-left: 5%;
+    }
+
+}
+ 
+@media screen and (min-width: 1024px) and (max-width: 2039px) {
+
+    .main-title {
+        margin-top: 5%
+    }
+
+    .anim span {
+        text-align: center;
+    }
+}
+@media screen and (min-width: 2040px) and (max-width: 4096px) {
+
+    .main-title {
+        margin-top: 5%
+    }
+
+    .anim span {
+        text-align: center;
+        font-size: 130px;
+        
+    }
+}
