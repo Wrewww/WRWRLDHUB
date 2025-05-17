@@ -11,6 +11,28 @@ body {
     min-height: 100vh;
 }
 
+.like-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.like-button img {
+    width: 50px; 
+    height: 50px;
+}
+
+.icon{
+    max-width: 20px;
+    margin-left: 20px;
+}
+
+.meme{
+    max-width: 250px;
+}
+.ad{
+    max-width: 400px;
+}
+
 header {
     background-color: white;
     color: #ff3232;

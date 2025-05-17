@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Личный кабинет Life5+</title>
-    <link rel="stylesheet" href="waw.css">
+    <link rel="stylesheet" href="css/waw.css">
+    <style>
+        body{
+            background-image: url(photo/backprof.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <img src="logo.jpg" class="logo">
+        <img src="photo/logo.jpg" class="logo">
         <h1>Личный кабинет Life5+</h1>
         <nav>
             <a href="index.html">Главная</a>
@@ -20,14 +27,12 @@
         </nav>
     </header>
 
-    <!-- Добавьте этот код в ваш profile.html вместо существующего содержимого контейнера -->
 
-<!-- Добавьте этот код в ваш profile.html вместо существующего содержимого контейнера -->
 
 <div class="container">
     <h2>Мини профиль</h2>
     <div id="miniProfile" style="display: none; border: 1px solid #ccc; padding: 10px; max-width: 300px; text-align: center;">
-        <img id="profilePicture" src="default.jpg" alt="Профиль" style="width: 100%; border-radius: 50%; margin-bottom: 10px;">
+        <img id="profilePicture" src="photo/default.jpg" alt="Профиль" style="width: 100%; border-radius: 50%; margin-bottom: 10px;">
         <h3 id="fullName">ФИО пользователя</h3>
     </div>
     
@@ -43,37 +48,14 @@
 
 <script>
     document.getElementById("saveButton").addEventListener("click", () => {
-        // Получение значений из полей ввода
         const lastName = document.getElementById("lastName").value.trim();
         const firstName = document.getElementById("firstName").value.trim();
         const middleName = document.getElementById("middleName").value.trim();
 
         if (lastName && firstName && middleName) {
-            // Обновление мини профиля
             document.getElementById("fullName").innerText = `${lastName} ${firstName} ${middleName}`;
-            // Отображение мини профиля
             document.getElementById("miniProfile").style.display = "block";
-            // Скрытие полей ввода
             document.getElementById("inputFields").style.display = "none";
-        } else {
-            alert("Пожалуйста, заполните все обязательные поля.");
-        }
-    });
-</script>
-
-
-<script>
-    document.getElementById("saveButton").addEventListener("click", () => {
-        // Получение значений из полей ввода
-        const lastName = document.getElementById("lastName").value.trim();
-        const firstName = document.getElementById("firstName").value.trim();
-        const middleName = document.getElementById("middleName").value.trim();
-
-        if (lastName && firstName && middleName) {
-            // Обновление мини профиля
-            document.getElementById("fullName").innerText = `${lastName} ${firstName} ${middleName}`;
-            // Отображение мини профиля
-            document.getElementById("miniProfile").style.display = "block";
         } else {
             alert("Пожалуйста, заполните все обязательные поля.");
         }

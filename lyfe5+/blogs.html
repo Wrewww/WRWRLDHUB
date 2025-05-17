@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Блоги Life5+</title>
-    <link rel="stylesheet" href="waw.css">
+    <link rel="stylesheet" href="css/waw.css">
+    <style>
+
+        body{
+            background-image: url(photo/backblogs.png);
+        }
+    </style>
 </head>
 <body>
     <header>
-        <img src="logo.jpg" class="logo">
+        <img src="photo/logo.jpg" class="logo">
         <h1>Тематика блогов Life5+</h1>
         <nav>
             <a href="index.html">Главная</a>
@@ -22,33 +28,61 @@
     <div class="container">
         <h2>Тематика блогов</h2>
         <div class="blog-post">
-            <h3>Блог 1</h3>
-            <p>Текст поста, который содержит минимум 100 слов или 500 знаков...</p>
-            <button type="button">Показать полный текст</button>
+            <h3>Обитель нордов<img src="photo/default.jpg" class="icon"></h3>
+            <span>
+                <a href="photo/meme/1.jpg"><img src="photo/meme/1.jpg", class="meme"></a>
+                <a href="photo/meme/2.jpg"><img src="photo/meme/2.jpg", class="meme"></a>
+                <a href="photo/meme/3.jpg"><img src="photo/meme/3.jpg", class="meme"></a>
+            </span>
             <button type="button">Оставить комментарий</button>
             <button type="button">Поделиться</button>
-            <button type="button">Лайк</button>
+            <button class="like-button" type="button" onclick="toggleLike(this)">
+                Лайк
+            </button>
         </div>
         <div class="blog-post">
-            <h3>Блог 2</h3>
-            <p>Текст поста, который содержит минимум 100 слов или 500 знаков...</p>
-            <button type="button">Показать полный текст</button>
+            <h3>G man<img src="photo/default.jpg" class="icon"></h3>
+            <a href="photo/meme/4.jpg"><img src="photo/meme/4.jpg", style="max-width: 400px; margin-left: 190px;"></a>
             <button type="button">Оставить комментарий</button>
             <button type="button">Поделиться</button>
-            <button type="button">Лайк</button>
+            <button class="like-button" type="button" onclick="toggleLike(this)">
+                Лайк
+            </button>
         </div>
         <div class="blog-post">
-            <h3>Блог 3</h3>
-            <p>Текст поста, который содержит минимум 100 слов или 500 знаков...</p>
-            <button type="button">Показать полный текст</button>
+            <h3>Реклама</h3>
+            <p>Запущена распродажа товаров вместе с Amaterasu<br>
+
+                С майскими скидками вся обувь по 1799р
+            </p>     
+            <p>
+                <a href="photo/meme/ad1.jpg"><img src="photo/meme/ad1.jpg", style="max-width: 400px;"></a>
+                <a href="photo/meme/ad2.jpg"><img src="photo/meme/ad2.jpg", style="max-width: 425px;"></a>
+            </p>
+            <p>
+                <a href="photo/meme/ad3.jpg"><img src="photo/meme/ad3.jpg", style="max-width: 425px;"></a>
+                <a href="photo/meme/ad4.jpg"><img src="photo/meme/ad4.jpg", style="max-width: 400px;"></a>
+            </p>   
             <button type="button">Оставить комментарий</button>
             <button type="button">Поделиться</button>
-            <button type="button">Лайк</button>
+            <button class="like-button" type="button" onclick="toggleLike(this)">
+                Лайк
+            </button>
         </div>
     </div>
 
     <footer>
         <p>© 2023 Life5+. Все права защищены.</p>
     </footer>
+
+    <script>
+        function toggleLike(button) {
+            if (button.innerHTML === 'Лайк') {
+                button.innerHTML = '<img src="photo/heart.png" alt="Сердечко">';
+            } else {
+                button.innerHTML = 'Лайк';
+            }
+        }
+    </script>
 </body>
 </html>
