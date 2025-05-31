@@ -1,0 +1,93 @@
+html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        @font-face {
+            font-family: Pixy;
+            src: url('PIXY.ttf');
+        }
+
+        body {
+            font-family: Pixy;
+            background-image: url('background2.png');
+            display: flex;
+            flex-direction: column;
+        }
+
+        section{
+            color: white;
+
+        }
+
+        .maintext{
+            font-size: 30px;
+            flex: 1;
+        }
+
+        .content {
+            text-align: center;
+            flex: 1;
+            font-size: 40px;
+        }
+
+        nav { margin: 20px; color: red; text-align: center; font-size: 30px;
+            background: linear-gradient(to right, rgb(255, 0, 179), rgb(238, 255, 0));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;}
+        a { color: #e5ff00; text-decoration: none;}
+
+
+        p{
+            background: linear-gradient(to right, rgb(255, 0, 179) , rgb(9, 255, 0) 30%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        footer {
+            background-color: #000000;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }    
+        .logo{
+            max-width: 8%
+
+        } 
+        .img2{
+            display: flex;
+            flex-direction: row;
+            max-width: 100%
+        
+        }
+        .ball {
+            width: 50px;
+            height: 50px;
+            background-color: rgb(26, 255, 0);
+            border-radius: 50%;
+            animation: bounceRoll 6s ease-in-out;
+        }
+        .cont{
+            max-width: 5%;
+        }
+        .bounce {
+            animation: bounceRoll 2s ease-in-out;
+        }
+        
+        @keyframes bounceRoll {
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+            30%{
+                transform: translateY(-700px) translateX(1400px);
+            }
+            60% {
+                transform: translateY(-700px) translateX(0);
+            }
+            90%{
+                transform: translateY(0) translateX(1400px);
+            }
+            100%{
+                transform: translateY(0) translateX(0);
+            }
+        }
