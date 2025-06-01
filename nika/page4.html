@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заказ подушки</title>
+    <link rel="stylesheet" href="buy.css">
+
+</head>
+<body>
+
+<header>
+    <div class="text1">
+        <h1>Оформление заказа</h1>
+        <p>Поздравляем! Вы выбрали самую странную подушку в мире!</p>
+    </div>
+</header>
+
+<h2 align="center">Ваш выбор: Каменная история</h2>
+
+<section class="section">
+    <div class="order-container">
+        <div class="order-image">
+            <img src="egypt.jpg" class="course-image1">
+        </div>
+        <div class="order-details">
+            <h2 class="course-title">Каменная история</h2>
+            <p class="course-description">Вы любитель истории? Помните все даты с начала мира? Тогда эта подушка вам понравится! Ощутите вес истории на своей голове (точнее шее)!</p>
+            <span class="course-price">Цена: 30 000 руб.</span>
+            
+            <form id="orderForm" class="order-form">
+                <div class="form-group">
+                    <label for="name">Ваше имя:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Адрес доставки:</label>
+                    <textarea id="address" name="address" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Количество:</label>
+                    <input type="number" id="quantity" name="quantity" min="1" value="1">
+                </div>
+                <div class="form-group">
+                    <label>Способ доставки:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="courier" name="delivery" value="courier" checked>
+                        <label for="courier">Курьер (500 руб.)</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="post" name="delivery" value="post">
+                        <label for="post">Почта России (300 руб.)</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="pickup" name="delivery" value="pickup">
+                        <label for="pickup">Самовывоз (бесплатно)</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="comments">Комментарий к заказу:</label>
+                    <textarea id="comments" name="comments" placeholder="Например: 'Будьте осторожны, она тяжелая!'"></textarea>
+                </div>
+            </form>
+            <a href="bought.html" ><button class="enroll-button">Подтвердить заказ</button></a>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="features">
+        <h2>Почему стоит купить подушку "Каменная история"?</h2>
+        <ul>
+            <li>✔️ Уникальный дизайн, вдохновленный природными текстурами камня</li>
+            <li>✔️ Высококачественные материалы для долговечности и комфорта</li>
+            <li>✔️ Поддержка шеи и головы для здорового сна</li>
+            <li>✔️ Легкость в уходе: съемный и washable чехол</li>
+            <li>✔️ Идеальное сочетание стиля и функциональности для вашего интерьера</li>
+        </ul>
+    </div>
+</section>
+
+<section class="section reviews-section">
+    <h2 align="center">Отзывы наших покупателей</h2>
+    <div class="reviews-container">
+        <div class="review">
+            <div class="review-header">
+                <span class="review-author">Анна К.</span>
+                <span class="review-date">15.05.2025</span>
+                <div class="review-rating">★★★★★</div>
+            </div>
+            <p class="review-text">Подушка просто волшебная! Очень удобная. Мой кот теперь постоянно пытается ее украсть!</p>
+        </div>
+        
+        <div class="review">
+            <div class="review-header">
+                <span class="review-author">Михаил П.</span>
+                <span class="review-date">03.05.2025</span>
+                <div class="review-rating">★★★★☆</div>
+            </div>
+            <p class="review-text">Очень необычная подушка. Жена сначала ругалась, но теперь спит только на ней.</p>
+        </div>
+        
+        <div class="review">
+            <div class="review-header">
+                <span class="review-author">Елена С.</span>
+                <span class="review-date">28.04.2025</span>
+                <div class="review-rating">★★★★★</div>
+            </div>
+            <p class="review-text">Заказала для дочки. Спит как младенец!</p>
+        </div>
+    </div>
+    
+    <div class="add-review">
+        <h3>Оставить свой отзыв</h3>
+        <form class="review-form">
+            <div class="form-group">
+                <label for="review-name">Ваше имя:</label>
+                <input type="text" id="review-name" name="review-name" required>
+            </div>
+            <div class="form-group">
+                <label for="review-text">Ваш отзыв:</label>
+                <textarea id="review-text" name="review-text" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Оценка:</label>
+                <select name="review-rating">
+                    <option value="5">★★★★★</option>
+                    <option value="4">★★★★☆</option>
+                    <option value="3">★★★☆☆</option>
+                    <option value="2">★★☆☆☆</option>
+                    <option value="1">★☆☆☆☆</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-review">Отправить отзыв</button>
+        </form>
+    </div>
+</section>
+
+<footer>
+    <p>© 2025 Все права защищены.</p>
+</footer>
+
+</body>
+</html>

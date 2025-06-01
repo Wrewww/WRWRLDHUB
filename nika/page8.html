@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заказ подушки</title>
+    <link rel="stylesheet" href="buy.css">
+
+</head>
+<body>
+
+<header>
+    <div class="text1">
+        <h1>Оформление заказа</h1>
+        <p>Поздравляем! Вы выбрали самую странную подушку в мире!</p>
+    </div>
+</header>
+
+<h2 align="center">Ваш выбор: Подушка для дыхания</h2>
+
+<section class="section">
+    <div class="order-container">
+        <div class="order-image">
+            <img src="Gemor.jpg" class="course-image1">
+        </div>
+        <div class="order-details">
+            <h2 class="course-title">Подушка для дыхания</h2>
+            <p class="course-description">Любите лежать ночью головой в низ но задыхаетесь? Не проблема! Эта подушка позволит вам дышать!(Возможны удушья по причине нехватки кислорода)</p>
+            <span class="course-price">Цена: 1 000 руб.</span>
+            
+            <form id="orderForm" class="order-form">
+                <div class="form-group">
+                    <label for="name">Ваше имя:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Адрес доставки:</label>
+                    <textarea id="address" name="address" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Количество:</label>
+                    <input type="number" id="quantity" name="quantity" min="1" value="1">
+                </div>
+                <div class="form-group">
+                    <label>Способ доставки:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="courier" name="delivery" value="courier" checked>
+                        <label for="courier">Курьер (500 руб.)</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="post" name="delivery" value="post">
+                        <label for="post">Почта России (300 руб.)</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="pickup" name="delivery" value="pickup">
+                        <label for="pickup">Самовывоз (бесплатно)</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="comments">Комментарий к заказу:</label>
+                    <textarea id="comments" name="comments" placeholder="Например: 'Будьте осторожны, она тяжелая!'"></textarea>
+                </div>
+            </form>
+            <a href="bought.html" ><button class="enroll-button">Подтвердить заказ</button></a>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="features">
+        <h2>Почему стоит купить подушку "Подушка для дыхания"?</h2>
+        <ul>
+            <li>✔️ Специальная форма для оптимальной поддержки шеи и головы</li>
+            <li>✔️ Дышащие материалы, обеспечивающие комфортный микроклимат</li>
+            <li>✔️ Помогает улучшить качество сна и расслабиться</li>
+            <li>✔️ Легкий и практичный чехол, который можно стирать</li>
+            <li>✔️ Создайте идеальные условия для глубокого и спокойного дыхания</li>
+        </ul>
+    </div>
+</section>
+
+
+
+
+<section class="section reviews-section">
+    <h2 align="center">Отзывы наших покупателей</h2>
+    <div class="add-review">
+        <h3>Оставить свой отзыв</h3>
+        <form class="review-form">
+            <div class="form-group">
+                <label for="review-name">Ваше имя:</label>
+                <input type="text" id="review-name" name="review-name" required>
+            </div>
+            <div class="form-group">
+                <label for="review-text">Ваш отзыв:</label>
+                <textarea id="review-text" name="review-text" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Оценка:</label>
+                <select name="review-rating">
+                    <option value="5">★★★★★</option>
+                    <option value="4">★★★★☆</option>
+                    <option value="3">★★★☆☆</option>
+                    <option value="2">★★☆☆☆</option>
+                    <option value="1">★☆☆☆☆</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-review">Отправить отзыв</button>
+        </form>
+    </div>
+</section>
+
+
+<footer>
+    <p>© 2025 Все права защищены.</p>
+</footer>
+
+</body>
+</html>

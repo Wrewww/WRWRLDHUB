@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureSkills - Курсы</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">FutureSkills</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="courses.html" class="active">Курсы</a></li>
+                    <li><a href="auth.html">Вход</a></li>
+                    <li><a href="profile.html">Кабинет</a></li>
+                    <li><a href="blog.html">Блог</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                </ul>
+                <div class="mobile-menu-btn">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Наши курсы</h1>
+        
+        <section class="course-categories">
+            <h2>Общественные науки</h2>
+            <div class="courses-grid">
+                <div class="course-card" data-category="social" data-science="social">
+                    <h3>Русский язык</h3>
+                    <p>Курс по современному русскому языку и грамотности</p>
+                    <span class="price">Бесплатно</span>
+                    <button class="btn">Подробнее</button>
+                </div>
+                <div class="course-card" data-category="social" data-science="social">
+                    <h3>Английский язык</h3>
+                    <p>Изучение английского с нуля до продвинутого уровня</p>
+                    <span class="price">Бесплатно</span>
+                    <button class="btn">Подробнее</button>
+                </div>
+                <div class="course-card" data-category="social" data-science="social">
+                    <h3>Китайский язык</h3>
+                    <p>Основы китайского языка и культуры</p>
+                    <span class="price">12 990 ₽</span>
+                    <button class="btn">Подробнее</button>
+                </div>
+                <div class="course-card" data-category="social" data-science="social">
+                    <h3>Обществознание</h3>
+                    <p>Курс по основам обществознания для школьников</p>
+                    <span class="price">Бесплатно</span>
+                    <button class="btn">Подробнее</button>
+                </div>
+                <div class="course-card" data-category="social" data-science="social">
+                    <h3>Юридическая грамотность</h3>
+                    <p>Основы права для повседневной жизни</p>
+                    <span class="price">7 990 ₽</span>
+                    <button class="btn">Подробнее</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="course-categories">
+            <h2>Технические науки</h2>
+            <div class="courses-grid">
+                <div class="course-card" data-category="technical" data-science="technical">
+                    <h3>Физика</h3>
+                    <p>Школьный курс физики с углубленным изучением</p>
+                    <span class="price">Бесплатно</span>
+                    <button class="btn">Подробнее</button>
+                </div>
+                <div class="course-card" data-category="technical" data-science="technical">
+                    <h3>Python для начинающих</h3>
+                    <p>Основы программирования на Python</p>
+                    <span class="price">9 990 ₽</span>
+                    <button class="btn">Подробнее</button>
+                </div>
+                <div class="course-card" data-category="technical" data-science="technical">
+                    <h3>JavaScript</h3>
+                    <p>Веб-разработка с использованием JavaScript</p>
+                    <span class="price">14 990 ₽</span>
+                    <button class="btn">Подробнее</button>
+                </div>
+               <div class="course-card" data-category="technical" data-science="technical">
+                    <h3>3D-моделирование</h3>
+                    <p>Создание 3D-объектов в Blender</p>
+                    <span class="price">14 990 ₽</span>
+                    <button class="btn">Подробнее</button>
+                </div>
+                <div class="course-card" data-category="technical" data-science="technical">
+                    <h3>Веб-дизайн</h3>
+                    <p>Основы создания современных веб-интерфейсов</p>
+                    <span class="price">11 990 ₽</span>
+                    <button class="btn">Подробнее</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="course-filters">
+    <h2>Фильтры</h2>
+    <div class="filter-options">
+        <select id="category-filter">
+            <option value="all">Все категории</option>
+            <option value="social">Общественные науки</option>
+            <option value="technical">Технические науки</option>
+        </select>
+        <select id="price-filter">
+            <option value="all">Любая цена</option>
+            <option value="free">Бесплатные</option>
+            <option value="paid">Платные</option>
+        </select>
+        <button id="apply-filters" class="btn">Применить</button>
+    </div>
+</section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 FutureSkills. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

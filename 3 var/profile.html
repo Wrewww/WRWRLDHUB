@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureSkills - Личный кабинет</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">FutureSkills</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="courses.html">Курсы</a></li>
+                    <li><a href="auth.html">Вход</a></li>
+                    <li><a href="profile.html" class="active">Кабинет</a></li>
+                    <li><a href="blog.html">Блог</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                </ul>
+                <div class="mobile-menu-btn">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container profile-container">
+        <section class="profile-header">
+            <div class="profile-photo">
+                <img src="photo/default.jpg" alt="Фото профиля">
+                <button class="btn change-photo-btn">Изменить фото</button>
+            </div>
+            <div class="profile-header">
+    <h1 class="profile-name">Иванов Иван Иванович</h1>
+    <button id="edit-name-btn" class="btn">Изменить ФИО</button>
+    
+    <form id="name-form" style="display: none;">
+        <div class="form-group">
+            <label for="last-name">Фамилия*</label>
+            <input type="text" id="last-name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="first-name">Имя*</label>
+            <input type="text" id="first-name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="middle-name">Отчество</label>
+            <input type="text" id="middle-name">
+        </div>
+        
+        <div class="form-actions">
+            <button type="button" id="save-name-btn" class="btn btn-primary">Сохранить</button>
+            <button type="button" id="cancel-name-btn" class="btn btn-secondary">Отмена</button>
+        </div>
+    </form>
+</div>
+        </section>
+
+        <section class="profile-courses">
+            <h2>Мои курсы</h2>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="completed">Завершенные</button>
+                <button class="tab-btn" data-tab="in-progress">В процессе</button>
+                <button class="tab-btn" data-tab="not-started">Не начатые</button>
+            </div>
+
+            <div id="completed" class="tab-content active">
+                <div class="course-item">
+                    <h3>Английский язык (базовый уровень)</h3>
+                    <p><strong>Оценка:</strong> 5 (Отлично)</p>
+                    <p><strong>Дата завершения:</strong> 20.04.2023</p>
+                </div>
+                <div class="course-item">
+                    <h3>Основы программирования</h3>
+                    <p><strong>Оценка:</strong> 4 (Хорошо)</p>
+                    <p><strong>Дата завершения:</strong> 10.04.2023</p>
+                </div>
+            </div>
+
+            <div id="in-progress" class="tab-content">
+                <div class="course-item">
+                    <h3>Разработка интерфейсов пользователя</h3>
+                    <p><strong>Прогресс:</strong> 98%</p>
+                    <p><strong>Текущая оценка:</strong> 4.0</p>
+                    <button class="btn continue-btn">Продолжить</button>
+                </div>
+            </div>
+
+            <div id="not-started" class="tab-content">
+                <div class="course-item">
+                    <h3>3D-моделирование</h3>
+                    <p><strong>Тип:</strong> Платный</p>
+                    <button class="btn start-btn">Начать курс</button>
+                </div>
+                <div class="course-item">
+                    <h3>Юридическая грамотность</h3>
+                    <p><strong>Тип:</strong> Бесплатный</p>
+                    <button class="btn start-btn">Начать курс</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-stats">
+            <h2>Статистика</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>Завершено курсов</h3>
+                    <p class="stat-value">2</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Средняя оценка</h3>
+                    <p class="stat-value">4.5</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Часов обучения</h3>
+                    <p class="stat-value">48</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Дней подряд</h3>
+                    <p class="stat-value">15</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 FutureSkills. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
