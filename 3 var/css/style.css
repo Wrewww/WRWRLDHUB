@@ -20,6 +20,14 @@ body {
     line-height: 1.6;
 }
 
+.profile-age {
+            font-size: 18px;
+            color: #666;
+            margin-top: 5px;
+            font-weight: normal;
+            font-style: italic;
+        }
+
 .container {
     width: 100%;
     max-width: 1200px;

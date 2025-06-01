@@ -115,59 +115,62 @@ const applyFiltersBtn = document.getElementById('apply-filters');
             this.textContent = `👍 ${likes + 1}`;
         });
     });
-    // Редактирование профиля (включая возраст)
-const editProfileBtn = document.getElementById('edit-profile-btn');
-const editForm = document.getElementById('edit-form');
-const saveProfileBtn = document.getElementById('save-profile-btn');
-const cancelEditBtn = document.getElementById('cancel-edit-btn');
-const profileAge = document.getElementById('profile-age');
-
-if (editProfileBtn && editForm) {
-    editProfileBtn.addEventListener('click', function() {
-        // Заполняем форму текущими значениями
-        document.getElementById('edit-age').value = profileAge.textContent;
-        this.classList.add('hidden');
-        editForm.classList.remove('hidden');
-    });
+    // Функционал смены ФИО в личном кабинете
+    const profileName = document.querySelector('.profile-name');
+    const editNameBtn = document.getElementById('edit-name-btn');
+    const nameForm = document.getElementById('name-form');
+    const saveNameBtn = document.getElementById('save-name-btn');
+    const cancelNameBtn = document.getElementById('cancel-name-btn');
     
-    cancelEditBtn.addEventListener('click', function() {
-        editForm.classList.add('hidden');
-        editProfileBtn.classList.remove('hidden');
-    });
-    
-    saveProfileBtn.addEventListener('click', function() {
-        const newAge = document.getElementById('edit-age').value;
+    if (editNameBtn && nameForm) {
+        // Показываем форму редактирования
+        editNameBtn.addEventListener('click', function() {
+            // Заполняем форму текущими значениями
+            const currentName = profileName.textContent.trim().split(' ');
+            document.getElementById('last-name').value = currentName[0] || '';
+            document.getElementById('first-name').value = currentName[1] || '';
+            document.getElementById('middle-name').value = currentName[2] || '';
+            
+            // Показываем форму и скрываем кнопку редактирования
+            nameForm.style.display = 'block';
+            editNameBtn.style.display = 'none';
+        });
         
-        // Проверка возраста
-        if (newAge < 10 || newAge > 120) {
-            alert('Пожалуйста, введите корректный возраст (от 10 до 120 лет)');
-            return;
-        }
+        // Сохраняем изменения
+        saveNameBtn.addEventListener('click', function() {
+            const lastName = document.getElementById('last-name').value.trim();
+            const firstName = document.getElementById('first-name').value.trim();
+            const middleName = document.getElementById('middle-name').value.trim();
+            
+            if (!lastName || !firstName) {
+                alert('Пожалуйста, заполните обязательные поля (Фамилия и Имя)');
+                return;
+            }
+            
+            // Формируем новое ФИО
+            let newName = lastName + ' ' + firstName;
+            if (middleName) {
+                newName += ' ' + middleName;
+            }
+            
+            // Обновляем отображение имени
+            profileName.textContent = newName;
+            
+            // Здесь можно добавить AJAX-запрос для сохранения на сервере
+            
+            // Скрываем форму и показываем кнопку редактирования
+            nameForm.style.display = 'none';
+            editNameBtn.style.display = 'inline-block';
+            
+            alert('ФИО успешно изменено!');
+        });
         
-        // Обновляем возраст на странице
-        profileAge.textContent = newAge;
-        
-        // Скрываем форму
-        editForm.classList.add('hidden');
-        editProfileBtn.classList.remove('hidden');
-        
-        // Сохраняем в localStorage
-        const userData = JSON.parse(localStorage.getItem('userProfile')) || {};
-        userData.age = newAge;
-        localStorage.setItem('userProfile', JSON.stringify(userData));
-        
-        alert('Данные успешно сохранены!');
-    });
-}
-
-// Загрузка сохранённых данных при загрузке страницы
-window.addEventListener('load', function() {
-    const savedData = JSON.parse(localStorage.getItem('userProfile'));
-    if (savedData && savedData.age) {
-        profileAge.textContent = savedData.age;
-        document.getElementById('edit-age').value = savedData.age;
+        // Отмена редактирования
+        cancelNameBtn.addEventListener('click', function() {
+            nameForm.style.display = 'none';
+            editNameBtn.style.display = 'inline-block';
+        });
     }
-});
 
     const commentBtns = document.querySelectorAll('.comment-btn');
     
