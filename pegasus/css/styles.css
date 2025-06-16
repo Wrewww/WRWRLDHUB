@@ -1,0 +1,241 @@
+.hedlogo{
+    max-width: 70px;
+    margin-left: 80px;
+}
+header{
+    background-color: #007bff5e;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: larger;
+    margin-top: -10px;
+    width: 100%;
+}
+.nav{
+    line-height: 40px;
+    margin-right: 50px;
+}
+.start{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    margin-left: 100px;
+    
+}
+.startpic{
+    max-height: 500px;
+}
+.startpic1{
+    width: 900px;
+    height: 500px;
+}
+#container {
+  height: 900px;
+  width: 10px;
+  position: relative;
+}
+#image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 900px;
+  height: 500px;
+}
+#text {
+  z-index: 100;
+  position: absolute;
+  width: 600px;
+  color: rgb(255, 255, 255);
+  font-size: 60px;
+  font-weight: bold;
+  left: 200px;
+  top: 0px;
+}
+#text1 {
+  z-index: 100;
+  position: absolute;
+  width: 600px;
+  color: rgb(255, 255, 255);
+  font-size: 24px;
+  font-weight: bold;
+  left: 200px;
+  top: 300px;
+}
+.block1-2{
+    background-color: #007bff5e;
+    width: 50%;
+}
+.why1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 60px;
+    margin-top: -400px;
+}
+.line{
+    width: 650px;
+}
+.whyblocks{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.block{
+    background-color: #007bff5e;
+    font-size: large;
+    text-align: center;
+    width: 300px;
+}
+.why2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 60px;
+}
+.line2{
+    width:100%;
+}
+.block2{
+    background-color: #007bff5e;
+    font-size: large;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    width: 700px;
+    
+}
+
+.block3{
+    background-color: #007bff5e;
+    font-size: large;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    width: 100%;
+    
+}
+
+.sus{
+    background-color: #007bff5e;
+    text-align: center;
+    font-size: 24px;
+    width: 20%;
+}
+
+.fside{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.t4{
+    font-size: 24px;
+}
+.cop{
+    width: 400px;
+}
+.step{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.whyblocks2{
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.whyblocks3{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.full{
+    width: 100%;
+}
+.us1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #3295ff;
+    color: white;
+    font-size: 24px;
+}
+.usblocks{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.usblock{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+    background-color: white;
+    width: 23%;
+    height: 500px;
+    text-align: center;
+}
+
+.pic{
+    width: 50px;
+}
+
+.usblock>p{
+    margin-top: 100px;
+}
+.usblock>h1{
+    margin-top: 100px;
+    color: #007bff;
+}
+.stores{
+    background-color: #007bff5e;
+    width: 300px;
+    height: 100px;
+    margin-top: 100px;
+    margin-left: 40%;
+}
+.storesmmi{
+    background-color: #742942;
+    width: 300px;
+    height: 100px;
+    margin-top: 100px;
+    margin-left: 40%;
+}
+.storeshere{
+    background-color: #007bff5e;
+    width: 300px;
+    height: 100px;
+    margin-top: 100px;
+}
+.storesherevoen{
+    background-color: #00822b;
+    width: 300px;
+    height: 100px;
+    margin-top: 100px;
+}
+.footimg{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+footer{
+    background-color: black;
+    text-align: center;
+    color: white;
+    margin-bottom: -15px;
+}
+.footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

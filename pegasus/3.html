@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pegasus Lifestyle Management - Luxury & Classic Car Storage</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family:
+          ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+          "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-size: 16px;
+        line-height: 1.5;
+        color: #020817;
+        background-color: #ffffff;
+      }
+
+      /* Header Styles */
+      .header {
+        background-color: #ffffff;
+        border-bottom: 1px solid #e2e8f0;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+
+      .header-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 64px;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        background-color: #1e293b;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .logo-icon svg {
+        width: 24px;
+        height: 24px;
+        color: #ffffff;
+        fill: currentColor;
+      }
+
+      .logo-text h1 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1e293b;
+        line-height: 1;
+      }
+
+      .logo-text p {
+        font-size: 12px;
+        color: #64748b;
+        line-height: 1;
+      }
+
+      .nav {
+        display: none;
+        gap: 32px;
+      }
+
+      .nav a {
+        color: #64748b;
+        text-decoration: none;
+        transition: color 0.15s ease;
+      }
+
+      .nav a:hover,
+      .nav a.active {
+        color: #2563eb;
+      }
+
+      .nav a.active {
+        color: #1e293b;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+        background: none;
+        border: none;
+        padding: 8px;
+        border-radius: 6px;
+        color: #64748b;
+        cursor: pointer;
+      }
+
+      .mobile-menu-btn:hover {
+        color: #2563eb;
+        background-color: #f1f5f9;
+      }
+
+      .mobile-menu-btn svg {
+        width: 24px;
+        height: 24px;
+        stroke: currentColor;
+        fill: none;
+      }
+
+      /* Mobile Menu */
+      .mobile-menu {
+        display: none;
+        background-color: #ffffff;
+        border-top: 1px solid #e2e8f0;
+      }
+
+      .mobile-menu.active {
+        display: block;
+      }
+
+      .mobile-menu-content {
+        padding: 8px;
+      }
+
+      .mobile-menu a {
+        display: block;
+        padding: 8px 12px;
+        color: #64748b;
+        text-decoration: none;
+        transition: color 0.15s ease;
+      }
+
+      .mobile-menu a:hover,
+      .mobile-menu a.active {
+        color: #2563eb;
+      }
+
+      .mobile-menu a.active {
+        color: #1e293b;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(to right, #2563eb, #3b82f6);
+        height: 600px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      }
+
+      .hero-container {
+        position: relative;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 16px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        z-index: 10;
+      }
+
+      .hero-content {
+        max-width: 768px;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 24px;
+        line-height: 1.1;
+      }
+
+      .hero p {
+        font-size: 24px;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 32px;
+        line-height: 1.4;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 32px;
+        background-color: #ffffff;
+        color: #2563eb;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 18px;
+        font-weight: 600;
+        transition: all 0.15s ease;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        background-color: #f1f5f9;
+      }
+
+      /* Section Styles */
+      .section {
+        padding: 64px 0;
+      }
+
+      .section-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 48px;
+      }
+
+      .section-header h2 {
+        font-size: 36px;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 16px;
+      }
+
+      .section-divider {
+        width: 96px;
+        height: 4px;
+        background-color: #2563eb;
+        margin: 0 auto 24px;
+      }
+
+      /* Excellence Section */
+      .excellence-content {
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+      }
+
+      .excellence-item {
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 32px;
+      }
+
+      .excellence-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .excellence-item h3 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 16px;
+      }
+
+      .excellence-item p {
+        color: #64748b;
+        line-height: 1.6;
+      }
+
+      .excellence-item::after {
+        content: "";
+        display: block;
+        width: 64px;
+        height: 4px;
+        background-color: #2563eb;
+        margin-top: 16px;
+      }
+
+      /* Storage Solutions */
+      .storage-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .storage-card {
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow:
+          0 1px 3px 0 rgba(0, 0, 0, 0.1),
+          0 1px 2px 0 rgba(0, 0, 0, 0.06);
+      }
+
+      .storage-image {
+        height: 192px;
+        background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+        position: relative;
+        display: flex;
+        align-items: end;
+        padding: 16px;
+      }
+
+      .storage-image.indoor {
+        background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+      }
+
+      .storage-image.showroom {
+        background: linear-gradient(135deg, #cbd5e1, #94a3b8);
+      }
+
+      .storage-image.outdoor {
+        background: linear-gradient(135deg, #fed7aa, #fdba74);
+      }
+
+      .storage-badge {
+        background-color: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(4px);
+        padding: 12px;
+        border-radius: 6px;
+        font-size: 14px;
+        color: #64748b;
+      }
+
+      .storage-content {
+        padding: 24px;
+      }
+
+      .storage-info {
+        background-color: #2563eb;
+        color: #ffffff;
+        padding: 16px;
+        border-radius: 6px;
+      }
+
+      .storage-info h3 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 12px;
+      }
+
+      .storage-info p {
+        font-size: 14px;
+        margin-bottom: 12px;
+        line-height: 1.5;
+      }
+
+      .storage-info ul {
+        list-style: disc;
+        padding-left: 20px;
+        font-size: 14px;
+      }
+
+      .storage-info li {
+        margin-bottom: 4px;
+      }
+
+      /* Maintenance Services */
+      .maintenance-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+
+      .maintenance-card {
+        background-color: #1e293b;
+        color: #ffffff;
+        padding: 16px;
+        border-radius: 6px;
+        text-align: center;
+      }
+
+      .maintenance-card p {
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      /* Footer */
+      .footer {
+        background-color: #000000;
+        color: #ffffff;
+        padding: 48px 0;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+        margin-bottom: 48px;
+      }
+
+      .footer-section h3 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+
+      .footer-section p,
+      .footer-section ul {
+        font-size: 14px;
+        color: #9ca3af;
+        line-height: 1.6;
+      }
+
+      .footer-section ul {
+        list-style: none;
+      }
+
+      .footer-section li {
+        margin-bottom: 8px;
+      }
+
+      .footer-section a {
+        color: #9ca3af;
+        text-decoration: none;
+        transition: color 0.15s ease;
+      }
+
+      .footer-section a:hover {
+        color: #ffffff;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .social-link {
+        width: 32px;
+        height: 32px;
+        background-color: #374151;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        text-decoration: none;
+      }
+
+      .social-link svg {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid #374151;
+        padding-top: 32px;
+        text-align: center;
+        font-size: 14px;
+        color: #9ca3af;
+      }
+
+      /* Responsive Design */
+      @media (min-width: 768px) {
+        .nav {
+          display: flex;
+        }
+
+        .mobile-menu-btn {
+          display: none;
+        }
+
+        .hero h1 {
+          font-size: 60px;
+        }
+
+        .storage-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .maintenance-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+
+        .footer-content {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .storage-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .storage-card:last-child {
+          grid-column: span 1;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .hero h1 {
+          font-size: 36px;
+        }
+
+        .hero p {
+          font-size: 20px;
+        }
+
+        .section-header h2 {
+          font-size: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <div class="header-content">
+          <!-- Logo -->
+          <div class="logo-container">
+            <div class="logo-icon">
+              <svg fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2L3.09 8.26L4 21L12 17L20 21L20.91 8.26L12 2ZM12 4.15L18.09 8.62L17.38 18.39L12 15.85L6.62 18.39L5.91 8.62L12 4.15Z"
+                />
+              </svg>
+            </div>
+            <div class="logo-text">
+              <h1>Pegasus</h1>
+              <p>Lifestyle Management</p>
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <nav class="nav">
+            <a href="#home" class="active">home</a>
+            <a href="#about">about</a>
+            <a href="#services">services</a>
+            <a href="#facilities">facilities</a>
+            <a href="#pricing">pricing</a>
+          </nav>
+
+          <!-- Mobile Menu Button -->
+          <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+          <a href="#home" class="active">home</a>
+          <a href="#about">about</a>
+          <a href="#services">services</a>
+          <a href="#facilities">facilities</a>
+          <a href="#pricing">pricing</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-container">
+        <div class="hero-content">
+          <h1>Luxury & Classic Car Storage</h1>
+          <p>Premium protection for your automotive investments</p>
+          <a href="#services" class="btn">Learn More</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Preserving Automotive Excellence Section -->
+    <section class="section">
+      <div class="section-container">
+        <div class="section-header">
+          <h2>Preserving Automotive Excellence</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="excellence-content">
+          <!-- Expert Care -->
+          <div class="excellence-item">
+            <h3>Expert Care</h3>
+            <p>
+              Our team includes certified automotive technicians who understand
+              the unique needs of luxury and classic vehicles.
+            </p>
+          </div>
+
+          <!-- Comprehensive Protection -->
+          <div class="excellence-item">
+            <h3>Comprehensive Protection</h3>
+            <p>
+              From climate control to security monitoring, every aspect of our
+              facility is designed to protect your investment.
+            </p>
+          </div>
+
+          <!-- Maintenance Programs -->
+          <div class="excellence-item">
+            <h3>Maintenance Programs</h3>
+            <p>
+              Customizable maintenance plans to keep your vehicle in perfect
+              condition while in storage.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Storage Solutions -->
+    <section class="section" style="background-color: #f9fafb" id="facilities">
+      <div class="section-container">
+        <div class="section-header">
+          <h2>Our Storage Solutions</h2>
+        </div>
+
+        <div class="storage-grid">
+          <!-- Climate-Controlled Indoor -->
+          <div class="storage-card">
+            <div class="storage-image indoor">
+              <div class="storage-badge">Premium indoor facility</div>
+            </div>
+            <div class="storage-content">
+              <div class="storage-info">
+                <h3>Climate-Controlled Indoor</h3>
+                <p>
+                  Maintain optimal conditions 55-75°F, 45-65% humidity is not
+                  sealed, dust-free environment. Ideal for classic cars, exotic
+                  vehicles and one-of-a-kind collectibles.
+                </p>
+                <ul>
+                  <li>Individual vehicle bays</li>
+                  <li>Air filtration</li>
+                  <li>Non-fluorescent lighting</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Private Showroom -->
+          <div class="storage-card">
+            <div class="storage-image showroom">
+              <div class="storage-badge">Exclusive showroom space</div>
+            </div>
+            <div class="storage-content">
+              <div class="storage-info">
+                <h3>Private Showroom</h3>
+                <p>
+                  Display your vehicle with our premium showroom spaces,
+                  complete with customizable lighting and viewing areas.
+                </p>
+                <ul>
+                  <li>Glass front enclosures</li>
+                  <li>Custom display options</li>
+                  <li>Visitor access control</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Covered Outdoor -->
+          <div class="storage-card">
+            <div class="storage-image outdoor">
+              <div class="storage-badge">Covered outdoor storage</div>
+            </div>
+            <div class="storage-content">
+              <div class="storage-info">
+                <h3>Covered Outdoor</h3>
+                <p>
+                  Cost-effective covered parking with full security for vehicles
+                  that don't require climate control.
+                </p>
+                <ul>
+                  <li>Canopy-protected spaces</li>
+                  <li>24/7 security monitoring</li>
+                  <li>Regular check-ins</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Maintenance & Care Services -->
+    <section class="section" id="services">
+      <div class="section-container">
+        <div class="section-header">
+          <h2>Maintenance & Care Services</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="maintenance-grid">
+          <div class="maintenance-card">
+            <p>Auto Detailing and Restoration</p>
+          </div>
+          <div class="maintenance-card">
+            <p>Interior & Exterior Detailing</p>
+          </div>
+          <div class="maintenance-card">
+            <p>Pre-Sale Checks and Preparation</p>
+          </div>
+          <div class="maintenance-card">
+            <p>Vehicle Starting and Maintenance</p>
+          </div>
+        </div>
+
+        <div class="maintenance-grid">
+          <div class="maintenance-card">
+            <p>Leather and Interior Reconditioning</p>
+          </div>
+          <div class="maintenance-card">
+            <p>Engine Prep and Maintenance</p>
+          </div>
+          <div class="maintenance-card">
+            <p>Pickup and Delivery for Permanent Storage</p>
+          </div>
+          <div class="maintenance-card">
+            <p>Comprehensive Inspection for Long-term Storage</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="section-container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Pegasus Lifestyle</h3>
+            <p>
+              Premier storage solutions for your luxury automotive investments.
+            </p>
+            <div class="social-links">
+              <a href="#" class="social-link">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
+                  />
+                </svg>
+              </a>
+              <a href="#" class="social-link">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-section" id="services">
+            <h3>Services</h3>
+            <ul>
+              <li><a href="#">Long-term storage</a></li>
+              <li><a href="#">Vehicle maintenance</a></li>
+              <li><a href="#">Concierge services</a></li>
+              <li><a href="#">Transportation</a></li>
+              <li><a href="#">Delivery</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p>Office: 141 1-800-Pin</p>
+            <p>Emergency: 141 1-800-Pin</p>
+            <p>Fax: 141 1-800-Pin</p>
+            <p>Email: info@pegasuslifestyle.com</p>
+          </div>
+
+          <div class="footer-section">
+            <h3>Our Partners</h3>
+            <p>Working with the best in luxury automotive care.</p>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>
+            © 2024 Pegasus Lifestyle Management. All Rights Reserved. | Privacy
+            Policy | Terms of Service
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      function toggleMobileMenu() {
+        const mobileMenu = document.getElementById("mobileMenu");
+        mobileMenu.classList.toggle("active");
+      }
+
+      // Close mobile menu when clicking on links
+      document.querySelectorAll(".mobile-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          document.getElementById("mobileMenu").classList.remove("active");
+        });
+      });
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+
+      // Update active navigation based on scroll position
+      window.addEventListener("scroll", () => {
+        const sections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll(".nav a, .mobile-menu a");
+
+        let current = "";
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (window.pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${current}`) {
+            link.classList.add("active");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
