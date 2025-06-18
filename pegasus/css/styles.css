@@ -1,113 +1,136 @@
-.hedlogo{
-    max-width: 70px;
-    margin-left: 80px;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
-header{
+
+
+.hedlogo {
+    max-width: 7%;
+    margin-left: 12%;
+}
+.hedlogommi {
+    max-width: 7%;
+    margin-left: 12%;
+}
+
+header {
     background-color: #007bff5e;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     font-size: larger;
-    margin-top: -10px;
     width: 100%;
 }
-.nav{
+
+.nav {
     line-height: 40px;
     margin-right: 50px;
 }
-.start{
-    width: 100%;
+
+.start {
+    width: 10px;
     display: flex;
     flex-direction: row;
     justify-content: start;
     margin-left: 100px;
-    
 }
-.startpic{
+
+.startpic {
     max-height: 500px;
 }
-.startpic1{
+
+.startpic1 {
     width: 900px;
     height: 500px;
 }
+
 #container {
-  height: 900px;
-  width: 10px;
-  position: relative;
+    height: 900px;
+    width: 10px;
+    position: relative;
 }
+
 #image {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 900px;
-  height: 500px;
+    position: block;
+    left: 0;
+    top: 0;
+    width: 900px;
+    height: 500px;
 }
+
 #text {
-  z-index: 100;
-  position: absolute;
-  width: 600px;
-  color: rgb(255, 255, 255);
-  font-size: 60px;
-  font-weight: bold;
-  left: 200px;
-  top: 0px;
+    z-index: 100;
+    position:relative;
+    width: 600px;
+    color: rgb(255, 255, 255);
+    font-size: 60px;
+    font-weight: bold;
+    left: 200px;
+    top: -450px;
 }
+
 #text1 {
-  z-index: 100;
-  position: absolute;
-  width: 600px;
-  color: rgb(255, 255, 255);
-  font-size: 24px;
-  font-weight: bold;
-  left: 200px;
-  top: 300px;
+    z-index: 100;
+    position: relative;
+    width: 600px;
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+    font-weight: bold;
+    left: 200px;
+    top: -400px;
 }
-.block1-2{
+
+.block1-2 {
     background-color: #007bff5e;
     width: 50%;
 }
-.why1{
+
+.why1 {
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 60px;
     margin-top: -400px;
 }
-.line{
+
+p {
+    padding: 2%;
+}
+
+.why1>p {
+    padding: 2%;
+}
+
+.line {
     width: 650px;
 }
-.whyblocks{
+
+.whyblocks {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
-.block{
+
+.block {
     background-color: #007bff5e;
     font-size: large;
     text-align: center;
     width: 300px;
 }
-.why2{
+
+.why2 {
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 60px;
 }
-.line2{
-    width:100%;
-}
-.block2{
-    background-color: #007bff5e;
-    font-size: large;
-    text-align: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    width: 700px;
-    
+
+.line2 {
+    width: 100%;
 }
 
-.block3{
+.block2 {
     background-color: #007bff5e;
     font-size: large;
     text-align: center;
@@ -115,54 +138,188 @@ header{
     flex-direction: row;
     justify-content: start;
     width: 100%;
-    
 }
 
-.sus{
+.block3 {
+    background-color: #007bff5e;
+    font-size: large;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    width: 100%;
+}
+
+.sus {
     background-color: #007bff5e;
     text-align: center;
     font-size: 24px;
     width: 20%;
 }
 
-.fside{
+li {
+    text-align: start;
+}
+
+.sus1 {
+    background-color: #007bffbe;
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    width: 50%;
+}
+
+.sus2 {
+    background-color: #1F1F1F;
+    text-align: center;
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    width: 24%;
+}
+
+.voen1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #007bff;
+    color: white;
+    font-size: 30px;
+}
+
+.stolbec {
+    width: 20%;
+}
+
+.voen2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #00822B;
+    color: white;
+    font-size: 30px;
+}
+
+.sus3 {
+    background-color: #00822B;
+    text-align: center;
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    width: 50%;
+}
+
+.sus2>h1 {
+    color: #0095FF;
+    text-align: start;
+}
+
+.probel {
+    height: 50px;
+}
+
+.fside {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.t4{
+
+.t4 {
     font-size: 24px;
 }
-.cop{
+
+.cop {
     width: 400px;
 }
-.step{
+
+.step {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
-.whyblocks2{
+
+.whyblocks2 {
     display: flex;
     flex-direction: column;
     align-items: baseline;
 }
 
-.column{
+.column {
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
 }
 
-.whyblocks3{
+.whyblocks3 {
     display: flex;
     flex-direction: column;
     align-items: start;
 }
-.full{
+
+.full {
     width: 100%;
 }
-.us1{
+
+.fifty {
+    width: 10%;
+    max-height: 800px;
+}
+
+.mmi {
+    width: 100%;
+    background-color: #742942;
+    color: white;
+    padding: 2%;
+}
+
+.mmitext {
+    font-size: 40px;
+    text-align: start;
+    padding: 2%;
+}
+
+.mmitext2 {
+    font-size: 40px;
+    text-align: center;
+    padding: 2%;
+}
+
+.mmiimg>img {
+    width: 152.5%;
+}
+
+.mmicard {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    background-color: #742942;
+    color: white;
+    width: 100%;
+}
+
+.mmicardfinal {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    background-image: url(mmifinal.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    width: 100%;
+}
+
+.mmi>p {
+    text-align: start;
+    font-size: 30px;
+}
+
+.mmi>li {
+    text-align: start;
+    font-size: 30px;
+}
+
+.us1 {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -170,12 +327,14 @@ header{
     color: white;
     font-size: 24px;
 }
-.usblocks{
+
+.usblocks {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-.usblock{
+
+.usblock {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -186,56 +345,317 @@ header{
     text-align: center;
 }
 
-.pic{
+.pic {
     width: 50px;
 }
 
-.usblock>p{
+.usblock>p {
     margin-top: 100px;
 }
-.usblock>h1{
+
+.usblock>h1 {
     margin-top: 100px;
     color: #007bff;
 }
-.stores{
+
+.stores {
     background-color: #007bff5e;
     width: 300px;
     height: 100px;
     margin-top: 100px;
     margin-left: 40%;
 }
-.storesmmi{
+
+.storesmmi {
     background-color: #742942;
     width: 300px;
     height: 100px;
     margin-top: 100px;
+    color: white;
     margin-left: 40%;
 }
-.storeshere{
+
+.mmibutt {
+    background-color: #742942;
+    width: 300px;
+    height: 100px;
+    color: white;
+}
+
+.storeshere {
     background-color: #007bff5e;
     width: 300px;
     height: 100px;
     margin-top: 100px;
 }
-.storesherevoen{
+
+.storesherevoen {
     background-color: #00822b;
     width: 300px;
     height: 100px;
+    color: white;
     margin-top: 100px;
 }
-.footimg{
+
+.stolbic{
+    width: 20%;
+    height: 900px;
+    max-height: none;
+}
+
+.footimg {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
-footer{
+
+footer {
     background-color: black;
     text-align: center;
     color: white;
-    margin-bottom: -15px;
 }
-.footer{
+
+.footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    height: 200px;
+}
+
+.weare{
+    width: 270%;
+    height:; 
+    margin-left: -240px;
+}
+
+.champions{
+    width: 100%;
+}
+
+.mobile{
+    display: none;
+}
+.mobilelogo{
+    display: none;
+}
+
+.block1-2phone{
+    width: 100%;
+}
+a{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+.rickroll{
+    color: white;
+}
+
+@media only screen and (max-width: 768px) {
+    .hedlogo {
+        max-width: 20%;
+        margin-left: 5%;
+    }
+    .block1-2phone{
+    display: none;
+}
+p {
+    padding: 5%;
+}
+.hedlogommi {
+    display: none;
+}
+
+.mobilelogo{
+        display: block;
+        width: 60%;
+    }
+
+    .cop {
+    width: 100%;
+    }
+
+    .startphoto{
+        display: none;
+    }
+
+    .champions{
+        display: none;
+    }
+
+    .mobile{
+        display: block;
+        width: 100%;
+    }
+
+    .sside{
+        display: none;
+    }
+
+    .weare{
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .stolbic{
+        display: none;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 0;
+    }
+
+    .nav {
+        margin-right: 0;
+        line-height: 30px;
+        text-align: center;
+    }
+
+    .start {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .startpic{
+        display: none;
+    }
+
+
+    #image {
+        width: 100%;
+        height: auto;
+    }
+
+    #container {
+        height: auto;
+        width: 100%;
+    }
+
+    #text, #text1 {
+        position: static;
+        width: 100%;
+        text-align: center;
+        font-size: 24px;
+        padding: 10px;
+    }
+
+    #text1 {
+        font-size: 16px;
+        top: auto;
+    }
+
+    .why1 {
+        margin-top: 1%;
+        font-size: 32px;
+    }
+
+    .line {
+        width: 90%;
+    }
+
+    .whyblocks {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .block {
+        width: 90%;
+        margin-bottom: 15px;
+    }
+
+    .why2 {
+        font-size: 32px;
+    }
+
+    .sus, .sus1, .sus2, .sus3 {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .voen1, .voen2 {
+        flex-direction: column;
+        font-size: 20px;
+    }
+
+    .stolbec {
+        width: 100%;
+    }
+
+    .usblocks {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .usblock {
+        width: 90%;
+        height: auto;
+        margin-bottom: 20px;
+        padding: 15px;
+    }
+
+    .usblock>p, .usblock>h1 {
+        margin-top: 20px;
+    }
+
+    .stores, .storeshere, .storesherevoen, .mmibutt {
+        width: 90%;
+        margin: 20px auto;
+        height: auto;
+        padding: 15px;
+    }
+    .storesmmi{
+        width: 100%;
+        margin: 20px auto;
+        height: auto;
+        padding: 15px;
+    }
+
+    .footer {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+    }
+
+    .footimg {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .mmi>p, .mmi>li {
+        font-size: 18px;
+    }
+
+    .mmitext, .mmitext2 {
+        font-size: 24px;
+    }
+
+    .mmiimg>img {
+        width: 100%;
+    }
+
+    .block1-2 {
+        width: 100%;
+    }
+
+}
+
+
+@media only screen and (max-width: 480px) {
+    #text {
+        font-size: 20px;
+    }
+
+    #text1 {
+        font-size: 14px;
+    }
+
+    .why1, .why2 {
+        font-size: 32px;
+    }
+
+    .mmitext, .mmitext2 {
+        font-size: 20px;
+    }
 }
