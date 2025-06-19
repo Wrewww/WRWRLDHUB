@@ -81,6 +81,12 @@ header {
     top: -400px;
 }
 
+
+
+.t10{
+    font-size: 40px;
+}
+
 .block1-2 {
     background-color: #007bff5e;
     width: 50%;
@@ -286,7 +292,7 @@ li {
 }
 
 .mmiimg>img {
-    width: 152.5%;
+    width: 151.7%;
 }
 
 .mmicard {
@@ -423,8 +429,7 @@ footer {
 }
 
 .weare{
-    width: 270%;
-    height:; 
+    width: 268.5%;
     margin-left: -240px;
 }
 
