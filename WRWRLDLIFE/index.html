@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WRWRLDLIFE | Фармацевтика без границ</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">WRWRLDLIFE</div>
+        <nav>
+            <a href="#">Главная</a>
+            <a href="#">Каталог</a>
+            <a href="#">Доставка</a>
+            <a href="#">О нас</a>
+            <a href="#">Контакты</a>
+        </nav>
+        <div class="auth-buttons">
+            <button onclick="openModal('login')" class="butt butt-login">Вход</button>
+            <button onclick="openModal('register')" class="butt butt-register">Регистрация</button>
+        </div>
+    </header>
+
+    <!-- Секция слайдера -->
+    <section class="slider-section">
+        <div id="slider">
+            <img src="apteka.jpg" class="slide active">
+            <img src="bad.webp" class="slide">
+            <img src="dileviry.jpg" class="slide">
+            <img src="laboratory.webp" class="slide">
+        </div>
+        <div class="slider-controls">
+            <button onclick="prevSlide()" class="slider-btn prev-btn">‹</button>
+            <button onclick="nextSlide()" class="slider-btn next-btn">›</button>
+        </div>
+        <div class="slider-info">
+            <h2>WRWRLDLIFE — инновации в фармацевтике</h2>
+            <p>Доступ к рецептурным препаратам | Нано-технологии | Конфиденциальная доставка</p>
+        </div>
+    </section>
+
+    <main>
+        <section class="theme-block">
+            <h1>WRWRLDLIFE — фармацевтика нового поколения</h1>
+            <p class="tagline">Лекарства без рецептов. Свобода выбора. Технологии здоровья.</p>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>Рецептурные препараты</h3>
+                    <p>Мы предоставляем доступ к лекарствам, которые обычно требуют рецепта — быстро, конфиденциально, с полной документацией.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Безрецептурные средства</h3>
+                    <p>Широкий ассортимент витаминов, БАДов, средств для ухода и профилактики.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Технологии WRWRLD INC</h3>
+                    <p>Используем нано-доставку, умные упаковки и ИИ-подбор препаратов для максимальной эффективности.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Безопасность и конфиденциальность</h3>
+                    <p>Все заказы шифруются, доставка — анонимная. Ваше здоровье — только ваше дело.</p>
+                </div>
+            </div>
+
+            <div class="mission">
+                <h2>Наша миссия</h2>
+                <p>WRWRLDLIFE — это ответвление глобальной корпорации WRWRLD INC, которая ставит целью демократизацию доступа к медицинским препаратам. Мы верим, что каждый должен иметь возможность лечиться так, как считает нужным.</p>
+                <blockquote>
+                    "Здоровье без границ — будущее без ограничений."
+                    <cite>Основатель WRWRLD INC - Матвей Кругов</cite>
+                </blockquote>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">WRWRLDLIFE</div>
+            <p>Подразделение корпорации WRWRLD INC.<br>Продажа рецептурных и безрецептурных препаратов.</p>
+            <div class="footer-links">
+                <a href="#">Политика конфиденциальности</a>
+                <a href="#">Условия использования</a>
+                <a href="#">Контакты</a>
+                <a href="#">Вакансии</a>
+            </div>
+            <p class="credits">© 2025 WRWRLD INC. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Вход</h2>
+                <span onclick="closeModal()" class="close">&times;</span>
+            </div>
+            
+            <form id="login-form" onsubmit="handleSubmit(event, 'login')">
+                <div class="form-group">
+                    <input type="text" placeholder="Email или логин" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Пароль" required>
+                </div>
+                <button type="submit" class="submit-butt">Войти</button>
+                <p class="form-switch">
+                    Нет аккаунта? 
+                    <a href="#" onclick="switchForm('register')">Зарегистрироваться</a>
+                </p>
+            </form>
+            
+            <form id="register-form" style="display: none;" onsubmit="handleSubmit(event, 'register')">
+                <div class="form-group">
+                    <input type="text" placeholder="Имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Пароль" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Повторите пароль" required>
+                </div>
+                <button type="submit" class="submit-butt">Зарегистрироваться</button>
+                <p class="form-switch">
+                    Уже есть аккаунт? 
+                    <a href="#" onclick="switchForm('login')">Войти</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
