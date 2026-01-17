@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог лекарств | WRWRLDLIFE</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="catalog-styles.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">WRWRLDLIFE</div>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="catalog.html" class="active">Каталог</a>
+            <a href="#">Доставка</a>
+            <a href="#">О нас</a>
+            <a href="#">Контакты</a>
+        </nav>
+        <div class="auth-buttons">
+            <button onclick="openModal('login')" class="butt butt-login">Вход</button>
+            <button onclick="openModal('register')" class="butt butt-register">Регистрация</button>
+        </div>
+    </header>
+
+    <main class="theme-block">
+        <div class="catalog-header">
+            <h1>Каталог лекарств</h1>
+            <p class="tagline">Рецептурные и безрецептурные препараты с доставкой</p>
+            
+            <div class="content-card" style="background: #111; border: 1px solid #333;">
+                <div class="catalog-controls">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Поиск лекарств по названию..." 
+                               class="form-group" style="margin: 0;">
+                        <button onclick="clearSearch()" class="clear-btn">×</button>
+                    </div>
+                    
+                    <div class="sort-controls">
+                        <label>Сортировка:</label>
+                        <select id="sortSelect" onchange="sort()" class="form-group" style="margin: 0; padding: 8px;">
+                            <option value="default">По умолчанию</option>
+                            <option value="price-asc">Цена: по возрастанию</option>
+                            <option value="price-desc">Цена: по убыванию</option>
+                            <option value="name-asc">Название: А-Я</option>
+                            <option value="name-desc">Название: Я-А</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-grid" id="catalogGrid">
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">WRWRLDLIFE</div>
+            <p>Подразделение корпорации WRWRLD INC.<br>Продажа рецептурных и безрецептурных препаратов.</p>
+            <div class="footer-links">
+                <a href="#">Политика конфиденциальности</a>
+                <a href="#">Условия использования</a>
+                <a href="#">Контакты</a>
+                <a href="#">Вакансии</a>
+            </div>
+            <p class="copyright">© 2025 WRWRLD INC. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Вход</h2>
+                <span onclick="closeModal()" class="close">&times;</span>
+            </div>
+            
+            <form id="login-form" onsubmit="handleSubmit(event, 'login')">
+                <div class="form-group">
+                    <input type="text" placeholder="Email или логин" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Пароль" required>
+                </div>
+                <button type="submit" class="submit-butt">Войти</button>
+                <p class="form-switch">
+                    Нет аккаунта? 
+                    <a href="#" onclick="switchForm('register')">Зарегистрироваться</a>
+                </p>
+            </form>
+            
+            <form id="register-form" style="display: none;" onsubmit="handleSubmit(event, 'register')">
+                <div class="form-group">
+                    <input type="text" placeholder="Имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Пароль" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Повторите пароль" required>
+                </div>
+                <button type="submit" class="submit-butt">Зарегистрироваться</button>
+                <p class="form-switch">
+                    Уже есть аккаунт? 
+                    <a href="#" onclick="switchForm('login')">Войти</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script src="scripts/script.js"></script>
+    <script src="scripts/catalog-script.js"></script>
+</body>
+</html>
