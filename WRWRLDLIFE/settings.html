@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройки | WRWRLDLIFE</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/settings-styles.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">WRWRLDLIFE</div>
+        <nav>
+            <a href="index.html">Главная</a>
+            <a href="catalog.html">Каталог</a>
+            <a href="settings.html" class="active">Настройка сайта</a>
+        </nav>
+        <div class="auth-buttons">
+            <button onclick="openModal('login')" class="butt butt-login">Вход</button>
+            <button onclick="openModal('register')" class="butt butt-register">Регистрация</button>
+        </div>
+    </header>
+
+    <main class="theme-block">
+        <h1>Настройки внешнего вида</h1>
+        <p class="tagline">Настройте сайт под свои предпочтения</p>
+        
+        <div class="settings-container">
+            <div class="setting-card">
+                <h3><span class="setting-icon">🌓</span> Цветовая тема</h3>
+                <p class="setting-description">Выберите светлую или темную тему оформления</p>
+                
+                <div class="theme-switcher">
+                    <button class="theme-btn active" data-theme="dark">
+                        <span class="theme-icon">🌙</span>
+                        <span>Темная</span>
+                    </button>
+                    <button class="theme-btn" data-theme="light">
+                        <span class="theme-icon">☀️</span>
+                        <span>Светлая</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="setting-card">
+                <h3><span class="setting-icon">🔤</span> Размер текста</h3>
+                <p class="setting-description">Выберите удобный для чтения размер шрифта</p>
+                
+                <div class="size-switcher">
+                    <button class="size-btn" data-size="small">
+                        <span class="size-icon">S</span>
+                        <span>Маленький</span>
+                    </button>
+                    <button class="size-btn active" data-size="medium">
+                        <span class="size-icon">M</span>
+                        <span>Средний</span>
+                    </button>
+                    <button class="size-btn" data-size="large">
+                        <span class="size-icon">L</span>
+                        <span>Большой</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="setting-card">
+                <h3><span class="setting-icon">🎨</span> Акцентный цвет</h3>
+                <p class="setting-description">Выберите основной цвет для кнопок и ссылок</p>
+                
+                <div class="color-picker-container">
+                    <div class="color-presets">
+                        <button class="color-preset" data-color="#ff2a2a" style="background: #ff2a2a;"></button>
+                        <button class="color-preset" data-color="#2a7aff" style="background: #2a7aff;"></button>
+                        <button class="color-preset" data-color="#9d2aff" style="background: #9d2aff;"></button>
+                        <button class="color-preset" data-color="#2aff7a" style="background: #2aff7a;"></button>
+                        <button class="color-preset" data-color="#ffaa2a" style="background: #ffaa2a;"></button>
+                    </div>
+                    
+                    <div class="custom-color">
+                        <label>Свой цвет (RGB):</label>
+                        <div class="color-inputs">
+                            <input type="range" id="red" min="0" max="255" value="255" class="color-slider red">
+                            <input type="range" id="green" min="0" max="255" value="42" class="color-slider green">
+                            <input type="range" id="blue" min="0" max="255" value="42" class="color-slider blue">
+                        </div>
+                        <div class="color-preview">
+                            <div class="preview-box" id="colorPreview"></div>
+                            <span class="color-code" id="colorCode">#ff2a2a</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="setting-actions">
+                <button class="save-btn" id="saveBtn">Сохранить настройки</button>
+                <button class="reset-btn" id="resetBtn">Сбросить к заводским</button>
+            </div>
+            
+            <div class="save-status" id="saveStatus"></div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">WRWRLDLIFE</div>
+            <p>Подразделение корпорации WRWRLD INC.<br>Продажа рецептурных и безрецептурных препаратов.</p>
+            <div class="footer-links">
+                <a href="#">Политика конфиденциальности</a>
+                <a href="#">Условия использования</a>
+                <a href="#">Контакты</a>
+                <a href="#">Вакансии</a>
+            </div>
+            <p class="copyright">© 2025 WRWRLD INC. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Вход</h2>
+                <span onclick="closeModal()" class="close">&times;</span>
+            </div>
+            
+            <form id="login-form" onsubmit="handleSubmit(event, 'login')">
+                <div class="form-group">
+                    <input type="text" placeholder="Email или логин" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Пароль" required>
+                </div>
+                <button type="submit" class="submit-butt">Войти</button>
+                <p class="form-switch">
+                    Нет аккаунта? 
+                    <a href="#" onclick="switchForm('register')">Зарегистрироваться</a>
+                </p>
+            </form>
+            
+            <form id="register-form" style="display: none;" onsubmit="handleSubmit(event, 'register')">
+                <div class="form-group">
+                    <input type="text" placeholder="Имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Пароль" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Повторите пароль" required>
+                </div>
+                <button type="submit" class="submit-butt">Зарегистрироваться</button>
+                <p class="form-switch">
+                    Уже есть аккаунт? 
+                    <a href="#" onclick="switchForm('login')">Войти</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    
+
+    <script src="scripts/script.js"></script>
+    <script src="scripts/settings-script.js"></script>
+</body>
+</html>

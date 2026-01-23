@@ -4,19 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Каталог лекарств | WRWRLDLIFE</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="catalog-styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
+    <script>
+=        (function() {
+            const settings = localStorage.getItem('siteSettings');
+            if (settings) {
+                try {
+                    const { theme, fontSize, accentColor } = JSON.parse(settings);
+                    document.body.className = `theme-${theme} font-${fontSize}`;
+                    document.documentElement.style.setProperty('--accent-color', accentColor);
+                } catch(e) {
+                    console.error('Ошибка загрузки настроек:', e);
+                }
+            }
+        })();
+    </script>
 
     <header>
         <div class="logo">WRWRLDLIFE</div>
         <nav>
             <a href="index.html">Главная</a>
-            <a href="catalog.html" class="active">Каталог</a>
-            <a href="#">Доставка</a>
-            <a href="#">О нас</a>
-            <a href="#">Контакты</a>
+            <a href="catalog.html">Каталог</a>
+            <a href="settings.html">Настройки сайта</a>
         </nav>
         <div class="auth-buttons">
             <button onclick="openModal('login')" class="butt butt-login">Вход</button>
