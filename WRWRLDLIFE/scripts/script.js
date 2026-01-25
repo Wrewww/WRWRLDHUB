@@ -1,4 +1,4 @@
-// ==================== ЗАГРУЗКА НАСТРОЕК ДЛЯ ВСЕХ СТРАНИЦ ====================
+// ЗАГРУЗКА НАСТРОЕК ДЛЯ ВСЕХ СТРАНИЦ
 
 function loadSettings() {
     const defaultSettings = {
@@ -61,7 +61,7 @@ function hexToRgb(hex) {
 
 document.addEventListener('DOMContentLoaded', applySettings);
 
-// ==================== КОД ДЛЯ МОДАЛЬНЫХ ОКОН ====================
+// МОДАЛЬНЫЕ ОКНА
 const modal = document.getElementById('modal');
 const loginForm = document.getElementById('login-form');
 const registerForm = document.getElementById('register-form');
@@ -132,7 +132,7 @@ if (modal && loginForm && registerForm && modalTitle) {
     window.handleSubmit = handleSubmit;
 }
 
-// ==================== КОД ДЛЯ СЛАЙДЕРА С ИНДИКАТОРАМИ ====================
+// СЛАЙДЕР С ИНДИКАТОРАМИ
 const slides = document.querySelectorAll('.slide');
 
 if (slides.length > 0) {
