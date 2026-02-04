@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WRWRLD Архив</title>
+    <link rel="icon" type="favicon" href="logo.png">
+    <link rel="stylesheet" href="waw.css">
+    <style>
+        body{
+            background-image: url(wrwrld-infographic/hablogo.png);
+            background-size: 120px;
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <img src="logo.png" class="logo">
+        <img src="logo.png" class="logo1">
+        <h1>WRWRLD</h1>
+        <button id="nav-toggle">Архив работ</button>
+
+    <!-- Навигация, которая будет выезжать -->
+    <nav id="nav-menu">
+      <a href="index.html">Главная</a>
+      <a href="2-1.html">Pegasus lyfestyle managment</a>
+      <a href="2-2.html">WRWRLD-LIFE</a>
+      <a href="2-3.html">WRWRLD-INFOGRAPHIC</a>
+
+
+    </nav>
+  </header>
+
+    <div class="container">
+        <h1>Курсы</h1>
+        <p align="center">Адаптив: присутствует</p>
+        <p align="center">|</p>
+        <p align="center">|</p>
+        <p align="center">|</p>
+        <p align="center">&#9660;</p>
+        <p align="center"><a href="WRWRLDLIFE/index.html">WRWRLD-INFOGRAPHIC</a></p>
+    </div>
+
+    <footer>
+        <p>© 2025 WRWRLD. Все права (не)защищены.</p>
+    </footer>
+
+    <script>
+        // Обработка клика по кнопке для переключения видимости навигации
+        document.getElementById('nav-toggle').addEventListener('click', function () {
+          var nav = document.getElementById('nav-menu');
+          nav.classList.toggle('show');
+        });
+      </script>
+</body>
+</html>
