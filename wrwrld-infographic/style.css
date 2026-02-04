@@ -1,0 +1,126 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #f7f7f7;
+    color: #111;
+}
+
+/* WRAPPER — чтобы футер был внизу */
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* HEADER */
+header {
+    background: #fff;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #e10600;
+}
+
+header h1 {
+    margin: 0;
+    color: #e10600;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+/* MAIN */
+main {
+    flex: 1;
+    padding: 40px 20px;
+}
+
+/* CHARTS */
+.charts {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* CARD */
+.chart-card {
+    position: relative;
+    width: 260px;
+    height: 320px;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 20px;
+    text-align: center;
+    border: 2px solid rgba(225, 6, 0, 0.15);
+    box-shadow: 0 8px 20px rgba(0,0,0,.05);
+    animation: fadeUp 0.8s ease forwards;
+    opacity: 0;
+}
+
+.chart-card:nth-child(1) { animation-delay: .2s; }
+.chart-card:nth-child(2) { animation-delay: .4s; }
+.chart-card:nth-child(3) { animation-delay: .6s; }
+
+.chart-card canvas {
+    max-width: 200px;
+    margin: auto;
+}
+
+/* NUMBER IN CENTER */
+.chart-card span {
+    position: absolute;
+    top: 115px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px;
+    font-weight: bold;
+    color: #e10600;
+}
+
+/* LABEL */
+.chart-card p {
+    margin-top: 15px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: #444;
+}
+
+/* FOOTER */
+footer {
+    background: #ffffff;
+    text-align: center;
+    padding: 15px;
+    border-top: 2px solid #e10600;
+}
+
+footer h2 {
+    margin: 0;
+    font-size: 13px;
+    color: #e10600;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .chart-card {
+        width: 100%;
+        max-width: 320px;
+    }
+}

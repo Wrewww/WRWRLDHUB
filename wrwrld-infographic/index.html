@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>WRWRLD-INFOGRAPHIC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Chart.js -->
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- sql.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+
+</head>
+<body>
+    <div class="wrapper">
+    
+    <header>
+        <h1>WRWRLD-INFOGRAPHIC</h1>
+    </header>
+    
+    <main>
+        <div class="charts">
+            <div class="chart-card">
+                <canvas id="usersChart"></canvas>
+                <span id="usersValue"></span>
+                <p>Пользователи</p>
+            </div>
+    
+            <div class="chart-card">
+                <canvas id="eventsChart"></canvas>
+                <span id="eventsValue"></span>
+                <p>Мероприятия</p>
+            </div>
+    
+            <div class="chart-card">
+                <canvas id="attendanceChart"></canvas>
+                <span id="attendanceValue"></span>
+                <p>Посещаемость</p>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <h2>WRWRLD-INFOGRAPHIC</h2>
+    </footer>
+    
+    </div>
+    <script src="script.js"></script>
+    </body>
+    
+</html>
