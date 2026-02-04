@@ -92,12 +92,21 @@ main {
 /* FOOTER */
 footer {
     background: #ffffff;
-    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     padding: 15px;
     border-top: 2px solid #e10600;
 }
 
 footer h2 {
+    margin: 0;
+    font-size: 13px;
+    color: #e10600;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+footer a {
     margin: 0;
     font-size: 13px;
     color: #e10600;
