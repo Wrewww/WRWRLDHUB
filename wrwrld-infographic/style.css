@@ -133,3 +133,53 @@ footer a {
         max-width: 320px;
     }
 }
+
+.events {
+    max-width: 600px;
+    margin: 40px auto;
+}
+
+.events-list {
+    list-style: none;
+    padding: 0;
+}
+
+.event-item {
+    background: #fff;
+    border: 2px solid #e10600;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.event-item:hover {
+    background: #ffecec;
+}
+
+.event-title {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.users-list {
+    list-style: none;
+    padding-left: 20px;
+    margin-top: 12px;
+    display: none;
+}
+
+.user {
+    margin: 6px 0;
+    font-size: 15px;
+}
+
+.user.present {
+    color: #1db954; /* зелёный */
+}
+
+.user.absent {
+    color: #e10600; /* красный */
+}
+
