@@ -26,7 +26,7 @@ async function loadEvents() {
                 console.log("fetch:", event.name);
 
                 const response = await fetch(
-                    `${API}/event/users?name=${encodeURIComponent(event.name)}`
+                    `${API}/events/users?name=${encodeURIComponent(event.name)}`
                 );
 
                 const users = await response.json();
