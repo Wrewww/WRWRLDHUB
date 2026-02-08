@@ -183,3 +183,23 @@ footer a {
     color: #e10600; /* красный */
 }
 
+.stat-label {
+    cursor: pointer;
+    color: #e10600;
+    font-weight: 600;
+}
+
+.events {
+    max-width: 600px;
+    margin: 20px auto;
+    animation: fadeIn 0.3s ease;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
