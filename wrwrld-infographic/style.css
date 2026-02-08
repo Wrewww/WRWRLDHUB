@@ -204,72 +204,57 @@ footer a {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ---------- EVENTS CARD ---------- */
-.stat-card.clickable {
-    cursor: pointer;
+/* ---------- STAT CARD ---------- */
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ---------- HEADER (CIRCLE AREA) ---------- */
+.stat-header {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin-bottom: 12px;
+}
+
+/* ---------- CANVAS ---------- */
+.stat-header canvas {
+    width: 160px !important;
+    height: 160px !important;
+}
+
+/* ---------- VALUE INSIDE CIRCLE ---------- */
+.stat-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 26px;
+    font-weight: 700;
+    color: #e10600;
+    pointer-events: none;
+}
+
+/* ---------- LABEL ---------- */
+.stat-label {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 6px;
+    color: #e10600;
+    text-align: center;
 }
 
 /* ---------- EVENTS SECTION ---------- */
 .events-section {
-    margin-top: 12px;
+    width: 100%;
+    margin-top: 14px;
     padding-top: 10px;
     border-top: 1px solid #eee;
-    animation: fadeIn 0.25s ease;
 }
 
 .events-section.hidden {
     display: none;
-}
-
-/* ---------- EVENT ITEM ---------- */
-.event-item {
-    list-style: none;
-    margin: 8px 0;
-    padding: 10px 12px;
-    border-radius: 10px;
-    background: #f7f7f7;
-    font-weight: 600;
-    transition: background 0.2s ease;
-}
-
-.event-item:hover {
-    background: #efefef;
-}
-
-/* ---------- USERS LIST ---------- */
-.users-list {
-    margin-top: 8px;
-    padding-left: 0;
-    display: none;
-}
-
-/* ---------- USER ---------- */
-.user {
-    list-style: none;
-    padding: 6px 10px;
-    margin: 4px 0;
-    border-radius: 8px;
-    font-size: 14px;
-}
-
-.user.present {
-    background: #e6f7ee;
-    color: #0a7a3c;
-}
-
-.user.absent {
-    background: #fdeaea;
-    color: #a10000;
-}
-
-/* ---------- ANIMATION ---------- */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-4px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
