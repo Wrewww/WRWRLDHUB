@@ -87,3 +87,20 @@ document.getElementById("eventsStat").addEventListener("click", () => {
 });
 
 window.addEventListener("load", loadStatsAndEvents);
+
+
+function animateNumber(id, value) {
+    const el = document.getElementById(id);
+    let start = 0;
+    const isPercent = typeof value === "string";
+    const end = parseInt(value, 10);
+
+    const timer = setInterval(() => {
+        start++;
+        el.textContent = isPercent ? start + "%" : start;
+        if (start >= end) {
+            el.textContent = value;
+            clearInterval(timer);
+        }
+    }, 20);
+}
