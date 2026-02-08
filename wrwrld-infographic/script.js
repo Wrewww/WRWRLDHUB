@@ -1,9 +1,48 @@
-const API = "https://andrew248919.pythonanywhere.com"; // ОБЯЗАТЕЛЬНО замени
+const API = "https://andrew248919.pythonanywhere.com";
 
-async function loadEvents() {
-    const res = await fetch(`${API}/events`);
-    const events = await res.json();
+async function loadStatsAndEvents() {
+    const eventsRes = await fetch(`${API}/events`);
+    const events = await eventsRes.json();
 
+    // ===== 1. КОЛ-ВО МЕРОПРИЯТИЙ =====
+    const eventsCount = events.length;
+    animateNumber("eventsValue", eventsCount);
+    drawChart("eventsChart", eventsCount, eventsCount + 1);
+
+    // ===== 2. СЧИТАЕМ ПОСЕЩАЕМОСТЬ И ПОЛЬЗОВАТЕЛЕЙ =====
+    let came = 0;
+    let promised = 0;
+    const usersSet = new Set();
+
+    for (const event of events) {
+        const res = await fetch(
+            `${API}/event/users?name=${encodeURIComponent(event.name)}`
+        );
+        const users = await res.json();
+
+        users.forEach(u => {
+            usersSet.add(u.name);
+            if (u.status === "present") came++;
+            else promised++;
+        });
+    }
+
+    const totalUsers = usersSet.size;
+    const percent = came + promised
+        ? Math.round((came / (came + promised)) * 100)
+        : 0;
+
+    animateNumber("usersValue", totalUsers);
+    animateNumber("attendanceValue", percent + "%");
+
+    drawChart("usersChart", totalUsers, totalUsers + 1);
+    drawChart("attendanceChart", percent, 100);
+
+    // ===== 3. СПИСОК МЕРОПРИЯТИЙ =====
+    renderEvents(events);
+}
+
+function renderEvents(events) {
     const list = document.getElementById("eventsList");
     list.innerHTML = "";
 
@@ -16,35 +55,24 @@ async function loadEvents() {
         title.textContent = event.name;
 
         const usersList = document.createElement("ul");
-        usersList.className = "users-list";
-        usersList.style.display = "none";
-
-        let loaded = false;
+        usersList.className = "users-list hidden";
 
         title.addEventListener("click", async () => {
-            if (!loaded) {
-                console.log("fetch:", event.name);
-
-                const response = await fetch(
+            if (!usersList.hasChildNodes()) {
+                const res = await fetch(
                     `${API}/event/users?name=${encodeURIComponent(event.name)}`
                 );
-
-                const users = await response.json();
-
-                usersList.innerHTML = "";
+                const users = await res.json();
 
                 users.forEach(u => {
-                    const liUser = document.createElement("li");
-                    liUser.className = `user ${u.status}`;
-                    liUser.textContent = u.name;
-                    usersList.appendChild(liUser);
+                    const uLi = document.createElement("li");
+                    uLi.className = `user ${u.status}`;
+                    uLi.textContent = u.name;
+                    usersList.appendChild(uLi);
                 });
-
-                loaded = true;
             }
 
-            usersList.style.display =
-                usersList.style.display === "none" ? "block" : "none";
+            usersList.classList.toggle("hidden");
         });
 
         li.appendChild(title);
@@ -53,4 +81,9 @@ async function loadEvents() {
     });
 }
 
-window.addEventListener("load", loadEvents);
+// ===== раскрытие списка по клику на статистику =====
+document.getElementById("eventsStat").addEventListener("click", () => {
+    document.getElementById("eventsSection").classList.toggle("hidden");
+});
+
+window.addEventListener("load", loadStatsAndEvents);
