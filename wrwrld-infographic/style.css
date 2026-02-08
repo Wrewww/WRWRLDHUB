@@ -203,3 +203,71 @@ footer a {
     from { opacity: 0; transform: translateY(-6px); }
     to   { opacity: 1; transform: translateY(0); }
 }
+
+/* ---------- EVENTS CARD ---------- */
+.stat-card.clickable {
+    cursor: pointer;
+}
+
+/* ---------- EVENTS SECTION ---------- */
+.events-section {
+    margin-top: 15px;
+    animation: fadeIn 0.3s ease;
+}
+
+.events-section.hidden {
+    display: none;
+}
+
+/* ---------- EVENT ITEM ---------- */
+.event-item {
+    list-style: none;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 12px;
+    background: #f7f7f7;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.event-item:hover {
+    background: #f0f0f0;
+}
+
+/* ---------- USERS LIST ---------- */
+.users-list {
+    margin-top: 10px;
+    padding-left: 10px;
+    display: none;
+}
+
+/* ---------- USER ---------- */
+.user {
+    list-style: none;
+    padding: 6px 10px;
+    margin: 4px 0;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.user.present {
+    background: #e6f7ee;
+    color: #0a7a3c;
+}
+
+.user.absent {
+    background: #fdeaea;
+    color: #a10000;
+}
+
+/* ---------- ANIMATION ---------- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
