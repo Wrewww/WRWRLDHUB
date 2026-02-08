@@ -33,14 +33,16 @@
                 <p>Пользователи</p>
             </div>
     
-            <div class="chart-card">
+            <div class="stat" id="eventsStat">
                 <canvas id="eventsChart"></canvas>
-                <span id="eventsValue"></span>
-                <section class="events">
-                <p>Мероприятия</p>
-                <ul id="eventsList" class="events-list"></ul>
-                </section>
+                <div class="stat-label">Мероприятия</div>
+                <div class="stat-value" id="eventsValue">0</div>
             </div>
+
+<section id="eventsSection" class="events hidden">
+    <ul id="eventsList"></ul>
+</section>
+
     
             <div class="chart-card">
                 <canvas id="attendanceChart"></canvas>
