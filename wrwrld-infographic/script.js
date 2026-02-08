@@ -1,4 +1,5 @@
 /* ====== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ====== */
+const API = "https://andrew248919.pythonanywhere.com";
 
 function animateNumber(id, value) {
     const el = document.getElementById(id);
