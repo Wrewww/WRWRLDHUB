@@ -227,7 +227,7 @@ footer a {
 
 /* ---------- CANVAS ---------- */
 .stat-header canvas {
-    width: 200px !important;
+    width: 150px !important;
     height: 150px !important;
 }
 
