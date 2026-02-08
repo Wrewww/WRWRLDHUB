@@ -64,10 +64,12 @@ async function loadEventsList() {
 
             users.forEach(u => {
                 const userLi = document.createElement("li");
-                userLi.className = `user ${u.present ? "present" : "absent"}`;
-                userLi.textContent = `${u.name} ${u.surname}`;
+                userLi.className = `user ${u.status === "present" ? "present" : "absent"}`;
+                userLi.textContent = u.name;
+
                 usersList.appendChild(userLi);
             });
+
 
             if (users.length === 0) {
                 usersList.innerHTML = "<li class='user absent'>Нет данных</li>";
