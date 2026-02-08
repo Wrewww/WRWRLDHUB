@@ -1,4 +1,4 @@
-const API = "https://ТВОЙ_ДОМЕН.pythonanywhere.com"; // ОБЯЗАТЕЛЬНО замени
+const API = "https://andrew248919.pythonanywhere.com"; // ОБЯЗАТЕЛЬНО замени
 
 async function loadEvents() {
     const res = await fetch(`${API}/events`);
