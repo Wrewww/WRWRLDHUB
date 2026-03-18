@@ -28,7 +28,7 @@ const tourConfig = {
             title: 'Коридор 1 этажа',
             description: 'Главный коридор первого этажа. Здесь расположены кабинеты начальных классов.',
             details: '1 этаж | Кабинеты 101-108',
-            image: 'panoramas/entrance2.jpg',
+            image: 'panoramas/entrance2.JPG',
             hotSpots: [
                 {
                     pitch: -10,
@@ -67,7 +67,7 @@ const tourConfig = {
             title: 'Развилка на первом этаже',
             description: 'Кабинет математики. Класс оборудован интерактивной доской и современными партами.',
             details: '',
-            image: 'panoramas/firstfloor1.jpg',
+            image: 'panoramas/firstfloor1.JPG',
             hotSpots: [
                 {
                     pitch: -10,
@@ -98,7 +98,7 @@ const tourConfig = {
             title: 'Развилка на первом этаже',
             description: 'Кабинет математики. Класс оборудован интерактивной доской и современными партами.',
             details: '',
-            image: 'panoramas/firstfloorleft1.jpg',
+            image: 'panoramas/firstfloorleft1.JPG',
             hotSpots: [
                 {
                     pitch: -10,
@@ -122,7 +122,7 @@ const tourConfig = {
             title: 'Развилка на первом этаже',
             description: 'Кабинет математики. Класс оборудован интерактивной доской и современными партами.',
             details: '',
-            image: 'panoramas/firstfloorleft2.jpg',
+            image: 'panoramas/firstfloorleft2.JPG',
             hotSpots: [
                 {
                     pitch: -10,
@@ -140,7 +140,7 @@ const tourConfig = {
             title: 'Развилка на первом этаже',
             description: 'Кабинет математики. Класс оборудован интерактивной доской и современными партами.',
             details: '',
-            image: 'panoramas/firstfloorright1.jpg',
+            image: 'panoramas/firstfloorright1.JPG',
             hotSpots: [
                 {
                     pitch: -10,
@@ -164,7 +164,7 @@ const tourConfig = {
             title: 'Развилка на первом этаже',
             description: 'Кабинет математики. Класс оборудован интерактивной доской и современными партами.',
             details: '',
-            image: 'panoramas/firstfloorright2.jpg',
+            image: 'panoramas/firstfloorright2.JPG',
             hotSpots: [
                 {
                     pitch: -10,
@@ -182,7 +182,7 @@ const tourConfig = {
             title: 'Кабинет 101 - Математика',
             description: 'Кабинет математики. Класс оборудован интерактивной доской и современными партами.',
             details: '1 этаж | Учитель: Петрова М.И. | Вместимость: 25 человек',
-            image: 'panoramas/2floorleft.jpg',
+            image: 'panoramas/2floorleft.JPG',
             hotSpots: [
                 {
                     pitch: -10,
@@ -214,7 +214,7 @@ const tourConfig = {
             title: 'Школьная столовая',
             description: 'Просторная столовая с уютным дизайном. Есть горячее питание и буфет.',
             details: '1 этаж | Часы работы: 8:00 - 18:00',
-            image: 'panoramas/2floorright.jpg',
+            image: 'panoramas/2floorright.JPG',
             hotSpots: [
                 {
                     pitch: -10,
@@ -239,7 +239,7 @@ const tourConfig = {
             title: 'Спортивный зал',
             description: 'Большой спортивный зал для занятий физкультурой и спортивных секций.',
             details: '2 этаж | Площадь: 250 кв.м. | Оборудование: шведские стенки, маты, мячи',
-            image: 'panoramas/joycab.jpg',
+            image: 'panoramas/joycab.JPG',
             hotSpots: [
                 {
                     pitch: -10,
