@@ -9,7 +9,7 @@ const tourConfig = {
             title: 'Вход в школу',
             description: 'Главный вход и вестибюль школы. Здесь находится пост охраны и стенд с расписанием.',
             details: '1 этаж | Режим работы: 7:00 - 22:00',
-            image: 'panoramas/entrance.jpg',
+            image: 'panoramas/entrance.JPG',
             // Точки перехода (стрелки)
             hotSpots: [
                 {
