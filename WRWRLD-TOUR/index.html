@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Виртуальная экскурсия по школе</title>
+    <link rel="icon" type="favicon" href="hablogo.png">
+    
+    <!-- Pannellum CSS и JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Наши стили -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="panorama-container">
+        <div id="panorama"></div>
+        
+        <!-- Навигационная панель -->
+        <div id="navigation-panel">
+            <div class="current-location">
+                <i class="fas fa-map-marker-alt"></i>
+                <span id="location-name">Вход в школу</span>
+            </div>
+            
+            <!-- Кнопки навигации -->
+            <div class="nav-buttons">
+                <button id="btn-prev" class="nav-btn" disabled>
+                    <i class="fas fa-arrow-left"></i> Назад
+                </button>
+                <button id="btn-home" class="nav-btn">
+                    <i class="fas fa-home"></i> Главная
+                </button>
+                <button id="btn-next" class="nav-btn" disabled>
+                    Вперед <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Карта школы (схема) -->
+        <div id="map-container" class="collapsed">
+            <div class="map-header">
+                <h3><i class="fas fa-map"></i> Карта школы</h3>
+                <button id="toggle-map">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            <div class="map-content">
+                <img src="map/1floormap.png" alt="Карта школы" id="school-map" usemap="#hotspots">
+                <map name="hotspots" id="map-hotspots">
+                    <!-- Точки будут добавляться через JavaScript -->
+                </map>
+                <div class="map-legend">
+                    <div class="legend-item"><span class="dot current"></span> Вы здесь</div>
+                    <div class="legend-item"><span class="dot available"></span> Доступно</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Информационная панель -->
+        <div id="info-panel">
+            <i class="fas fa-info-circle" id="info-toggle"></i>
+            <div id="info-content" class="hidden">
+                <h4>О помещении</h4>
+                <p id="room-description">Главный вход в школу. Здесь находится вестибюль и пост охраны.</p>
+                <p class="room-details" id="room-details"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Наш скрипт -->
+    <script src="js/tour.js"></script>
+</body>
+</html>
