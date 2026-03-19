@@ -392,14 +392,26 @@ function loadScene(sceneId) {
 }
 
 // Переключение на уже загруженную сцену
+// Исправленная функция switchToScene
 function switchToScene(sceneId) {
     const scene = tourConfig.scenes[sceneId];
     if (!scene) return;
     
     currentSceneId = sceneId;
     
-    // Сохраняем текущее положение камеры
-    const currentView = viewer.getView();
+    // Сохраняем текущее положение камеры из Pannellum
+    let currentYaw = 0;
+    let currentPitch = 0;
+    
+    try {
+        // В Pannellum текущий угол обзора можно получить через viewer.getPitch() и viewer.getYaw()
+        if (viewer && typeof viewer.getYaw === 'function' && typeof viewer.getPitch === 'function') {
+            currentYaw = viewer.getYaw();
+            currentPitch = viewer.getPitch();
+        }
+    } catch (e) {
+        console.log('Не удалось получить текущий угол обзора', e);
+    }
     
     // Создаем новую конфигурацию
     const config = {
@@ -416,8 +428,9 @@ function switchToScene(sceneId) {
         draggable: true,
         disableKeyboardCtrl: false,
         showFullscreenCtrl: true,
-        yaw: currentView.yaw,  // Сохраняем направление взгляда
-        pitch: currentView.pitch
+        // Используем сохраненные углы, но проверяем что они валидные
+        yaw: !isNaN(currentYaw) ? currentYaw : 0,
+        pitch: !isNaN(currentPitch) ? currentPitch : 0
     };
     
     // Добавляем хотспоты
@@ -435,8 +448,29 @@ function switchToScene(sceneId) {
     });
     
     // Обновляем просмотрщик
-    viewer.destroy();
+    try {
+        if (viewer) {
+            viewer.destroy();
+        }
+    } catch (e) {
+        console.log('Ошибка при уничтожении предыдущего просмотрщика', e);
+    }
+    
+    // Создаем новый просмотрщик
     viewer = pannellum.viewer('panorama', config);
+    
+    // Добавляем обработчик полной загрузки
+    viewer.on('load', function() {
+        console.log(`Сцена ${sceneId} загружена`);
+        updateLoadingStatus(sceneId, 'loaded');
+        hideLoadingIndicator();
+    });
+    
+    // Добавляем обработчик ошибок
+    viewer.on('error', function(error) {
+        console.error(`Ошибка загрузки сцены ${sceneId}:`, error);
+        hideLoadingIndicator();
+    });
     
     // Обновляем интерфейс
     updateUI();
@@ -446,6 +480,182 @@ function switchToScene(sceneId) {
     
     // Обновляем приоритеты загрузки
     prioritizeSceneLoads(sceneId);
+}
+
+// Исправленная функция loadScene
+function loadScene(sceneId) {
+    if (!tourConfig.scenes[sceneId]) {
+        console.error('Сцена не найдена:', sceneId);
+        return;
+    }
+    
+    // Сохраняем статистику просмотра предыдущей сцены
+    stopViewingTimer();
+    
+    // Мгновенное переключение, если сцена уже загружена
+    if (imageCache.has(sceneId)) {
+        console.log(`Сцена ${sceneId} уже загружена, переключаем мгновенно`);
+        switchToScene(sceneId);
+        return;
+    }
+    
+    // Показываем индикатор загрузки
+    showLoadingIndicator(sceneId);
+    
+    // Загружаем и переключаемся
+    preloadScene(sceneId, 'high').then(() => {
+        switchToScene(sceneId);
+        hideLoadingIndicator();
+    }).catch(error => {
+        console.error(`Ошибка загрузки сцены ${sceneId}:`, error);
+        hideLoadingIndicator();
+        
+        // Показываем сообщение об ошибке пользователю
+        showErrorMessage(`Не удалось загрузить панораму "${tourConfig.scenes[sceneId].title}". Попробуйте еще раз.`);
+    });
+}
+
+// Функция для показа сообщения об ошибке
+function showErrorMessage(message) {
+    // Удаляем предыдущее сообщение об ошибке, если есть
+    const oldError = document.getElementById('error-message');
+    if (oldError) oldError.remove();
+    
+    const errorDiv = document.createElement('div');
+    errorDiv.id = 'error-message';
+    errorDiv.innerHTML = `
+        <div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+                    background: #ff4444; color: white; padding: 15px 30px;
+                    border-radius: 8px; z-index: 2000; font-size: 16px;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                    animation: slideDown 0.3s ease;">
+            ❌ ${message}
+        </div>
+        <style>
+            @keyframes slideDown {
+                from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+                to { transform: translateX(-50%) translateY(0); opacity: 1; }
+            }
+        </style>
+    `;
+    
+    document.body.appendChild(errorDiv);
+    
+    // Автоматически скрываем через 5 секунд
+    setTimeout(() => {
+        if (errorDiv.parentNode) {
+            errorDiv.style.animation = 'slideDown 0.3s ease reverse';
+            setTimeout(() => errorDiv.remove(), 300);
+        }
+    }, 5000);
+}
+
+// Исправленная функция initTour
+function initTour() {
+    const scene = tourConfig.scenes[currentSceneId];
+    
+    // Начинаем отсчет времени просмотра
+    startViewingTimer(currentSceneId);
+    
+    // Создаем конфигурацию для Pannellum
+    const config = {
+        type: 'equirectangular',
+        panorama: scene.image,
+        autoLoad: true,
+        autoRotate: -2,
+        compass: true,
+        showControls: true,
+        hotSpots: [],
+        showZoomCtrl: false,
+        keyboardZoom: false,
+        mouseZoom: true,
+        draggable: true,
+        disableKeyboardCtrl: false,
+        showFullscreenCtrl: true,
+        strings: {
+            loadButtonLabel: 'Нажмите для загрузки',
+            loadingLabel: 'Загрузка...',
+            bylineLabel: 'Виртуальный тур по школе'
+        }
+    };
+    
+    // Добавляем хотспоты из конфига
+    scene.hotSpots.forEach(spot => {
+        config.hotSpots.push({
+            pitch: spot.pitch,
+            yaw: spot.yaw,
+            text: spot.text,
+            type: spot.type,
+            sceneId: spot.sceneId,
+            clickHandlerFunc: function() {
+                loadScene(spot.sceneId);
+            }
+        });
+    });
+    
+    // Создаем просмотрщик
+    viewer = pannellum.viewer('panorama', config);
+    
+    // Отслеживаем полную загрузку сцены
+    viewer.on('load', function() {
+        console.log(`Сцена ${currentSceneId} полностью загружена`);
+        updateLoadingStatus(currentSceneId, 'loaded');
+        hideLoadingIndicator();
+        
+        // После загрузки текущей сцены начинаем предзагрузку остальных
+        prioritizeSceneLoads(currentSceneId);
+    });
+    
+    // Отслеживаем ошибки
+    viewer.on('error', function(error) {
+        console.error(`Ошибка загрузки сцены ${currentSceneId}:`, error);
+        hideLoadingIndicator();
+        showErrorMessage(`Ошибка загрузки панорамы: ${error.message || 'Неизвестная ошибка'}`);
+    });
+    
+    // Обновляем интерфейс
+    updateUI();
+}
+
+// Добавим функцию для проверки состояния viewer
+function isViewerReady() {
+    return viewer && typeof viewer === 'object';
+}
+
+// Исправленная функция для сохранения положения камеры при переключении
+function getCurrentViewAngles() {
+    if (!isViewerReady()) {
+        return { yaw: 0, pitch: 0 };
+    }
+    
+    try {
+        // Проверяем наличие методов разными способами
+        let yaw = 0;
+        let pitch = 0;
+        
+        // Способ 1: через getYaw/getPitch
+        if (typeof viewer.getYaw === 'function') {
+            yaw = viewer.getYaw();
+        }
+        
+        if (typeof viewer.getPitch === 'function') {
+            pitch = viewer.getPitch();
+        }
+        
+        // Способ 2: через свойство view (если есть)
+        if ((yaw === 0 && pitch === 0) && viewer.view) {
+            if (viewer.view.yaw !== undefined) yaw = viewer.view.yaw;
+            if (viewer.view.pitch !== undefined) pitch = viewer.view.pitch;
+        }
+        
+        return {
+            yaw: !isNaN(yaw) ? yaw : 0,
+            pitch: !isNaN(pitch) ? pitch : 0
+        };
+    } catch (e) {
+        console.log('Ошибка при получении углов камеры:', e);
+        return { yaw: 0, pitch: 0 };
+    }
 }
 
 // Предзагрузка сцены
