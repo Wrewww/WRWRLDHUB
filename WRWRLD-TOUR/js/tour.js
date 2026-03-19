@@ -250,173 +250,199 @@ const tourConfig = {
     navigationOrder: ['entrance', 'entrance2', 'secondfloorleft', 'secondfloorright', 'joycab']
 };
 
-// Текущая сцена
+// Глобальное состояние
 let currentSceneId = 'entrance';
 let viewer = null;
 
-// Кэш предзагруженных изображений
-const imageCache = new Map();
+// Кэш ВСЕХ панорам (ключ - sceneId, значение - Image)
+const panoramaCache = new Map();
 
-// Статус загрузки сцен
+// Статус загрузки каждой панорамы
 const loadingStatus = new Map();
 
-// Очередь загрузки с приоритетами
-const loadQueue = {
-    high: [],    // текущая сцена и соседние
-    medium: [],  // сцены из hotSpots
-    low: []      // остальные сцены
-};
+// Прогресс общей загрузки
+let totalScenes = Object.keys(tourConfig.scenes).length;
+let loadedScenes = 0;
 
-// Настройки загрузки
-const LOAD_CONFIG = {
-    maxConcurrent: 2,           // максимум одновременных загрузок
-    preloadRadius: 2,           // сколько сцен вперед/назад загружать
-    retryAttempts: 3,           // попыток перезагрузки при ошибке
-    retryDelay: 2000,           // задержка между попытками (мс)
-    progressInterval: 100       // интервал обновления прогресса (мс)
-};
+// Флаг, что все панорамы загружены
+let allScenesLoaded = false;
 
-// Таймеры для отслеживания времени просмотра
-let viewingTimer = null;
-let viewingStartTime = null;
-const sceneViewingStats = new Map();
+// Очередь загрузки (максимум 2 одновременных загрузки)
+let activeLoads = 0;
+const MAX_CONCURRENT_LOADS = 2;
+const loadQueue = [];
 
-// Инициализация при загрузке
+// Инициализация
 document.addEventListener('DOMContentLoaded', function() {
-    initTour();
+    // Показываем экран загрузки
+    showFullscreenLoader();
+    
+    // Начинаем загрузку ВСЕХ панорам сразу
+    loadAllPanoramas();
+    
+    // Инициализируем первую панораму после небольшой задержки
+    setTimeout(() => {
+        initFirstScene();
+    }, 500);
+    
     initUI();
-    
-    // Запускаем обработку очереди загрузки
-    processLoadQueue();
-    
-    // Начинаем предзагрузку всех сцен
-    preloadAllScenes();
 });
 
-// Инициализация тура
-function initTour() {
-    const scene = tourConfig.scenes[currentSceneId];
+// Загрузка ВСЕХ панорам в фоне
+function loadAllPanoramas() {
+    console.log('Начинаем загрузку всех панорам...');
     
-    // Начинаем отсчет времени просмотра
-    startViewingTimer(currentSceneId);
+    // Получаем список всех изображений
+    const scenes = Object.values(tourConfig.scenes);
     
-    // Создаем конфигурацию для Pannellum с улучшенными настройками
-    const config = {
-        type: 'equirectangular',
-        panorama: scene.image,
-        autoLoad: true,
-        autoRotate: -2,           // Медленное авто-вращение для красоты
-        compass: true,
-        showControls: true,
-        hotSpots: [],
-        showZoomCtrl: false,
-        keyboardZoom: false,
-        mouseZoom: true,
-        draggable: true,
-        disableKeyboardCtrl: false,
-        showFullscreenCtrl: true,
-        showChat: false,
-        showCopyright: false,
-        preview: null,            // Можно добавить preview для быстрой загрузки
-        strings: {
-            loadButtonLabel: 'Нажмите для загрузки',
-            loadingLabel: 'Загрузка...',
-            bylineLabel: 'Виртуальный тур'
-        }
-    };
-    
-    // Добавляем хотспоты из конфига
-    scene.hotSpots.forEach(spot => {
-        config.hotSpots.push({
-            pitch: spot.pitch,
-            yaw: spot.yaw,
-            text: spot.text,
-            type: spot.type,
-            sceneId: spot.sceneId,
-            clickHandlerFunc: function() {
-                loadScene(spot.sceneId);
-            }
+    // Создаем очередь загрузки
+    scenes.forEach(scene => {
+        loadQueue.push({
+            sceneId: scene.id,
+            imageSrc: scene.image,
+            priority: scene.id === 'entrance' ? 1 : 2 // Приоритет для первой сцены
         });
     });
     
-    // Создаем просмотрщик
-    viewer = pannellum.viewer('panorama', config);
+    // Сортируем по приоритету
+    loadQueue.sort((a, b) => a.priority - b.priority);
     
-    // Отслеживаем полную загрузку сцены
-    viewer.on('load', function() {
-        console.log(`Сцена ${currentSceneId} полностью загружена`);
-        updateLoadingStatus(currentSceneId, 'loaded');
+    // Запускаем загрузку
+    processLoadQueue();
+}
+
+// Обработка очереди загрузки
+function processLoadQueue() {
+    while (activeLoads < MAX_CONCURRENT_LOADS && loadQueue.length > 0) {
+        const nextItem = loadQueue.shift();
+        activeLoads++;
+        loadPanorama(nextItem.sceneId, nextItem.imageSrc);
+    }
+}
+
+// Загрузка одной панорамы
+function loadPanorama(sceneId, imageSrc) {
+    console.log(`Загрузка: ${sceneId}...`);
+    
+    loadingStatus.set(sceneId, { status: 'loading', progress: 0 });
+    
+    const img = new Image();
+    
+    img.onload = () => {
+        console.log(`✅ Загружена: ${sceneId}`);
         
-        // После загрузки текущей сцены начинаем предзагрузку остальных
-        prioritizeSceneLoads(currentSceneId);
-    });
-    
-    // Отслеживаем прогресс загрузки
-    viewer.on('scenechange-progress', function(progress) {
-        updateLoadingProgress(currentSceneId, progress);
-    });
-    
-    // Обновляем интерфейс
-    updateUI();
-}
-
-// Загрузка другой сцены
-function loadScene(sceneId) {
-    if (!tourConfig.scenes[sceneId]) {
-        console.error('Сцена не найдена:', sceneId);
-        return;
-    }
-    
-    // Сохраняем статистику просмотра предыдущей сцены
-    stopViewingTimer();
-    
-    // Мгновенное переключение, если сцена уже загружена
-    if (imageCache.has(sceneId)) {
-        console.log(`Сцена ${sceneId} уже загружена, переключаем мгновенно`);
-        switchToScene(sceneId);
-        return;
-    }
-    
-    // Показываем индикатор загрузки
-    showLoadingIndicator(sceneId);
-    
-    // Загружаем и переключаемся
-    preloadScene(sceneId, 'high').then(() => {
-        switchToScene(sceneId);
-        hideLoadingIndicator();
-    }).catch(error => {
-        console.error(`Ошибка загрузки сцены ${sceneId}:`, error);
-        hideLoadingIndicator();
-        alert('Не удалось загрузить панораму. Попробуйте еще раз.');
-    });
-}
-
-// Переключение на уже загруженную сцену
-// Исправленная функция switchToScene
-function switchToScene(sceneId) {
-    const scene = tourConfig.scenes[sceneId];
-    if (!scene) return;
-    
-    currentSceneId = sceneId;
-    
-    // Сохраняем текущее положение камеры из Pannellum
-    let currentYaw = 0;
-    let currentPitch = 0;
-    
-    try {
-        // В Pannellum текущий угол обзора можно получить через viewer.getPitch() и viewer.getYaw()
-        if (viewer && typeof viewer.getYaw === 'function' && typeof viewer.getPitch === 'function') {
-            currentYaw = viewer.getYaw();
-            currentPitch = viewer.getPitch();
+        // Сохраняем в кэш
+        panoramaCache.set(sceneId, img);
+        loadingStatus.set(sceneId, { status: 'loaded', progress: 100 });
+        
+        loadedScenes++;
+        updateLoadingProgress();
+        
+        activeLoads--;
+        processLoadQueue();
+        
+        // Если это первая сцена, скрываем загрузку
+        if (sceneId === 'entrance') {
+            setTimeout(() => {
+                hideFullscreenLoader();
+            }, 1000);
         }
-    } catch (e) {
-        console.log('Не удалось получить текущий угол обзора', e);
+        
+        // Если все загружено
+        if (loadedScenes === totalScenes) {
+            allScenesLoaded = true;
+            console.log('🎉 Все панорамы загружены!');
+            showNotification('Все панорамы загружены, можно гулять!');
+        }
+    };
+    
+    img.onerror = (error) => {
+        console.error(`❌ Ошибка загрузки ${sceneId}:`, error);
+        
+        // Пробуем снова через 2 секунды
+        setTimeout(() => {
+            console.log(`Повторная попытка загрузки ${sceneId}...`);
+            loadQueue.unshift({ sceneId, imageSrc, priority: 1 });
+            processLoadQueue();
+        }, 2000);
+        
+        activeLoads--;
+        processLoadQueue();
+    };
+    
+    // Добавляем поддержку прогресса
+    img.onprogress = (event) => {
+        if (event.lengthComputable) {
+            const progress = Math.round((event.loaded / event.total) * 100);
+            loadingStatus.set(sceneId, { status: 'loading', progress });
+            updateLoadingProgress();
+        }
+    };
+    
+    img.src = imageSrc;
+}
+
+// Обновление прогресса загрузки
+function updateLoadingProgress() {
+    const totalProgress = Math.round((loadedScenes / totalScenes) * 100);
+    
+    // Обновляем прогресс-бар
+    const progressBar = document.getElementById('loading-progress-bar');
+    const progressText = document.getElementById('loading-progress-text');
+    
+    if (progressBar) {
+        progressBar.style.width = totalProgress + '%';
     }
     
-    // Создаем новую конфигурацию
+    if (progressText) {
+        progressText.textContent = `Загружено ${loadedScenes} из ${totalScenes} панорам (${totalProgress}%)`;
+    }
+}
+
+// Инициализация первой сцены
+function initFirstScene() {
+    const scene = tourConfig.scenes['entrance'];
+    
+    // Проверяем, загружена ли уже панорама
+    if (panoramaCache.has('entrance')) {
+        showScene('entrance');
+    } else {
+        // Ждем загрузки первой сцены
+        const checkInterval = setInterval(() => {
+            if (panoramaCache.has('entrance')) {
+                clearInterval(checkInterval);
+                showScene('entrance');
+            }
+        }, 100);
+    }
+}
+
+// Показать сцену (мгновенно из кэша)
+function showScene(sceneId) {
+    console.log(`Показываем сцену: ${sceneId}`);
+    
+    const scene = tourConfig.scenes[sceneId];
+    const cachedImage = panoramaCache.get(sceneId);
+    
+    if (!cachedImage && !allScenesLoaded) {
+        console.log(`Сцена ${sceneId} еще не загружена, показываем загрузку...`);
+        showMiniLoader(sceneId);
+        
+        // Ждем загрузку
+        const checkInterval = setInterval(() => {
+            if (panoramaCache.has(sceneId)) {
+                clearInterval(checkInterval);
+                hideMiniLoader();
+                showScene(sceneId);
+            }
+        }, 100);
+        return;
+    }
+    
+    // Создаем конфигурацию
     const config = {
         type: 'equirectangular',
-        panorama: scene.image,
+        panorama: scene.image, // Pannellum сам использует кэш браузера
         autoLoad: true,
         autoRotate: -2,
         compass: true,
@@ -426,11 +452,9 @@ function switchToScene(sceneId) {
         keyboardZoom: false,
         mouseZoom: true,
         draggable: true,
-        disableKeyboardCtrl: false,
         showFullscreenCtrl: true,
-        // Используем сохраненные углы, но проверяем что они валидные
-        yaw: !isNaN(currentYaw) ? currentYaw : 0,
-        pitch: !isNaN(currentPitch) ? currentPitch : 0
+        // Плавный переход
+        sceneFadeDuration: 500
     };
     
     // Добавляем хотспоты
@@ -442,633 +466,187 @@ function switchToScene(sceneId) {
             type: spot.type,
             sceneId: spot.sceneId,
             clickHandlerFunc: function() {
-                loadScene(spot.sceneId);
+                // Мгновенное переключение
+                switchToScene(spot.sceneId);
             }
         });
     });
     
-    // Обновляем просмотрщик
-    try {
-        if (viewer) {
-            viewer.destroy();
-        }
-    } catch (e) {
-        console.log('Ошибка при уничтожении предыдущего просмотрщика', e);
+    // Если уже есть viewer, уничтожаем
+    if (viewer) {
+        // Плавно затемняем
+        const panoramaDiv = document.getElementById('panorama');
+        panoramaDiv.style.transition = 'opacity 0.3s';
+        panoramaDiv.style.opacity = '0';
+        
+        setTimeout(() => {
+            try {
+                viewer.destroy();
+            } catch (e) {}
+            
+            viewer = pannellum.viewer('panorama', config);
+            
+            // Плавно появляемся
+            setTimeout(() => {
+                panoramaDiv.style.opacity = '1';
+            }, 100);
+        }, 300);
+    } else {
+        viewer = pannellum.viewer('panorama', config);
     }
     
-    // Создаем новый просмотрщик
-    viewer = pannellum.viewer('panorama', config);
-    
-    // Добавляем обработчик полной загрузки
-    viewer.on('load', function() {
-        console.log(`Сцена ${sceneId} загружена`);
-        updateLoadingStatus(sceneId, 'loaded');
-        hideLoadingIndicator();
-    });
-    
-    // Добавляем обработчик ошибок
-    viewer.on('error', function(error) {
-        console.error(`Ошибка загрузки сцены ${sceneId}:`, error);
-        hideLoadingIndicator();
-    });
-    
-    // Обновляем интерфейс
+    currentSceneId = sceneId;
     updateUI();
     
-    // Начинаем отсчет времени просмотра новой сцены
-    startViewingTimer(sceneId);
-    
-    // Обновляем приоритеты загрузки
-    prioritizeSceneLoads(sceneId);
-}
-
-// Исправленная функция loadScene
-function loadScene(sceneId) {
-    if (!tourConfig.scenes[sceneId]) {
-        console.error('Сцена не найдена:', sceneId);
-        return;
-    }
-    
-    // Сохраняем статистику просмотра предыдущей сцены
-    stopViewingTimer();
-    
-    // Мгновенное переключение, если сцена уже загружена
-    if (imageCache.has(sceneId)) {
-        console.log(`Сцена ${sceneId} уже загружена, переключаем мгновенно`);
-        switchToScene(sceneId);
-        return;
-    }
-    
-    // Показываем индикатор загрузки
-    showLoadingIndicator(sceneId);
-    
-    // Загружаем и переключаемся
-    preloadScene(sceneId, 'high').then(() => {
-        switchToScene(sceneId);
-        hideLoadingIndicator();
-    }).catch(error => {
-        console.error(`Ошибка загрузки сцены ${sceneId}:`, error);
-        hideLoadingIndicator();
-        
-        // Показываем сообщение об ошибке пользователю
-        showErrorMessage(`Не удалось загрузить панораму "${tourConfig.scenes[sceneId].title}". Попробуйте еще раз.`);
+    // Предзагружаем связанные сцены, если они еще не загружены
+    scene.hotSpots.forEach(spot => {
+        if (!panoramaCache.has(spot.sceneId)) {
+            loadPanoramaIfNeeded(spot.sceneId);
+        }
     });
 }
 
-// Функция для показа сообщения об ошибке
-function showErrorMessage(message) {
-    // Удаляем предыдущее сообщение об ошибке, если есть
-    const oldError = document.getElementById('error-message');
-    if (oldError) oldError.remove();
+// Переключение на другую сцену (мгновенное)
+function switchToScene(sceneId) {
+    if (!tourConfig.scenes[sceneId]) return;
     
-    const errorDiv = document.createElement('div');
-    errorDiv.id = 'error-message';
-    errorDiv.innerHTML = `
-        <div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-                    background: #ff4444; color: white; padding: 15px 30px;
-                    border-radius: 8px; z-index: 2000; font-size: 16px;
-                    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-                    animation: slideDown 0.3s ease;">
-            ❌ ${message}
+    // Проверяем, загружена ли сцена
+    if (panoramaCache.has(sceneId)) {
+        // Мгновенное переключение
+        showScene(sceneId);
+    } else {
+        // Если не загружена, показываем мини-загрузку
+        console.log(`Сцена ${sceneId} еще загружается...`);
+        showMiniLoader(sceneId);
+        
+        // Ждем загрузку
+        const checkInterval = setInterval(() => {
+            if (panoramaCache.has(sceneId)) {
+                clearInterval(checkInterval);
+                hideMiniLoader();
+                showScene(sceneId);
+            }
+        }, 100);
+        
+        // Форсируем загрузку
+        loadPanoramaIfNeeded(sceneId);
+    }
+}
+
+// Загрузить панораму, если еще не загружена
+function loadPanoramaIfNeeded(sceneId) {
+    if (!panoramaCache.has(sceneId) && loadingStatus.get(sceneId)?.status !== 'loading') {
+        const scene = tourConfig.scenes[sceneId];
+        loadingStatus.set(sceneId, { status: 'loading', progress: 0 });
+        
+        const img = new Image();
+        img.onload = () => {
+            panoramaCache.set(sceneId, img);
+            loadingStatus.set(sceneId, { status: 'loaded', progress: 100 });
+            loadedScenes++;
+            updateLoadingProgress();
+        };
+        img.src = scene.image;
+    }
+}
+
+// Показать полноэкранный загрузчик
+function showFullscreenLoader() {
+    const loader = document.createElement('div');
+    loader.id = 'fullscreen-loader';
+    loader.innerHTML = `
+        <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                    background: #000; z-index: 9999; display: flex;
+                    flex-direction: column; justify-content: center;
+                    align-items: center; color: white; font-family: Arial;">
+            <h2 style="margin-bottom: 30px;">Загрузка виртуального тура...</h2>
+            <div style="width: 400px; height: 20px; background: #333;
+                        border-radius: 10px; overflow: hidden;">
+                <div id="loading-progress-bar" style="height: 100%; width: 0%;
+                        background: linear-gradient(90deg, #4CAF50, #8BC34A);
+                        transition: width 0.3s;"></div>
+            </div>
+            <p id="loading-progress-text" style="margin-top: 15px; color: #ccc;">
+                Загружено 0 из ${totalScenes} панорам (0%)
+            </p>
+            <p style="margin-top: 30px; color: #666; font-size: 14px;">
+                Панорамы загружаются в фоне, это займет около минуты...
+            </p>
+        </div>
+    `;
+    document.body.appendChild(loader);
+}
+
+// Скрыть полноэкранный загрузчик
+function hideFullscreenLoader() {
+    const loader = document.getElementById('fullscreen-loader');
+    if (loader) {
+        loader.style.transition = 'opacity 0.5s';
+        loader.style.opacity = '0';
+        setTimeout(() => loader.remove(), 500);
+    }
+}
+
+// Показать мини-загрузчик при переключении
+function showMiniLoader(sceneId) {
+    let miniLoader = document.getElementById('mini-loader');
+    if (!miniLoader) {
+        miniLoader = document.createElement('div');
+        miniLoader.id = 'mini-loader';
+        miniLoader.innerHTML = `
+            <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                        background: rgba(0,0,0,0.9); color: white; padding: 20px 40px;
+                        border-radius: 10px; z-index: 1000; text-align: center;
+                        backdrop-filter: blur(5px); border: 1px solid #333;">
+                <div class="spinner" style="border: 3px solid #333; border-top: 3px solid #4CAF50;
+                        width: 30px; height: 30px; border-radius: 50%;
+                        animation: spin 1s linear infinite; margin: 0 auto 10px;"></div>
+                <div id="mini-loader-text">Загрузка панорамы...</div>
+            </div>
+            <style>
+                @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+            </style>
+        `;
+        document.body.appendChild(miniLoader);
+    }
+    
+    const sceneName = tourConfig.scenes[sceneId]?.title || 'панорамы';
+    document.getElementById('mini-loader-text').textContent = `Загрузка ${sceneName}...`;
+    miniLoader.style.display = 'block';
+}
+
+// Скрыть мини-загрузчик
+function hideMiniLoader() {
+    const miniLoader = document.getElementById('mini-loader');
+    if (miniLoader) {
+        miniLoader.style.display = 'none';
+    }
+}
+
+// Показать уведомление
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.innerHTML = `
+        <div style="position: fixed; bottom: 20px; right: 20px;
+                    background: #4CAF50; color: white; padding: 15px 25px;
+                    border-radius: 8px; z-index: 10000; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                    animation: slideIn 0.3s ease;">
+            ✅ ${message}
         </div>
         <style>
-            @keyframes slideDown {
-                from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
-                to { transform: translateX(-50%) translateY(0); opacity: 1; }
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
             }
         </style>
     `;
+    document.body.appendChild(notification);
     
-    document.body.appendChild(errorDiv);
-    
-    // Автоматически скрываем через 5 секунд
     setTimeout(() => {
-        if (errorDiv.parentNode) {
-            errorDiv.style.animation = 'slideDown 0.3s ease reverse';
-            setTimeout(() => errorDiv.remove(), 300);
-        }
-    }, 5000);
-}
-
-// Исправленная функция initTour
-function initTour() {
-    const scene = tourConfig.scenes[currentSceneId];
-    
-    // Начинаем отсчет времени просмотра
-    startViewingTimer(currentSceneId);
-    
-    // Создаем конфигурацию для Pannellum
-    const config = {
-        type: 'equirectangular',
-        panorama: scene.image,
-        autoLoad: true,
-        autoRotate: -2,
-        compass: true,
-        showControls: true,
-        hotSpots: [],
-        showZoomCtrl: false,
-        keyboardZoom: false,
-        mouseZoom: true,
-        draggable: true,
-        disableKeyboardCtrl: false,
-        showFullscreenCtrl: true,
-        strings: {
-            loadButtonLabel: 'Нажмите для загрузки',
-            loadingLabel: 'Загрузка...',
-            bylineLabel: 'Виртуальный тур по школе'
-        }
-    };
-    
-    // Добавляем хотспоты из конфига
-    scene.hotSpots.forEach(spot => {
-        config.hotSpots.push({
-            pitch: spot.pitch,
-            yaw: spot.yaw,
-            text: spot.text,
-            type: spot.type,
-            sceneId: spot.sceneId,
-            clickHandlerFunc: function() {
-                loadScene(spot.sceneId);
-            }
-        });
-    });
-    
-    // Создаем просмотрщик
-    viewer = pannellum.viewer('panorama', config);
-    
-    // Отслеживаем полную загрузку сцены
-    viewer.on('load', function() {
-        console.log(`Сцена ${currentSceneId} полностью загружена`);
-        updateLoadingStatus(currentSceneId, 'loaded');
-        hideLoadingIndicator();
-        
-        // После загрузки текущей сцены начинаем предзагрузку остальных
-        prioritizeSceneLoads(currentSceneId);
-    });
-    
-    // Отслеживаем ошибки
-    viewer.on('error', function(error) {
-        console.error(`Ошибка загрузки сцены ${currentSceneId}:`, error);
-        hideLoadingIndicator();
-        showErrorMessage(`Ошибка загрузки панорамы: ${error.message || 'Неизвестная ошибка'}`);
-    });
-    
-    // Обновляем интерфейс
-    updateUI();
-}
-
-// Добавим функцию для проверки состояния viewer
-function isViewerReady() {
-    return viewer && typeof viewer === 'object';
-}
-
-// Исправленная функция для сохранения положения камеры при переключении
-function getCurrentViewAngles() {
-    if (!isViewerReady()) {
-        return { yaw: 0, pitch: 0 };
-    }
-    
-    try {
-        // Проверяем наличие методов разными способами
-        let yaw = 0;
-        let pitch = 0;
-        
-        // Способ 1: через getYaw/getPitch
-        if (typeof viewer.getYaw === 'function') {
-            yaw = viewer.getYaw();
-        }
-        
-        if (typeof viewer.getPitch === 'function') {
-            pitch = viewer.getPitch();
-        }
-        
-        // Способ 2: через свойство view (если есть)
-        if ((yaw === 0 && pitch === 0) && viewer.view) {
-            if (viewer.view.yaw !== undefined) yaw = viewer.view.yaw;
-            if (viewer.view.pitch !== undefined) pitch = viewer.view.pitch;
-        }
-        
-        return {
-            yaw: !isNaN(yaw) ? yaw : 0,
-            pitch: !isNaN(pitch) ? pitch : 0
-        };
-    } catch (e) {
-        console.log('Ошибка при получении углов камеры:', e);
-        return { yaw: 0, pitch: 0 };
-    }
-}
-
-// Предзагрузка сцены
-function preloadScene(sceneId, priority = 'medium') {
-    return new Promise((resolve, reject) => {
-        // Проверяем, не загружается ли уже
-        if (loadingStatus.has(sceneId)) {
-            const status = loadingStatus.get(sceneId);
-            if (status.status === 'loading') {
-                // Добавляем в очередь ожидания
-                status.promises.push({ resolve, reject });
-                return;
-            }
-            if (status.status === 'loaded') {
-                resolve();
-                return;
-            }
-        }
-        
-        // Создаем запись о загрузке
-        loadingStatus.set(sceneId, {
-            status: 'loading',
-            progress: 0,
-            retries: 0,
-            promises: [{ resolve, reject }]
-        });
-        
-        // Добавляем в очередь
-        addToQueue(sceneId, priority);
-    });
-}
-
-// Добавление в очередь с приоритетом
-function addToQueue(sceneId, priority) {
-    const scene = tourConfig.scenes[sceneId];
-    if (!scene) return;
-    
-    // Проверяем, нет ли уже в очереди
-    const queueItem = { sceneId, image: scene.image };
-    
-    switch(priority) {
-        case 'high':
-            loadQueue.high.push(queueItem);
-            break;
-        case 'medium':
-            loadQueue.medium.push(queueItem);
-            break;
-        case 'low':
-            loadQueue.low.push(queueItem);
-            break;
-    }
-    
-    console.log(`Добавлено в очередь (${priority}): ${sceneId}`);
-}
-
-// Обработка очереди загрузки
-async function processLoadQueue() {
-    let activeLoads = 0;
-    
-    while (true) {
-        // Проверяем, есть ли свободные слоты
-        if (activeLoads < LOAD_CONFIG.maxConcurrent) {
-            // Берем следующее задание по приоритету
-            let nextItem = null;
-            
-            if (loadQueue.high.length > 0) {
-                nextItem = loadQueue.high.shift();
-            } else if (loadQueue.medium.length > 0) {
-                nextItem = loadQueue.medium.shift();
-            } else if (loadQueue.low.length > 0) {
-                nextItem = loadQueue.low.shift();
-            }
-            
-            if (nextItem) {
-                activeLoads++;
-                loadImageWithRetry(nextItem.sceneId, nextItem.image)
-                    .then(() => {
-                        activeLoads--;
-                    })
-                    .catch(() => {
-                        activeLoads--;
-                    });
-            }
-        }
-        
-        // Ждем немного перед следующей проверкой
-        await new Promise(resolve => setTimeout(resolve, 100));
-    }
-}
-
-// Загрузка изображения с повторными попытками
-function loadImageWithRetry(sceneId, imageSrc, attempt = 1) {
-    return new Promise((resolve, reject) => {
-        console.log(`Загрузка сцены ${sceneId} (попытка ${attempt})...`);
-        
-        const img = new Image();
-        
-        img.onload = () => {
-            console.log(`Сцена ${sceneId} успешно загружена`);
-            
-            // Сохраняем в кэш
-            imageCache.set(sceneId, img);
-            
-            // Обновляем статус
-            const status = loadingStatus.get(sceneId);
-            if (status) {
-                status.status = 'loaded';
-                status.progress = 100;
-                
-                // Уведомляем все ожидающие промисы
-                status.promises.forEach(p => p.resolve());
-            }
-            
-            resolve();
-        };
-        
-        img.onerror = (error) => {
-            console.error(`Ошибка загрузки ${sceneId} (попытка ${attempt}):`, error);
-            
-            if (attempt < LOAD_CONFIG.retryAttempts) {
-                // Пробуем снова через задержку
-                setTimeout(() => {
-                    loadImageWithRetry(sceneId, imageSrc, attempt + 1)
-                        .then(resolve)
-                        .catch(reject);
-                }, LOAD_CONFIG.retryDelay);
-            } else {
-                // Все попытки исчерпаны
-                const status = loadingStatus.get(sceneId);
-                if (status) {
-                    status.promises.forEach(p => p.reject(new Error(`Failed to load ${sceneId}`)));
-                }
-                reject(error);
-            }
-        };
-        
-        img.src = imageSrc;
-    });
-}
-
-// Приоритизация загрузки на основе текущей сцены
-function prioritizeSceneLoads(currentSceneId) {
-    console.log('Пересчет приоритетов для сцены:', currentSceneId);
-    
-    // Очищаем очереди
-    loadQueue.high = [];
-    loadQueue.medium = [];
-    loadQueue.low = [];
-    
-    const currentIndex = tourConfig.navigationOrder.indexOf(currentSceneId);
-    const currentScene = tourConfig.scenes[currentSceneId];
-    
-    // 1. Высокий приоритет: соседние сцены (вперед/назад)
-    for (let i = 1; i <= LOAD_CONFIG.preloadRadius; i++) {
-        if (currentIndex - i >= 0) {
-            const prevSceneId = tourConfig.navigationOrder[currentIndex - i];
-            if (!imageCache.has(prevSceneId) && !isLoading(prevSceneId)) {
-                addToQueue(prevSceneId, 'high');
-            }
-        }
-        if (currentIndex + i < tourConfig.navigationOrder.length) {
-            const nextSceneId = tourConfig.navigationOrder[currentIndex + i];
-            if (!imageCache.has(nextSceneId) && !isLoading(nextSceneId)) {
-                addToQueue(nextSceneId, 'high');
-            }
-        }
-    }
-    
-    // 2. Средний приоритет: все сцены из hotSpots текущей сцены
-    const visitedScenes = new Set();
-    const scenesToCheck = [currentScene];
-    
-    while (scenesToCheck.length > 0) {
-        const scene = scenesToCheck.shift();
-        if (visitedScenes.has(scene.id)) continue;
-        visitedScenes.add(scene.id);
-        
-        scene.hotSpots.forEach(spot => {
-            if (spot.sceneId && !imageCache.has(spot.sceneId) && !isLoading(spot.sceneId)) {
-                addToQueue(spot.sceneId, 'medium');
-                
-                // Добавляем в проверку для следующего уровня
-                const nextScene = tourConfig.scenes[spot.sceneId];
-                if (nextScene && !visitedScenes.has(spot.sceneId)) {
-                    scenesToCheck.push(nextScene);
-                }
-            }
-        });
-    }
-    
-    // 3. Низкий приоритет: все остальные сцены
-    tourConfig.navigationOrder.forEach(sceneId => {
-        if (!imageCache.has(sceneId) && !isLoading(sceneId)) {
-            // Проверяем, не добавлена ли уже в высокий или средний
-            const inHigh = loadQueue.high.some(item => item.sceneId === sceneId);
-            const inMedium = loadQueue.medium.some(item => item.sceneId === sceneId);
-            
-            if (!inHigh && !inMedium) {
-                addToQueue(sceneId, 'low');
-            }
-        }
-    });
-    
-    console.log('Очередь загрузки:', {
-        high: loadQueue.high.length,
-        medium: loadQueue.medium.length,
-        low: loadQueue.low.length,
-        cached: imageCache.size
-    });
-}
-
-// Предзагрузка всех сцен в фоне
-function preloadAllScenes() {
-    // Начинаем с приоритетной загрузки на основе первой сцены
-    prioritizeSceneLoads(currentSceneId);
-    
-    // Анализируем частоту переходов для умной предзагрузки
-    analyzeNavigationPatterns();
-}
-
-// Анализ паттернов навигации
-function analyzeNavigationPatterns() {
-    // Загружаем статистику из localStorage если есть
-    const savedStats = localStorage.getItem('tourViewingStats');
-    if (savedStats) {
-        const stats = JSON.parse(savedStats);
-        stats.forEach((value, key) => {
-            sceneViewingStats.set(key, value);
-        });
-    }
-}
-
-// Старт таймера просмотра
-function startViewingTimer(sceneId) {
-    viewingStartTime = Date.now();
-    
-    if (viewingTimer) {
-        clearInterval(viewingTimer);
-    }
-    
-    // Обновляем статистику каждые 5 секунд
-    viewingTimer = setInterval(() => {
-        if (viewingStartTime) {
-            const viewingTime = Date.now() - viewingStartTime;
-            const currentStats = sceneViewingStats.get(sceneId) || { totalTime: 0, visits: 0 };
-            currentStats.totalTime += 5000; // Добавляем 5 секунд
-            sceneViewingStats.set(sceneId, currentStats);
-            
-            // Сохраняем в localStorage
-            saveViewingStats();
-            
-            console.log(`Просмотр сцены ${sceneId}: ${currentStats.totalTime/1000} сек`);
-        }
-    }, 5000);
-}
-
-// Остановка таймера просмотра
-function stopViewingTimer() {
-    if (viewingTimer) {
-        clearInterval(viewingTimer);
-        viewingTimer = null;
-    }
-    
-    if (viewingStartTime && currentSceneId) {
-        const viewingTime = Date.now() - viewingStartTime;
-        const currentStats = sceneViewingStats.get(currentSceneId) || { totalTime: 0, visits: 0 };
-        currentStats.totalTime += viewingTime;
-        currentStats.visits += 1;
-        sceneViewingStats.set(currentSceneId, currentStats);
-        
-        saveViewingStats();
-        
-        console.log(`Сцена ${currentSceneId} просмотрена ${viewingTime/1000} сек`);
-    }
-}
-
-// Сохранение статистики
-function saveViewingStats() {
-    const statsObj = {};
-    sceneViewingStats.forEach((value, key) => {
-        statsObj[key] = value;
-    });
-    localStorage.setItem('tourViewingStats', JSON.stringify(statsObj));
-}
-
-// Проверка, загружается ли сцена
-function isLoading(sceneId) {
-    const status = loadingStatus.get(sceneId);
-    return status && status.status === 'loading';
-}
-
-// Обновление статуса загрузки
-function updateLoadingStatus(sceneId, status) {
-    if (loadingStatus.has(sceneId)) {
-        loadingStatus.get(sceneId).status = status;
-    }
-}
-
-// Обновление прогресса загрузки
-function updateLoadingProgress(sceneId, progress) {
-    if (loadingStatus.has(sceneId)) {
-        loadingStatus.get(sceneId).progress = progress;
-    }
-}
-
-// Показать индикатор загрузки
-function showLoadingIndicator(sceneId) {
-    const scene = tourConfig.scenes[sceneId];
-    let loader = document.getElementById('loading-indicator');
-    
-    if (!loader) {
-        loader = document.createElement('div');
-        loader.id = 'loading-indicator';
-        loader.innerHTML = `
-            <div class="loading-spinner"></div>
-            <div id="loading-text">Загрузка панорамы...</div>
-            <div class="loading-progress">
-                <div class="loading-progress-bar"></div>
-            </div>
-        `;
-        
-        // Добавляем стили
-        const style = document.createElement('style');
-        style.textContent = `
-            #loading-indicator {
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: rgba(0,0,0,0.9);
-                color: white;
-                padding: 30px;
-                border-radius: 15px;
-                z-index: 1000;
-                text-align: center;
-                min-width: 250px;
-                backdrop-filter: blur(5px);
-                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            }
-            
-            .loading-spinner {
-                border: 4px solid rgba(255,255,255,0.2);
-                border-top: 4px solid white;
-                border-radius: 50%;
-                width: 50px;
-                height: 50px;
-                animation: spin 1s linear infinite;
-                margin: 0 auto 20px;
-            }
-            
-            .loading-progress {
-                width: 100%;
-                height: 6px;
-                background: rgba(255,255,255,0.2);
-                border-radius: 3px;
-                margin-top: 15px;
-                overflow: hidden;
-            }
-            
-            .loading-progress-bar {
-                height: 100%;
-                background: #4CAF50;
-                width: 0%;
-                transition: width 0.3s;
-            }
-            
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-            
-            #loading-text {
-                font-size: 16px;
-                margin: 10px 0;
-            }
-        `;
-        
-        document.head.appendChild(style);
-        document.body.appendChild(loader);
-    }
-    
-    document.getElementById('loading-text').textContent = 
-        `Загрузка: ${scene.title}...`;
-    
-    loader.style.display = 'block';
-    
-    // Анимируем прогресс
-    let progress = 0;
-    const interval = setInterval(() => {
-        if (loadingStatus.has(sceneId)) {
-            const status = loadingStatus.get(sceneId);
-            if (status.progress > progress) {
-                progress = status.progress;
-                const bar = document.querySelector('.loading-progress-bar');
-                if (bar) bar.style.width = progress + '%';
-            }
-        }
-    }, 100);
-    
-    // Сохраняем interval для очистки
-    loader.dataset.interval = interval;
-}
-
-// Скрыть индикатор загрузки
-function hideLoadingIndicator() {
-    const loader = document.getElementById('loading-indicator');
-    if (loader) {
-        // Очищаем interval
-        if (loader.dataset.interval) {
-            clearInterval(parseInt(loader.dataset.interval));
-        }
-        loader.style.display = 'none';
-    }
+        notification.style.transition = 'opacity 0.3s';
+        notification.style.opacity = '0';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
 }
 
 // Обновление интерфейса
@@ -1086,42 +664,22 @@ function updateUI() {
     
     if (currentIndex > 0) {
         prevBtn.disabled = false;
-        prevBtn.onclick = () => loadScene(tourConfig.navigationOrder[currentIndex - 1]);
+        prevBtn.onclick = () => switchToScene(tourConfig.navigationOrder[currentIndex - 1]);
     } else {
         prevBtn.disabled = true;
     }
     
     if (currentIndex < tourConfig.navigationOrder.length - 1) {
         nextBtn.disabled = false;
-        nextBtn.onclick = () => loadScene(tourConfig.navigationOrder[currentIndex + 1]);
+        nextBtn.onclick = () => switchToScene(tourConfig.navigationOrder[currentIndex + 1]);
     } else {
         nextBtn.disabled = true;
     }
     
-    document.getElementById('btn-home').onclick = () => loadScene('entrance');
-    
-    // Показываем статус загрузки в консоли
-    showLoadingStatus();
+    document.getElementById('btn-home').onclick = () => switchToScene('entrance');
 }
 
-// Показать статус загрузки всех сцен
-function showLoadingStatus() {
-    console.log('=== СТАТУС ЗАГРУЗКИ ===');
-    console.log(`Загружено сцен: ${imageCache.size} из ${Object.keys(tourConfig.scenes).length}`);
-    console.log('В очереди:', {
-        high: loadQueue.high.length,
-        medium: loadQueue.medium.length,
-        low: loadQueue.low.length
-    });
-    
-    // Показываем статистику просмотров
-    console.log('Статистика просмотров:');
-    sceneViewingStats.forEach((stats, sceneId) => {
-        console.log(`${sceneId}: ${stats.visits} посещений, ${Math.round(stats.totalTime/1000)} сек`);
-    });
-}
-
-// Инициализация UI
+// Остальные функции (initUI, createMapHotspots и т.д.) остаются без изменений
 function initUI() {
     document.getElementById('toggle-map').addEventListener('click', function() {
         document.getElementById('map-container').classList.toggle('collapsed');
@@ -1134,7 +692,6 @@ function initUI() {
     createMapHotspots();
 }
 
-// Создание хотспотов на карте
 function createMapHotspots() {
     const mapElement = document.getElementById('map-hotspots');
     
@@ -1154,50 +711,8 @@ function createMapHotspots() {
         area.title = tourConfig.scenes[spot.sceneId]?.title || '';
         area.onclick = (e) => {
             e.preventDefault();
-            loadScene(spot.sceneId);
+            switchToScene(spot.sceneId);
         };
         mapElement.appendChild(area);
     });
 }
-
-// Обновление позиции на карте
-function updateMapCurrentPosition(sceneId) {
-    console.log('Текущая позиция:', sceneId);
-}
-
-// Очистка кэша при необходимости
-function clearCache() {
-    imageCache.clear();
-    loadingStatus.clear();
-    loadQueue.high = [];
-    loadQueue.medium = [];
-    loadQueue.low = [];
-    console.log('Кэш очищен');
-}
-
-// Предзагрузка следующей вероятной сцены на основе статистики
-function preloadNextProbableScene() {
-    if (!currentSceneId) return;
-    
-    const stats = sceneViewingStats.get(currentSceneId);
-    if (!stats || !stats.transitions) return;
-    
-    // Находим самый частый переход из текущей сцены
-    const sortedTransitions = Object.entries(stats.transitions)
-        .sort((a, b) => b[1] - a[1]);
-    
-    if (sortedTransitions.length > 0) {
-        const nextSceneId = sortedTransitions[0][0];
-        if (!imageCache.has(nextSceneId) && !isLoading(nextSceneId)) {
-            addToQueue(nextSceneId, 'high');
-        }
-    }
-}
-
-// Обработка ошибок загрузки
-window.addEventListener('error', function(e) {
-    if (e.target.tagName === 'IMG') {
-        console.error('Ошибка загрузки изображения:', e.target.src);
-        // Можно попробовать перезагрузить
-    }
-});
