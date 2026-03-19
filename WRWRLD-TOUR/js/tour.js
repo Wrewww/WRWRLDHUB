@@ -1,5 +1,4 @@
 // Конфигурация экскурсии
-// ЗДЕСЬ ВАМ НУЖНО НАСТРОИТЬ СВОИ ПАНОРАМЫ И ТОЧКИ!
 const tourConfig = {
     // Список всех панорам
     scenes: {
@@ -13,8 +12,8 @@ const tourConfig = {
             // Точки перехода (стрелки)
             hotSpots: [
                 {
-                    pitch: -10,    // Угол по вертикали (-90 вниз, 90 вверх)
-                    yaw: 10,       // Угол по горизонтали (0 прямо, 90 направо и т.д.)
+                    pitch: -10,
+                    yaw: 10,
                     sceneId: 'entrance2',
                     text: 'В коридор 1 этажа',
                     type: 'scene'
@@ -58,7 +57,6 @@ const tourConfig = {
                     text: 'пройти дальше',
                     type: 'scene'
                 }
-                
             ]
         },
 
@@ -76,7 +74,7 @@ const tourConfig = {
                     text: 'Пройти налево',
                     type: 'scene'
                 },
-		        {
+                {
                     pitch: -10,
                     yaw: 0,
                     sceneId: 'firstfloorright1',
@@ -107,7 +105,7 @@ const tourConfig = {
                     text: 'Пройти дальше',
                     type: 'scene'
                 },
-		        {
+                {
                     pitch: -10,
                     yaw: 0,
                     sceneId: 'firstfloor1',
@@ -134,7 +132,6 @@ const tourConfig = {
             ]
         },
 
-
         firstfloorright1: {
             id: 'firstfloorright1',
             title: 'Развилка на первом этаже',
@@ -149,7 +146,7 @@ const tourConfig = {
                     text: 'Пройти к столовой',
                     type: 'scene'
                 },
-		        {
+                {
                     pitch: -10,
                     yaw: -90,
                     sceneId: 'firstfloor1',
@@ -176,7 +173,6 @@ const tourConfig = {
             ]
         },
         
-        // Кабинет 101
         secondfloorleft: {
             id: '2floorleft',
             title: 'Кабинет 101 - Математика',
@@ -191,7 +187,7 @@ const tourConfig = {
                     text: 'Пройти в коридор',
                     type: 'scene'
                 },
-		        {
+                {
                     pitch: -40,
                     yaw: 185,
                     sceneId: 'entrance2',
@@ -208,7 +204,6 @@ const tourConfig = {
             ]
         },
         
-        // Столовая
         secondfloorright: {
             id: 'secondfloorright',
             title: 'Школьная столовая',
@@ -223,7 +218,7 @@ const tourConfig = {
                     text: 'Пройти в коридор',
                     type: 'scene'
                 },
-		{
+                {
                     pitch: -40,
                     yaw: 180,
                     sceneId: 'entrance2',
@@ -233,7 +228,6 @@ const tourConfig = {
             ]
         },
         
-        // Спортзал
         joycab: {
             id: 'joycab',
             title: 'Спортивный зал',
@@ -250,8 +244,6 @@ const tourConfig = {
                 }
             ]
         }
-
-        
     },
     
     // Порядок для навигации (предыдущая/следующая)
@@ -262,17 +254,130 @@ const tourConfig = {
 let currentSceneId = 'entrance';
 let viewer = null;
 
+// Кэш предзагруженных изображений
+const imageCache = new Map();
+
+// Настройки качества
+const QUALITY_SETTINGS = {
+    lowResWidth: 1024,  // Для предпросмотра
+    maxConcurrentLoads: 3, // Максимум одновременных загрузок
+    preloadRadius: 2 // Сколько сцен вперед загружать
+};
+
+// Очередь загрузки
+let loadQueue = [];
+let activeLoads = 0;
+
 // Инициализация при загрузке
 document.addEventListener('DOMContentLoaded', function() {
     initTour();
     initUI();
+    startBackgroundPreload();
 });
 
-// Инициализация тура
+// Предзагрузка изображений
+function preloadImage(sceneId) {
+    if (imageCache.has(sceneId)) return Promise.resolve(imageCache.get(sceneId));
+    
+    return new Promise((resolve, reject) => {
+        const scene = tourConfig.scenes[sceneId];
+        if (!scene) {
+            reject(new Error(`Scene ${sceneId} not found`));
+            return;
+        }
+        
+        const img = new Image();
+        img.onload = () => {
+            imageCache.set(sceneId, img);
+            resolve(img);
+        };
+        img.onerror = reject;
+        img.src = scene.image;
+    });
+}
+
+// Загрузка с контролем очереди
+function queueLoad(sceneId) {
+    return new Promise((resolve, reject) => {
+        loadQueue.push({ sceneId, resolve, reject });
+        processLoadQueue();
+    });
+}
+
+function processLoadQueue() {
+    if (activeLoads >= QUALITY_SETTINGS.maxConcurrentLoads || loadQueue.length === 0) return;
+    
+    activeLoads++;
+    const { sceneId, resolve, reject } = loadQueue.shift();
+    
+    preloadImage(sceneId)
+        .then(result => {
+            activeLoads--;
+            resolve(result);
+            processLoadQueue();
+        })
+        .catch(error => {
+            activeLoads--;
+            reject(error);
+            processLoadQueue();
+        });
+}
+
+// Фоновая предзагрузка связанных сцен
+function startBackgroundPreload() {
+    // Предзагружаем текущую сцену
+    queueLoad(currentSceneId);
+    
+    // Предзагружаем соседние сцены
+    const currentIndex = tourConfig.navigationOrder.indexOf(currentSceneId);
+    
+    for (let i = 1; i <= QUALITY_SETTINGS.preloadRadius; i++) {
+        if (currentIndex - i >= 0) {
+            queueLoad(tourConfig.navigationOrder[currentIndex - i]);
+        }
+        if (currentIndex + i < tourConfig.navigationOrder.length) {
+            queueLoad(tourConfig.navigationOrder[currentIndex + i]);
+        }
+    }
+    
+    // Предзагружаем все сцены из hotSpots текущей сцены
+    const currentScene = tourConfig.scenes[currentSceneId];
+    currentScene.hotSpots.forEach(spot => {
+        if (spot.sceneId && !imageCache.has(spot.sceneId)) {
+            queueLoad(spot.sceneId);
+        }
+    });
+}
+
+// Инициализация тура с улучшенной загрузкой
 function initTour() {
     const scene = tourConfig.scenes[currentSceneId];
     
-    // Создаем конфигурацию для Pannellum
+    // Показываем индикатор загрузки
+    showLoadingIndicator();
+    
+    // Сначала показываем низкокачественную версию, если есть
+    if (imageCache.has(currentSceneId)) {
+        loadSceneWithCache(currentSceneId);
+    } else {
+        // Загружаем сцену
+        preloadImage(currentSceneId).then(() => {
+            loadSceneWithCache(currentSceneId);
+        }).catch(error => {
+            console.error('Error loading scene:', error);
+            hideLoadingIndicator();
+        });
+    }
+}
+
+// Загрузка сцены из кэша
+function loadSceneWithCache(sceneId) {
+    const scene = tourConfig.scenes[sceneId];
+    
+    if (viewer) {
+        viewer.destroy();
+    }
+    
     const config = {
         type: 'equirectangular',
         panorama: scene.image,
@@ -282,7 +387,6 @@ function initTour() {
         hotSpots: []
     };
     
-    // Добавляем хотспоты из конфига
     scene.hotSpots.forEach(spot => {
         config.hotSpots.push({
             pitch: spot.pitch,
@@ -296,10 +400,15 @@ function initTour() {
         });
     });
     
-    // Создаем просмотрщик
     viewer = pannellum.viewer('panorama', config);
     
-    // Обновляем интерфейс
+    // Скрываем индикатор загрузки после полной загрузки
+    viewer.on('load', function() {
+        hideLoadingIndicator();
+        // После загрузки текущей сцены предзагружаем связанные
+        startBackgroundPreload();
+    });
+    
     updateUI();
 }
 
@@ -310,53 +419,57 @@ function loadScene(sceneId) {
         return;
     }
     
+    showLoadingIndicator();
     currentSceneId = sceneId;
-    const scene = tourConfig.scenes[sceneId];
     
-    // Обновляем панораму
-    viewer.destroy();
-    
-    const config = {
-        type: 'equirectangular',
-        panorama: scene.image,
-        autoLoad: true,
-        hotSpots: []
-    };
-    
-    scene.hotSpots.forEach(spot => {
-        config.hotSpots.push({
-            pitch: spot.pitch,
-            yaw: spot.yaw,
-            text: spot.text,
-            type: spot.type,
-            sceneId: spot.sceneId,
-            clickHandlerFunc: function() {
-                loadScene(spot.sceneId);
-            }
+    if (imageCache.has(sceneId)) {
+        // Если уже загружено, показываем сразу
+        loadSceneWithCache(sceneId);
+    } else {
+        // Если нет, загружаем
+        preloadImage(sceneId).then(() => {
+            loadSceneWithCache(sceneId);
+        }).catch(error => {
+            console.error('Error loading scene:', error);
+            hideLoadingIndicator();
         });
-    });
-    
-    viewer = pannellum.viewer('panorama', config);
-    
-    // Обновляем интерфейс
-    updateUI();
-    
-    // Обновляем положение на карте
-    updateMapCurrentPosition(sceneId);
+    }
+}
+
+// Показать индикатор загрузки
+function showLoadingIndicator() {
+    let loader = document.getElementById('loading-indicator');
+    if (!loader) {
+        loader = document.createElement('div');
+        loader.id = 'loading-indicator';
+        loader.innerHTML = `
+            <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                        background: rgba(0,0,0,0.8); color: white; padding: 20px 40px;
+                        border-radius: 10px; z-index: 1000; font-size: 18px;">
+                Загрузка панорамы...
+            </div>
+        `;
+        document.body.appendChild(loader);
+    }
+    loader.style.display = 'block';
+}
+
+// Скрыть индикатор загрузки
+function hideLoadingIndicator() {
+    const loader = document.getElementById('loading-indicator');
+    if (loader) {
+        loader.style.display = 'none';
+    }
 }
 
 // Обновление интерфейса
 function updateUI() {
     const scene = tourConfig.scenes[currentSceneId];
     
-    // Обновляем название
     document.getElementById('location-name').textContent = scene.title;
-    
-    // Обновляем описание
     document.getElementById('room-description').textContent = scene.description;
     document.getElementById('room-details').textContent = scene.details;
     
-    // Обновляем кнопки навигации
     const currentIndex = tourConfig.navigationOrder.indexOf(currentSceneId);
     
     const prevBtn = document.getElementById('btn-prev');
@@ -381,17 +494,14 @@ function updateUI() {
 
 // Инициализация пользовательского интерфейса
 function initUI() {
-    // Кнопка сворачивания карты
     document.getElementById('toggle-map').addEventListener('click', function() {
         document.getElementById('map-container').classList.toggle('collapsed');
     });
     
-    // Кнопка информации
     document.getElementById('info-toggle').addEventListener('click', function() {
         document.getElementById('info-content').classList.toggle('hidden');
     });
     
-    // Добавляем кликабельные области на карту
     createMapHotspots();
 }
 
@@ -399,8 +509,6 @@ function initUI() {
 function createMapHotspots() {
     const mapElement = document.getElementById('map-hotspots');
     
-    // Здесь вам нужно настроить координаты для вашей схемы школы
-    // Каждая area - это кликабельная область на карте
     const hotspots = [
         { sceneId: 'entrance', shape: 'circle', coords: '150,100,10' },
         { sceneId: 'corridor1', shape: 'rect', coords: '120,150,180,170' },
@@ -413,8 +521,8 @@ function createMapHotspots() {
         const area = document.createElement('area');
         area.shape = spot.shape;
         area.coords = spot.coords;
-        area.alt = tourConfig.scenes[spot.sceneId].title;
-        area.title = tourConfig.scenes[spot.sceneId].title;
+        area.alt = tourConfig.scenes[spot.sceneId]?.title || '';
+        area.title = tourConfig.scenes[spot.sceneId]?.title || '';
         area.onclick = (e) => {
             e.preventDefault();
             loadScene(spot.sceneId);
@@ -423,8 +531,6 @@ function createMapHotspots() {
     });
 }
 
-// Обновление текущего положения на карте
 function updateMapCurrentPosition(sceneId) {
-    // Здесь можно добавить подсветку текущей точки на карте
     console.log('Текущая позиция:', sceneId);
 }
