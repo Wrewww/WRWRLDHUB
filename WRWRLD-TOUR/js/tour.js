@@ -165,7 +165,7 @@ const tourConfig = {
             hotSpots: [
                 {
                     pitch: -10,
-                    yaw: 185,
+                    yaw: 100,
                     sceneId: 'firstfloorright1',
                     text: 'Пройти к столовой',
                     type: 'scene'
