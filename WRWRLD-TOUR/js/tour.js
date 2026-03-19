@@ -1,7 +1,252 @@
 // Конфигурация экскурсии
 const tourConfig = {
     // ... ваш существующий конфиг остается без изменений ...
-    scenes: { /* ... */ },
+    scenes: {
+        // Вход/вестибюль
+        entrance: {
+            id: 'entrance',
+            title: 'Вход в школу',
+            description: 'Главный вход и вестибюль школы. Здесь находится пост охраны и стенд с расписанием.',
+            details: '1 этаж | Режим работы: 7:00 - 22:00',
+            image: 'panoramas/entrance.JPG',
+            // Точки перехода (стрелки)
+            hotSpots: [
+                {
+                    pitch: -10,
+                    yaw: 10,
+                    sceneId: 'entrance2',
+                    text: 'В коридор 1 этажа',
+                    type: 'scene'
+                },
+            ]
+        },
+        
+        // Коридор 1 этажа
+        entrance2: {
+            id: 'entrance2',
+            title: 'Коридор 1 этажа',
+            description: 'Главный коридор первого этажа. Здесь расположены кабинеты начальных классов.',
+            details: '1 этаж | Кабинеты 101-108',
+            image: 'panoramas/entrance2.JPG',
+            hotSpots: [
+                {
+                    pitch: -10,
+                    yaw: 110,
+                    sceneId: 'entrance',
+                    text: 'Назад к входу',
+                    type: 'scene'
+                },
+                {
+                    pitch: -5,
+                    yaw: 240,
+                    sceneId: 'secondfloorleft',
+                    text: 'Подняться по лестнице',
+                    type: 'scene'
+                },
+                {
+                    pitch: -5,
+                    yaw: -30,
+                    sceneId: 'secondfloorright',
+                    text: 'Подняться по лестнице',
+                    type: 'scene'
+                },
+                {
+                    pitch: -5,
+                    yaw: -70,
+                    sceneId: 'firstfloor1',
+                    text: 'пройти дальше',
+                    type: 'scene'
+                }
+            ]
+        },
+
+        firstfloor1: {
+            id: 'firstfloor1',
+            title: 'Развилка на первом этаже',
+            description: 'Кабинет математики. Класс оборудован интерактивной доской и современными партами.',
+            details: '',
+            image: 'panoramas/firstfloor1.JPG',
+            hotSpots: [
+                {
+                    pitch: -10,
+                    yaw: 180,
+                    sceneId: 'firstfloorleft1',
+                    text: 'Пройти налево',
+                    type: 'scene'
+                },
+                {
+                    pitch: -10,
+                    yaw: 0,
+                    sceneId: 'firstfloorright1',
+                    text: 'Пройти направо',
+                    type: 'scene'
+                },
+                {
+                    pitch: -10,
+                    yaw: 90,
+                    sceneId: 'entrance2',
+                    text: 'Вернуться ко входу',
+                    type: 'scene'
+                }
+            ]
+        },
+
+        firstfloorleft1: {
+            id: 'firstfloorleft1',
+            title: 'Развилка на первом этаже',
+            description: 'Кабинет математики. Класс оборудован интерактивной доской и современными партами.',
+            details: '',
+            image: 'panoramas/firstfloorleft1.JPG',
+            hotSpots: [
+                {
+                    pitch: -10,
+                    yaw: 180,
+                    sceneId: 'firstfloorleft2',
+                    text: 'Пройти дальше',
+                    type: 'scene'
+                },
+                {
+                    pitch: -10,
+                    yaw: 0,
+                    sceneId: 'firstfloor1',
+                    text: 'Вернуться назад',
+                    type: 'scene'
+                },
+            ]
+        },
+
+        firstfloorleft2: {
+            id: 'firstfloorleft2',
+            title: 'Развилка на первом этаже',
+            description: 'Кабинет математики. Класс оборудован интерактивной доской и современными партами.',
+            details: '',
+            image: 'panoramas/firstfloorleft2.JPG',
+            hotSpots: [
+                {
+                    pitch: -10,
+                    yaw: 0,
+                    sceneId: 'firstfloorleft1',
+                    text: 'Вернуться',
+                    type: 'scene'
+                }
+            ]
+        },
+
+        firstfloorright1: {
+            id: 'firstfloorright1',
+            title: 'Развилка на первом этаже',
+            description: 'Кабинет математики. Класс оборудован интерактивной доской и современными партами.',
+            details: '',
+            image: 'panoramas/firstfloorright1.JPG',
+            hotSpots: [
+                {
+                    pitch: -10,
+                    yaw: 90,
+                    sceneId: 'firstfloorright2',
+                    text: 'Пройти к столовой',
+                    type: 'scene'
+                },
+                {
+                    pitch: -10,
+                    yaw: -90,
+                    sceneId: 'firstfloor1',
+                    text: 'Вернуться обратно',
+                    type: 'scene'
+                }
+            ]
+        },
+
+        firstfloorright2: {
+            id: 'firstfloorright1',
+            title: 'Развилка на первом этаже',
+            description: 'Кабинет математики. Класс оборудован интерактивной доской и современными партами.',
+            details: '',
+            image: 'panoramas/firstfloorright2.JPG',
+            hotSpots: [
+                {
+                    pitch: -10,
+                    yaw: 185,
+                    sceneId: 'firstfloorright1',
+                    text: 'Пройти к столовой',
+                    type: 'scene'
+                }
+            ]
+        },
+        
+        secondfloorleft: {
+            id: '2floorleft',
+            title: 'Кабинет 101 - Математика',
+            description: 'Кабинет математики. Класс оборудован интерактивной доской и современными партами.',
+            details: '1 этаж | Учитель: Петрова М.И. | Вместимость: 25 человек',
+            image: 'panoramas/2floorleft.JPG',
+            hotSpots: [
+                {
+                    pitch: -10,
+                    yaw: -85,
+                    sceneId: 'secondfloorleft1',
+                    text: 'Пройти в коридор',
+                    type: 'scene'
+                },
+                {
+                    pitch: -40,
+                    yaw: 185,
+                    sceneId: 'entrance2',
+                    text: 'Выйти ко входу',
+                    type: 'scene'
+                },
+                {
+                    pitch: -10,
+                    yaw: 95,
+                    sceneId: 'secondfloor1',
+                    text: 'Пройти направо',
+                    type: 'scene'
+                }
+            ]
+        },
+        
+        secondfloorright: {
+            id: 'secondfloorright',
+            title: 'Школьная столовая',
+            description: 'Просторная столовая с уютным дизайном. Есть горячее питание и буфет.',
+            details: '1 этаж | Часы работы: 8:00 - 18:00',
+            image: 'panoramas/2floorright.JPG',
+            hotSpots: [
+                {
+                    pitch: -10,
+                    yaw: 85,
+                    sceneId: 'secondfloorright1',
+                    text: 'Пройти в коридор',
+                    type: 'scene'
+                },
+                {
+                    pitch: -40,
+                    yaw: 180,
+                    sceneId: 'entrance2',
+                    text: 'Выйти ко входу',
+                    type: 'scene'
+                }
+            ]
+        },
+        
+        joycab: {
+            id: 'joycab',
+            title: 'Спортивный зал',
+            description: 'Большой спортивный зал для занятий физкультурой и спортивных секций.',
+            details: '2 этаж | Площадь: 250 кв.м. | Оборудование: шведские стенки, маты, мячи',
+            image: 'panoramas/joycab.JPG',
+            hotSpots: [
+                {
+                    pitch: -10,
+                    yaw: 105,
+                    sceneId: 'secondfloorleft',
+                    text: 'В коридор',
+                    type: 'scene'
+                }
+            ]
+        }
+    },
+    
+    // Порядок для навигации (предыдущая/следующая)
     navigationOrder: ['entrance', 'entrance2', 'secondfloorleft', 'secondfloorright', 'joycab']
 };
 
