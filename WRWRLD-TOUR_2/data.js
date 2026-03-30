@@ -1,8 +1,8 @@
 var APP_DATA = {
   "scenes": [
     {
-      "id": "0-",
-      "name": "холл",
+      "id": "0--",
+      "name": "К лестнице",
       "levels": [
         {
           "tileSize": 256,
@@ -33,14 +33,26 @@ var APP_DATA = {
           "yaw": -3.1364369211101337,
           "pitch": -0.2674212262890201,
           "rotation": 0,
-          "target": "1--2-"
+          "target": "1-"
+        },
+        {
+          "yaw": -1.6578602263878999,
+          "pitch": 0.03997066199226218,
+          "rotation": 0,
+          "target": "25-"
+        },
+        {
+          "yaw": 2.344806656958669,
+          "pitch": 0.3601581255758841,
+          "rotation": 0,
+          "target": "26-"
         }
       ],
       "infoHotspots": []
     },
     {
-      "id": "1--2-",
-      "name": "лестница 2 этаж",
+      "id": "1-",
+      "name": "Лестница",
       "levels": [
         {
           "tileSize": 256,
@@ -71,20 +83,26 @@ var APP_DATA = {
           "yaw": 2.3767722768847666,
           "pitch": 0.7708050433433264,
           "rotation": 0,
-          "target": "0-"
+          "target": "0--"
         },
         {
           "yaw": -3.093394803133206,
           "pitch": 0.43883579357810554,
           "rotation": 0,
-          "target": "2-2--"
+          "target": "2----2-"
+        },
+        {
+          "yaw": -3.084908376924183,
+          "pitch": -0.23356710472370068,
+          "rotation": 0,
+          "target": "12-3----"
         }
       ],
       "infoHotspots": []
     },
     {
-      "id": "2-2--",
-      "name": "2 этаж центр",
+      "id": "2----2-",
+      "name": "У лестницы на 2 этаже",
       "levels": [
         {
           "tileSize": 256,
@@ -121,20 +139,20 @@ var APP_DATA = {
           "yaw": -1.5615988109942833,
           "pitch": 0.11963999147002191,
           "rotation": 0,
-          "target": "5-2--"
+          "target": "5---"
         },
         {
           "yaw": 0.7780903244856585,
           "pitch": 0.07442854083877393,
           "rotation": 0,
-          "target": "1--2-"
+          "target": "1-"
         }
       ],
       "infoHotspots": []
     },
     {
-      "id": "3--2-",
-      "name": "английский 2 этаж",
+      "id": "3--42",
+      "name": "Кабинет 42",
       "levels": [
         {
           "tileSize": 256,
@@ -172,7 +190,7 @@ var APP_DATA = {
     },
     {
       "id": "4---",
-      "name": "перед кабинетом английского",
+      "name": "У кабинета английского",
       "levels": [
         {
           "tileSize": 256,
@@ -203,20 +221,20 @@ var APP_DATA = {
           "yaw": 2.4121310894848618,
           "pitch": 0.16638241409873444,
           "rotation": 0,
-          "target": "3--2-"
+          "target": "3--42"
         },
         {
           "yaw": 0.029705910093358767,
           "pitch": 0.05108945120464803,
           "rotation": 0,
-          "target": "2-2--"
+          "target": "2----2-"
         }
       ],
       "infoHotspots": []
     },
     {
-      "id": "5-2--",
-      "name": "2 этаж выпускники",
+      "id": "5---",
+      "name": "Выпускники медалисты гимназии",
       "levels": [
         {
           "tileSize": 256,
@@ -238,28 +256,28 @@ var APP_DATA = {
       ],
       "faceSize": 1680,
       "initialViewParameters": {
-        "pitch": 0,
-        "yaw": 0,
-        "fov": 1.5707963267948966
+        "yaw": -2.9934944597618056,
+        "pitch": 0.01920894227083636,
+        "fov": 1.4795154723455672
       },
       "linkHotspots": [
         {
           "yaw": -1.3656518668133089,
           "pitch": -0.0032315470593466955,
           "rotation": 0,
-          "target": "6-"
+          "target": "6---2-"
         },
         {
           "yaw": -1.743331525432712,
           "pitch": 0.015689962259600065,
           "rotation": 0,
-          "target": "2-2--"
+          "target": "2----2-"
         },
         {
           "yaw": 1.5270206568809677,
           "pitch": 0.02058045874183634,
           "rotation": 0,
-          "target": "7-"
+          "target": "7--"
         },
         {
           "yaw": 1.819004207040706,
@@ -271,8 +289,8 @@ var APP_DATA = {
       "infoHotspots": []
     },
     {
-      "id": "6-",
-      "name": "картина",
+      "id": "6---2-",
+      "name": "Картина на 2 этаже",
       "levels": [
         {
           "tileSize": 256,
@@ -294,29 +312,29 @@ var APP_DATA = {
       ],
       "faceSize": 1680,
       "initialViewParameters": {
-        "pitch": 0,
-        "yaw": 0,
-        "fov": 1.5707963267948966
+        "yaw": -3.1250657613117614,
+        "pitch": 0.08148487969040374,
+        "fov": 1.4795154723455672
       },
       "linkHotspots": [
         {
           "yaw": -0.09882232143401737,
           "pitch": 0.24173108005237154,
           "rotation": 0,
-          "target": "5-2--"
+          "target": "5---"
         },
         {
           "yaw": 1.9668901729518842,
           "pitch": 0.18865886117576913,
           "rotation": 0,
-          "target": "2-2--"
+          "target": "2----2-"
         }
       ],
       "infoHotspots": []
     },
     {
-      "id": "7-",
-      "name": "статуя",
+      "id": "7--",
+      "name": "В.И. Ульянов",
       "levels": [
         {
           "tileSize": 256,
@@ -347,7 +365,7 @@ var APP_DATA = {
           "yaw": -0.1550871623221468,
           "pitch": 0.11481648077194606,
           "rotation": 0,
-          "target": "5-2--"
+          "target": "5---"
         },
         {
           "yaw": -2.133423589135882,
@@ -391,7 +409,7 @@ var APP_DATA = {
           "yaw": -1.8880189877106481,
           "pitch": 0.03653077321027354,
           "rotation": 0,
-          "target": "5-2--"
+          "target": "5---"
         },
         {
           "yaw": -1.4977900692754478,
@@ -403,7 +421,7 @@ var APP_DATA = {
           "yaw": 1.716446716677246,
           "pitch": 0.014547726904785563,
           "rotation": 0,
-          "target": "10-2---2"
+          "target": "10-2--3"
         }
       ],
       "infoHotspots": []
@@ -447,14 +465,14 @@ var APP_DATA = {
           "yaw": 2.2313450230112153,
           "pitch": 0.22327714139354526,
           "rotation": 0,
-          "target": "5-2--"
+          "target": "5---"
         }
       ],
       "infoHotspots": []
     },
     {
-      "id": "10-2---2",
-      "name": "2 этаж дальше 2",
+      "id": "10-2--3",
+      "name": "2 этаж 3",
       "levels": [
         {
           "tileSize": 256,
@@ -491,14 +509,14 @@ var APP_DATA = {
           "yaw": -2.95214466574855,
           "pitch": 0.03416701773473818,
           "rotation": 0,
-          "target": "11-2---3"
+          "target": "11-2--4"
         }
       ],
       "infoHotspots": []
     },
     {
-      "id": "11-2---3",
-      "name": "2 этаж дальше 3",
+      "id": "11-2--4",
+      "name": "2 этаж 4",
       "levels": [
         {
           "tileSize": 256,
@@ -529,7 +547,7 @@ var APP_DATA = {
           "yaw": 0.08184593194939183,
           "pitch": 0.0036833886637754887,
           "rotation": 0,
-          "target": "10-2---2"
+          "target": "10-2--3"
         }
       ],
       "infoHotspots": []
@@ -558,16 +576,287 @@ var APP_DATA = {
       ],
       "faceSize": 1680,
       "initialViewParameters": {
+        "yaw": -3.1122577603370107,
+        "pitch": 0.10929973769346013,
+        "fov": 1.4795154723455672
+      },
+      "linkHotspots": [
+        {
+          "yaw": -1.684385979089944,
+          "pitch": 0.00921787658629114,
+          "rotation": 0,
+          "target": "1-"
+        },
+        {
+          "yaw": 1.8432423419948272,
+          "pitch": 0.010627983156609844,
+          "rotation": 0,
+          "target": "13-3--2"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "13-3--2",
+      "name": "3 этаж 2",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1680,
+      "initialViewParameters": {
+        "yaw": 1.774398770391854,
+        "pitch": 0.06787159602361825,
+        "fov": 1.4795154723455672
+      },
+      "linkHotspots": [
+        {
+          "yaw": 1.5535545047562316,
+          "pitch": 0.004816019243493841,
+          "rotation": 0,
+          "target": "12-3----"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "14-3--3",
+      "name": "3 этаж 3",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1680,
+      "initialViewParameters": {
+        "yaw": -3.1392708996955925,
+        "pitch": 0.12731914832659363,
+        "fov": 1.4795154723455672
+      },
+      "linkHotspots": [
+        {
+          "yaw": 2.983146525722029,
+          "pitch": 0.03390583253874979,
+          "rotation": 0,
+          "target": "15-3---"
+        },
+        {
+          "yaw": 0.05629812747475782,
+          "pitch": 0.015954289159893165,
+          "rotation": 0,
+          "target": "13-3--2"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "15-3---",
+      "name": "3 этаж около музея",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1680,
+      "initialViewParameters": {
         "pitch": 0,
         "yaw": 0,
         "fov": 1.5707963267948966
       },
-      "linkHotspots": [],
+      "linkHotspots": [
+        {
+          "yaw": 0.03556715384940645,
+          "pitch": 0.0032364914735332206,
+          "rotation": 0,
+          "target": "14-3--3"
+        },
+        {
+          "yaw": -3.109495612929816,
+          "pitch": 0.041287701491533824,
+          "rotation": 0,
+          "target": "16-3----"
+        },
+        {
+          "yaw": -2.164620584260927,
+          "pitch": 0.13073168697471083,
+          "rotation": 0,
+          "target": "32--1"
+        }
+      ],
       "infoHotspots": []
     },
     {
-      "id": "13-r0010571_20260321145138",
-      "name": "R0010571_20260321145138",
+      "id": "16-3----",
+      "name": "3 этаж лестница в спортзал",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1680,
+      "initialViewParameters": {
+        "pitch": 0,
+        "yaw": 0,
+        "fov": 1.5707963267948966
+      },
+      "linkHotspots": [
+        {
+          "yaw": -2.528372610453527,
+          "pitch": 0.31497378989673663,
+          "rotation": 0,
+          "target": "20---"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "17-3---16-",
+      "name": "3 этаж около 16 кабинета",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1680,
+      "initialViewParameters": {
+        "pitch": 0,
+        "yaw": 0,
+        "fov": 1.5707963267948966
+      },
+      "linkHotspots": [
+        {
+          "yaw": 3.128094154548373,
+          "pitch": 0.07635701403765438,
+          "rotation": 0,
+          "target": "19-3--8"
+        },
+        {
+          "yaw": 0.046387007931736335,
+          "pitch": 0.020483490202995114,
+          "rotation": 0,
+          "target": "16-3----"
+        },
+        {
+          "yaw": -2.1370798670240134,
+          "pitch": 0.15701905918940895,
+          "rotation": 0,
+          "target": "18-3--16--"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "18-3--16--",
+      "name": "3 этаж 16 кабинет астрофизики",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1680,
+      "initialViewParameters": {
+        "pitch": 0,
+        "yaw": 0,
+        "fov": 1.5707963267948966
+      },
+      "linkHotspots": [
+        {
+          "yaw": 0.5001837192495806,
+          "pitch": 0.06074037701278101,
+          "rotation": 0,
+          "target": "17-3---16-"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "19-3--8",
+      "name": "3 этаж 8",
       "levels": [
         {
           "tileSize": 256,
@@ -597,8 +886,172 @@ var APP_DATA = {
       "infoHotspots": []
     },
     {
-      "id": "14-r0010572_20260321145244",
-      "name": "R0010572_20260321145244",
+      "id": "20---",
+      "name": "Вход у спортзала",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1680,
+      "initialViewParameters": {
+        "pitch": 0,
+        "yaw": 0,
+        "fov": 1.5707963267948966
+      },
+      "linkHotspots": [
+        {
+          "yaw": 2.2480365507493882,
+          "pitch": 0.011611337201152594,
+          "rotation": 0,
+          "target": "21--"
+        },
+        {
+          "yaw": -1.6123154514527016,
+          "pitch": 0.02202062895981527,
+          "rotation": 0,
+          "target": "24--"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "21--",
+      "name": "Актовый зал",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1680,
+      "initialViewParameters": {
+        "pitch": 0,
+        "yaw": 0,
+        "fov": 1.5707963267948966
+      },
+      "linkHotspots": [
+        {
+          "yaw": -0.6856481813586619,
+          "pitch": 0.02474499640551997,
+          "rotation": 0,
+          "target": "20---"
+        },
+        {
+          "yaw": 3.1247408001143295,
+          "pitch": -0.07364422163752593,
+          "rotation": 0,
+          "target": "22----"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "22----",
+      "name": "Сцена в актовом зале",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1680,
+      "initialViewParameters": {
+        "pitch": 0,
+        "yaw": 0,
+        "fov": 1.5707963267948966
+      },
+      "linkHotspots": [
+        {
+          "yaw": -3.0672896464802566,
+          "pitch": 0.127756988909697,
+          "rotation": 0,
+          "target": "21--"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "23-",
+      "name": "Бассейн",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1680,
+      "initialViewParameters": {
+        "pitch": 0,
+        "yaw": 0,
+        "fov": 1.5707963267948966
+      },
+      "linkHotspots": [
+        {
+          "yaw": -1.3887508185798119,
+          "pitch": 0.030115673776334617,
+          "rotation": 0,
+          "target": "20---"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "24--",
+      "name": "У спортзала",
       "levels": [
         {
           "tileSize": 256,
@@ -628,8 +1081,52 @@ var APP_DATA = {
       "infoHotspots": []
     },
     {
-      "id": "15-r0010574_20260321145508",
-      "name": "R0010574_20260321145508",
+      "id": "25-",
+      "name": "Вход",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1680,
+      "initialViewParameters": {
+        "pitch": 0,
+        "yaw": 0,
+        "fov": 1.5707963267948966
+      },
+      "linkHotspots": [
+        {
+          "yaw": -1.0448940852576634,
+          "pitch": 0.03462894900111024,
+          "rotation": 0,
+          "target": "27-"
+        },
+        {
+          "yaw": 0.9237856586199431,
+          "pitch": 0.02234350211483438,
+          "rotation": 0,
+          "target": "0--"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "26-",
+      "name": "Подвал",
       "levels": [
         {
           "tileSize": 256,
@@ -659,8 +1156,52 @@ var APP_DATA = {
       "infoHotspots": []
     },
     {
-      "id": "16-r0010575_20260321145625",
-      "name": "R0010575_20260321145625",
+      "id": "27-",
+      "name": "Библиотека",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1680,
+      "initialViewParameters": {
+        "pitch": 0,
+        "yaw": 0,
+        "fov": 1.5707963267948966
+      },
+      "linkHotspots": [
+        {
+          "yaw": 0.0812098657655902,
+          "pitch": 0.0537850383583347,
+          "rotation": 0,
+          "target": "25-"
+        },
+        {
+          "yaw": -1.984973372012771,
+          "pitch": 0.07352238421819379,
+          "rotation": 0,
+          "target": "28--2"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "28--2",
+      "name": "Библиотека 2",
       "levels": [
         {
           "tileSize": 256,
@@ -690,8 +1231,190 @@ var APP_DATA = {
       "infoHotspots": []
     },
     {
-      "id": "17-r0010576_20260321145707",
-      "name": "R0010576_20260321145707",
+      "id": "29---2",
+      "name": "У школы 2",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1680,
+      "initialViewParameters": {
+        "pitch": 0,
+        "yaw": 0,
+        "fov": 1.5707963267948966
+      },
+      "linkHotspots": [
+        {
+          "yaw": -2.657755496675529,
+          "pitch": 0.004648299413954504,
+          "rotation": 0,
+          "target": "20---"
+        },
+        {
+          "yaw": 1.9123979255334183,
+          "pitch": 0.000666760755120066,
+          "rotation": 0,
+          "target": "25-"
+        },
+        {
+          "yaw": -1.565319032961881,
+          "pitch": -0.016452610835706594,
+          "rotation": 0,
+          "target": "31--1"
+        },
+        {
+          "yaw": 0.013644266543659356,
+          "pitch": 0.004002179389368976,
+          "rotation": 0,
+          "target": "34--"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "30--2",
+      "name": "Столовая 2",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1680,
+      "initialViewParameters": {
+        "pitch": 0,
+        "yaw": 0,
+        "fov": 1.5707963267948966
+      },
+      "linkHotspots": [
+        {
+          "yaw": -0.030017437387762413,
+          "pitch": 0.07253533943736556,
+          "rotation": 0,
+          "target": "31--1"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "31--1",
+      "name": "Столовая 1",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1680,
+      "initialViewParameters": {
+        "pitch": 0,
+        "yaw": 0,
+        "fov": 1.5707963267948966
+      },
+      "linkHotspots": [
+        {
+          "yaw": -2.1924858405870644,
+          "pitch": 0.06932146502852632,
+          "rotation": 0,
+          "target": "29---2"
+        },
+        {
+          "yaw": 0.01106186537986531,
+          "pitch": 0.2756615830427833,
+          "rotation": 0,
+          "target": "30--2"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "32--1",
+      "name": "Музей 1",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        },
+        {
+          "tileSize": 512,
+          "size": 2048
+        }
+      ],
+      "faceSize": 1680,
+      "initialViewParameters": {
+        "pitch": 0,
+        "yaw": 0,
+        "fov": 1.5707963267948966
+      },
+      "linkHotspots": [
+        {
+          "yaw": -0.025748947143469536,
+          "pitch": 0.03598148835761883,
+          "rotation": 0,
+          "target": "33--2"
+        },
+        {
+          "yaw": 1.9491750382213358,
+          "pitch": 0.10826429783947944,
+          "rotation": 0,
+          "target": "15-3---"
+        }
+      ],
+      "infoHotspots": []
+    },
+    {
+      "id": "33--2",
+      "name": "Музей 2",
       "levels": [
         {
           "tileSize": 256,
@@ -721,8 +1444,8 @@ var APP_DATA = {
       "infoHotspots": []
     },
     {
-      "id": "18-r0010577_20260321145836",
-      "name": "R0010577_20260321145836",
+      "id": "34--",
+      "name": "У школы",
       "levels": [
         {
           "tileSize": 256,
@@ -748,472 +1471,14 @@ var APP_DATA = {
         "yaw": 0,
         "fov": 1.5707963267948966
       },
-      "linkHotspots": [],
-      "infoHotspots": []
-    },
-    {
-      "id": "19-r0010578_20260321150004",
-      "name": "R0010578_20260321150004",
-      "levels": [
+      "linkHotspots": [
         {
-          "tileSize": 256,
-          "size": 256,
-          "fallbackOnly": true
-        },
-        {
-          "tileSize": 512,
-          "size": 512
-        },
-        {
-          "tileSize": 512,
-          "size": 1024
-        },
-        {
-          "tileSize": 512,
-          "size": 2048
+          "yaw": -0.012642036007356694,
+          "pitch": 0.022119359539056305,
+          "rotation": 0,
+          "target": "29---2"
         }
       ],
-      "faceSize": 1680,
-      "initialViewParameters": {
-        "pitch": 0,
-        "yaw": 0,
-        "fov": 1.5707963267948966
-      },
-      "linkHotspots": [],
-      "infoHotspots": []
-    },
-    {
-      "id": "20-r0010579_20260321150126",
-      "name": "R0010579_20260321150126",
-      "levels": [
-        {
-          "tileSize": 256,
-          "size": 256,
-          "fallbackOnly": true
-        },
-        {
-          "tileSize": 512,
-          "size": 512
-        },
-        {
-          "tileSize": 512,
-          "size": 1024
-        },
-        {
-          "tileSize": 512,
-          "size": 2048
-        }
-      ],
-      "faceSize": 1680,
-      "initialViewParameters": {
-        "pitch": 0,
-        "yaw": 0,
-        "fov": 1.5707963267948966
-      },
-      "linkHotspots": [],
-      "infoHotspots": []
-    },
-    {
-      "id": "21-r0010580_20260321150454",
-      "name": "R0010580_20260321150454",
-      "levels": [
-        {
-          "tileSize": 256,
-          "size": 256,
-          "fallbackOnly": true
-        },
-        {
-          "tileSize": 512,
-          "size": 512
-        },
-        {
-          "tileSize": 512,
-          "size": 1024
-        },
-        {
-          "tileSize": 512,
-          "size": 2048
-        }
-      ],
-      "faceSize": 1680,
-      "initialViewParameters": {
-        "pitch": 0,
-        "yaw": 0,
-        "fov": 1.5707963267948966
-      },
-      "linkHotspots": [],
-      "infoHotspots": []
-    },
-    {
-      "id": "22-r0010581_20260321150707",
-      "name": "R0010581_20260321150707",
-      "levels": [
-        {
-          "tileSize": 256,
-          "size": 256,
-          "fallbackOnly": true
-        },
-        {
-          "tileSize": 512,
-          "size": 512
-        },
-        {
-          "tileSize": 512,
-          "size": 1024
-        },
-        {
-          "tileSize": 512,
-          "size": 2048
-        }
-      ],
-      "faceSize": 1680,
-      "initialViewParameters": {
-        "pitch": 0,
-        "yaw": 0,
-        "fov": 1.5707963267948966
-      },
-      "linkHotspots": [],
-      "infoHotspots": []
-    },
-    {
-      "id": "23-r0010582_20260321150934",
-      "name": "R0010582_20260321150934",
-      "levels": [
-        {
-          "tileSize": 256,
-          "size": 256,
-          "fallbackOnly": true
-        },
-        {
-          "tileSize": 512,
-          "size": 512
-        },
-        {
-          "tileSize": 512,
-          "size": 1024
-        },
-        {
-          "tileSize": 512,
-          "size": 2048
-        }
-      ],
-      "faceSize": 1680,
-      "initialViewParameters": {
-        "pitch": 0,
-        "yaw": 0,
-        "fov": 1.5707963267948966
-      },
-      "linkHotspots": [],
-      "infoHotspots": []
-    },
-    {
-      "id": "24-r0010583_20260321151204",
-      "name": "R0010583_20260321151204",
-      "levels": [
-        {
-          "tileSize": 256,
-          "size": 256,
-          "fallbackOnly": true
-        },
-        {
-          "tileSize": 512,
-          "size": 512
-        },
-        {
-          "tileSize": 512,
-          "size": 1024
-        },
-        {
-          "tileSize": 512,
-          "size": 2048
-        }
-      ],
-      "faceSize": 1680,
-      "initialViewParameters": {
-        "pitch": 0,
-        "yaw": 0,
-        "fov": 1.5707963267948966
-      },
-      "linkHotspots": [],
-      "infoHotspots": []
-    },
-    {
-      "id": "25-r0010584_20260321151716",
-      "name": "R0010584_20260321151716",
-      "levels": [
-        {
-          "tileSize": 256,
-          "size": 256,
-          "fallbackOnly": true
-        },
-        {
-          "tileSize": 512,
-          "size": 512
-        },
-        {
-          "tileSize": 512,
-          "size": 1024
-        },
-        {
-          "tileSize": 512,
-          "size": 2048
-        }
-      ],
-      "faceSize": 1680,
-      "initialViewParameters": {
-        "pitch": 0,
-        "yaw": 0,
-        "fov": 1.5707963267948966
-      },
-      "linkHotspots": [],
-      "infoHotspots": []
-    },
-    {
-      "id": "26-r0010585_20260321151738",
-      "name": "R0010585_20260321151738",
-      "levels": [
-        {
-          "tileSize": 256,
-          "size": 256,
-          "fallbackOnly": true
-        },
-        {
-          "tileSize": 512,
-          "size": 512
-        },
-        {
-          "tileSize": 512,
-          "size": 1024
-        },
-        {
-          "tileSize": 512,
-          "size": 2048
-        }
-      ],
-      "faceSize": 1680,
-      "initialViewParameters": {
-        "pitch": 0,
-        "yaw": 0,
-        "fov": 1.5707963267948966
-      },
-      "linkHotspots": [],
-      "infoHotspots": []
-    },
-    {
-      "id": "27-r0010586_20260321152602",
-      "name": "R0010586_20260321152602",
-      "levels": [
-        {
-          "tileSize": 256,
-          "size": 256,
-          "fallbackOnly": true
-        },
-        {
-          "tileSize": 512,
-          "size": 512
-        },
-        {
-          "tileSize": 512,
-          "size": 1024
-        },
-        {
-          "tileSize": 512,
-          "size": 2048
-        }
-      ],
-      "faceSize": 1680,
-      "initialViewParameters": {
-        "pitch": 0,
-        "yaw": 0,
-        "fov": 1.5707963267948966
-      },
-      "linkHotspots": [],
-      "infoHotspots": []
-    },
-    {
-      "id": "28-r0010587_20260321152916",
-      "name": "R0010587_20260321152916",
-      "levels": [
-        {
-          "tileSize": 256,
-          "size": 256,
-          "fallbackOnly": true
-        },
-        {
-          "tileSize": 512,
-          "size": 512
-        },
-        {
-          "tileSize": 512,
-          "size": 1024
-        },
-        {
-          "tileSize": 512,
-          "size": 2048
-        }
-      ],
-      "faceSize": 1680,
-      "initialViewParameters": {
-        "pitch": 0,
-        "yaw": 0,
-        "fov": 1.5707963267948966
-      },
-      "linkHotspots": [],
-      "infoHotspots": []
-    },
-    {
-      "id": "29-r0010588_20260321153156",
-      "name": "R0010588_20260321153156",
-      "levels": [
-        {
-          "tileSize": 256,
-          "size": 256,
-          "fallbackOnly": true
-        },
-        {
-          "tileSize": 512,
-          "size": 512
-        },
-        {
-          "tileSize": 512,
-          "size": 1024
-        },
-        {
-          "tileSize": 512,
-          "size": 2048
-        }
-      ],
-      "faceSize": 1680,
-      "initialViewParameters": {
-        "pitch": 0,
-        "yaw": 0,
-        "fov": 1.5707963267948966
-      },
-      "linkHotspots": [],
-      "infoHotspots": []
-    },
-    {
-      "id": "30-r0010589_20260321153236",
-      "name": "R0010589_20260321153236",
-      "levels": [
-        {
-          "tileSize": 256,
-          "size": 256,
-          "fallbackOnly": true
-        },
-        {
-          "tileSize": 512,
-          "size": 512
-        },
-        {
-          "tileSize": 512,
-          "size": 1024
-        },
-        {
-          "tileSize": 512,
-          "size": 2048
-        }
-      ],
-      "faceSize": 1680,
-      "initialViewParameters": {
-        "pitch": 0,
-        "yaw": 0,
-        "fov": 1.5707963267948966
-      },
-      "linkHotspots": [],
-      "infoHotspots": []
-    },
-    {
-      "id": "31-r0010590_20260321153444",
-      "name": "R0010590_20260321153444",
-      "levels": [
-        {
-          "tileSize": 256,
-          "size": 256,
-          "fallbackOnly": true
-        },
-        {
-          "tileSize": 512,
-          "size": 512
-        },
-        {
-          "tileSize": 512,
-          "size": 1024
-        },
-        {
-          "tileSize": 512,
-          "size": 2048
-        }
-      ],
-      "faceSize": 1680,
-      "initialViewParameters": {
-        "pitch": 0,
-        "yaw": 0,
-        "fov": 1.5707963267948966
-      },
-      "linkHotspots": [],
-      "infoHotspots": []
-    },
-    {
-      "id": "32-r0010591_20260321153736",
-      "name": "R0010591_20260321153736",
-      "levels": [
-        {
-          "tileSize": 256,
-          "size": 256,
-          "fallbackOnly": true
-        },
-        {
-          "tileSize": 512,
-          "size": 512
-        },
-        {
-          "tileSize": 512,
-          "size": 1024
-        },
-        {
-          "tileSize": 512,
-          "size": 2048
-        }
-      ],
-      "faceSize": 1680,
-      "initialViewParameters": {
-        "pitch": 0,
-        "yaw": 0,
-        "fov": 1.5707963267948966
-      },
-      "linkHotspots": [],
-      "infoHotspots": []
-    },
-    {
-      "id": "33-r0010592_20260321153836",
-      "name": "R0010592_20260321153836",
-      "levels": [
-        {
-          "tileSize": 256,
-          "size": 256,
-          "fallbackOnly": true
-        },
-        {
-          "tileSize": 512,
-          "size": 512
-        },
-        {
-          "tileSize": 512,
-          "size": 1024
-        },
-        {
-          "tileSize": 512,
-          "size": 2048
-        }
-      ],
-      "faceSize": 1680,
-      "initialViewParameters": {
-        "pitch": 0,
-        "yaw": 0,
-        "fov": 1.5707963267948966
-      },
-      "linkHotspots": [],
       "infoHotspots": []
     }
   ],
