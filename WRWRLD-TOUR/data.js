@@ -1469,7 +1469,7 @@ var APP_DATA = {
       "infoHotspots": []
     }
   ],
-  "name": "Project Title",
+  "name": "Гимназия 1 - младший корпус",
   "settings": {
     "mouseViewMode": "drag",
     "autorotateEnabled": false,
