@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery Components</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <div data-include="./components/header.html"></div>
+
+    <main>
+        <div data-include="./components/filter.html"></div>
+
+        <section class="gallery js-gallery"></section>
+
+        <section class="pagination" aria-label="Pagination">
+            <button class="page prev" type="button" aria-label="Previous page">&lt;</button>
+            <button class="page active" type="button">1</button>
+            <button class="page" type="button">2</button>
+            <button class="page" type="button">3</button>
+            <div class="dots" aria-hidden="true">...</div>
+            <button class="page" type="button">9</button>
+            <button class="page next" type="button" aria-label="Next page">&gt;</button>
+        </section>
+    </main>
+
+    <script type="module" src="./js/app.js"></script>
+</body>
+</html>
