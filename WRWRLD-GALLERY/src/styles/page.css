@@ -1,0 +1,235 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0 60px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.page {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  color: inherit;
+}
+
+.page.active {
+  background-color: rgba(26, 24, 24, 1);
+  color: #ffffff;
+}
+
+body.light .page.active {
+  background-color: rgba(18, 18, 18, 0.05);
+  color: #121212;
+}
+
+.page:not(.active):hover::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: #dedede;
+}
+
+body.light .page:not(.active):hover::after {
+  background-color: #121212;
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+}
+
+@media (min-width: 1366px) {
+  .site-header {
+    padding: 20px 120px;
+  }
+
+  .controls {
+    padding: 0 120px;
+  }
+
+  .gallery {
+    padding: 40px 120px;
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1365px) {
+  .site-header {
+    padding: 20px 100px;
+  }
+
+  .controls {
+    padding: 0 100px;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 40px 100px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .site-header {
+    padding: 16px 40px;
+  }
+
+  .controls {
+    padding: 0 40px;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 30px 40px;
+    gap: 16px;
+  }
+
+  .card-info {
+    min-height: 56px;
+    padding: 8px 12px;
+  }
+
+  .title,
+  .artist {
+    font-size: 13px;
+  }
+
+  .year,
+  .location {
+    font-size: 11px;
+  }
+
+  .info-default,
+  .info-hover {
+    gap: 5px;
+    left: 12px;
+    right: 12px;
+    bottom: 8px;
+  }
+
+  .card-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 80%;
+    width: 36px;
+    height: 56px;
+    background: #ab8956;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  body.light .card-arrow {
+    background: #9b4b4b;
+  }
+
+  .filter-panel {
+    width: 420px;
+    right: -420px;
+    padding: 50px 48px;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .site-header {
+    padding: 16px 20px;
+    height: 60px;
+  }
+
+  .controls {
+    padding: 0 20px;
+    gap: 12px;
+  }
+
+  .search-box input {
+    width: 140px;
+  }
+
+  .gallery {
+    grid-template-columns: 1fr;
+    padding: 24px 20px;
+    gap: 16px;
+  }
+
+  .card-info {
+    min-height: 52px;
+    padding: 7px 10px;
+    width: 80%;
+  }
+
+  .title,
+  .artist {
+    font-size: 12px;
+  }
+
+  .year,
+  .location {
+    font-size: 10px;
+  }
+
+  .info-default,
+  .info-hover {
+    gap: 4px;
+    left: 10px;
+    right: 10px;
+    bottom: 7px;
+  }
+
+  .card-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 80%;
+    width: 32px;
+    height: 52px;
+    background: #ab8956;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  body.light .card-arrow {
+    background: #9b4b4b;
+  }
+
+  .filter-panel {
+    width: 100%;
+    right: -100%;
+    padding: 48px 20px 32px;
+  }
+
+  .filter-content {
+    margin-top: 40px;
+  }
+
+  .close-filter {
+    top: 18px;
+    right: 20px;
+  }
+
+  .filter-group-header h3 {
+    font-size: 20px;
+  }
+
+  .filter-footer {
+    margin-top: 56px;
+  }
+}
