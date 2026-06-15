@@ -31,6 +31,9 @@ jobs:
         with:
           node-version: 20
 
+      - name: Clean old dependencies
+        run: rm -rf WRWRLD-GALLERY/node_modules
+
       - name: Install dependencies
         working-directory: WRWRLD-GALLERY
         run: |
@@ -39,7 +42,7 @@ jobs:
 
       - name: Build
         working-directory: WRWRLD-GALLERY
-        run: npm run build
+        run: node ./node_modules/vite/bin/vite.js build
 
       - name: Prepare final Pages artifact
         run: |
