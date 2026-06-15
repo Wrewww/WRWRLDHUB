@@ -2,7 +2,7 @@ name: Deploy React app to GitHub Pages
 
 on:
   push:
-    branches: ['main']
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -11,19 +11,16 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: "pages"
   cancel-in-progress: true
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: WRWRLD-GALLERY
 
     steps:
       - name: Checkout
@@ -32,20 +29,24 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
           cache: npm
           cache-dependency-path: WRWRLD-GALLERY/package-lock.json
+          registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
+        working-directory: WRWRLD-GALLERY
         run: npm install
 
       - name: Build
+        working-directory: WRWRLD-GALLERY
         run: npm run build
 
-      - name: Add root redirect page
-        working-directory: .
+      - name: Prepare final Pages artifact
         run: |
-          mkdir -p dist
+          mkdir -p dist/WRWRLD-GALLERY
+          cp -R WRWRLD-GALLERY/dist/WRWRLD-GALLERY/* dist/WRWRLD-GALLERY/
+
           cat > dist/index.html <<'HTML'
           <!doctype html>
           <html lang="en">
