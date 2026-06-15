@@ -13,6 +13,7 @@ export default function FilterPanel({
 }) {
   const updateField = (field, value) => {
     onChangeFilters((prev) => ({ ...prev, [field]: value }));
+  const uniqueArtists = [...new Set(galleryItems.map(item => item.artist))];
   };
 
   return (
@@ -27,8 +28,6 @@ export default function FilterPanel({
           isOpen={accordionState.artist}
           onToggle={() => onToggleAccordion('artist')}
         >
-          const uniqueArtists = [...new Set(galleryItems.map(item => item.artist))];
-
           <div className="custom-select">
             <select
               value={filters.artist}
