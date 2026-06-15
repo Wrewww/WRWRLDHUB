@@ -47,7 +47,7 @@ jobs:
       - name: Prepare final Pages artifact
         run: |
           mkdir -p dist/WRWRLD-GALLERY
-          cp -R WRWRLD-GALLERY/dist/WRWRLD-GALLERY/* dist/WRWRLD-GALLERY/
+          cp -R WRWRLD-GALLERY/dist/* dist/WRWRLD-GALLERY/
 
           cat > dist/index.html <<'HTML'
           <!doctype html>
