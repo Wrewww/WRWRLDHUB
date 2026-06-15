@@ -1,7 +1,7 @@
 export const galleryItems = [
   {
     id: 1,
-    image: '/images/cascade-di-tivoli.png',
+    image: `${import.meta.env.BASE_URL}images/cascade-di-tivoli.svg`,
     alt: 'Cascate di Tivoli',
     title: 'CASCATE DI TIVOLI',
     year: '1761',
@@ -10,7 +10,7 @@ export const galleryItems = [
   },
   {
     id: 2,
-    image: '/images/portrait-of-vincent-van-gogh.png',
+    image: `${import.meta.env.BASE_URL}images/portrait-of-vincent-van-gogh.svg`,
     alt: 'Portrait of Vincent Van Gogh',
     title: 'PORTRAIT OF VINCENT VAN GOGH',
     year: '1886',
@@ -19,7 +19,7 @@ export const galleryItems = [
   },
   {
     id: 3,
-    image: '/images/unequal-marriage.png',
+    image: `${import.meta.env.BASE_URL}images/unequal-marriage.svg`,
     alt: 'Unequal Marriage',
     title: 'UNEQUAL MARRIAGE',
     year: '1862',
@@ -28,7 +28,7 @@ export const galleryItems = [
   },
   {
     id: 4,
-    image: '/images/the-happy-violinist.png',
+    image: `${import.meta.env.BASE_URL}images/the-happy-violinist.svg`,
     alt: 'The Happy Violinist',
     title: 'THE HAPPY VIOLINIST',
     year: '1624',
@@ -37,7 +37,7 @@ export const galleryItems = [
   },
   {
     id: 5,
-    image: '/images/the-arcadian.png',
+    image: `${import.meta.env.BASE_URL}images/the-arcadian.svg`,
     alt: 'The Arcadian',
     title: 'THE ARCADIAN',
     year: '1834',
@@ -46,7 +46,7 @@ export const galleryItems = [
   },
   {
     id: 6,
-    image: '/images/golfo-di-napoli.png',
+    image: `${import.meta.env.BASE_URL}images/golfo-di-napoli.svg`,
     alt: 'Golfo di Napoli',
     title: 'GOLFO DI NAPOLI',
     year: '1845',
