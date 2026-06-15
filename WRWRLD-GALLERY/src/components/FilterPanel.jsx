@@ -7,6 +7,7 @@ export default function FilterPanel({
   accordionState,
   onToggleAccordion,
   filters,
+  item,
   onChangeFilters,
   onClearFilters,
 }) {
@@ -26,17 +27,22 @@ export default function FilterPanel({
           isOpen={accordionState.artist}
           onToggle={() => onToggleAccordion('artist')}
         >
+          const uniqueArtists = [...new Set(galleryItems.map(item => item.artist))];
+
           <div className="custom-select">
             <select
               value={filters.artist}
               onChange={(event) => updateField('artist', event.target.value)}
             >
-              <option value="">Select the artist</option>
-              <option value="JEAN-HONORE FRAGONARD">Jean-Honore Fragonard</option>
-              <option value="VINCENT VAN GOGH">Vincent Van Gogh</option>
-              <option value="ILYA REPIN">Ilya Repin</option>
+            <option value="">Select the artist</option>
+            {uniqueArtists.map(artist => (
+            <option key={artist} value={artist}>
+              {artist}
+            </option>
+            ))}
             </select>
           </div>
+
         </FilterGroup>
 
         <FilterGroup
