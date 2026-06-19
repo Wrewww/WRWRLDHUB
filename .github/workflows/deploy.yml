@@ -36,13 +36,20 @@ jobs:
 
       - name: Install dependencies
         working-directory: WRWRLD-GALLERY
+        env:
+          NODE_ENV: development
+          NPM_CONFIG_PRODUCTION: "false"
         run: |
           npm config set registry https://registry.npmjs.org/
-          npm install
+          npm install --include=dev
+          npm ls vite
+          ls -la node_modules/.bin || true
 
       - name: Build
         working-directory: WRWRLD-GALLERY
-        run: npm run build
+        env:
+          NODE_ENV: production
+        run: npm exec vite build
 
       - name: Prepare final Pages artifact
         run: |
