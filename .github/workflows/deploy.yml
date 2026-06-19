@@ -41,15 +41,11 @@ jobs:
           NPM_CONFIG_PRODUCTION: "false"
         run: |
           npm config set registry https://registry.npmjs.org/
-          npm install --include=dev
-          npm ls vite
-          ls -la node_modules/.bin || true
+          npm install
 
       - name: Build
         working-directory: WRWRLD-GALLERY
-        env:
-          NODE_ENV: production
-        run: npm exec vite build
+        run: npm run build
 
       - name: Prepare final Pages artifact
         run: |
