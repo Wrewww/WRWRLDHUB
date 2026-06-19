@@ -1,5 +1,5 @@
-import FilterGroup from './FilterGroup';
-import { CloseIcon } from './icons';
+import FilterGroup from "./FilterGroup";
+import { CloseIcon } from "./icons";
 
 export default function FilterPanel({
   isOpen,
@@ -9,13 +9,15 @@ export default function FilterPanel({
   filters,
   onChangeFilters,
   onClearFilters,
+  artists,
+  locations,
 }) {
   const updateField = (field, value) => {
     onChangeFilters((prev) => ({ ...prev, [field]: value }));
   };
 
   return (
-    <div className={`filter-panel ${isOpen ? 'open' : ''}`}>
+    <div className={`filter-panel ${isOpen ? "open" : ""}`}>
       <button className="close-filter" type="button" aria-label="Close" onClick={onClose}>
         <CloseIcon />
       </button>
@@ -24,17 +26,19 @@ export default function FilterPanel({
         <FilterGroup
           title="ARTIST"
           isOpen={accordionState.artist}
-          onToggle={() => onToggleAccordion('artist')}
+          onToggle={() => onToggleAccordion("artist")}
         >
           <div className="custom-select">
             <select
               value={filters.artist}
-              onChange={(event) => updateField('artist', event.target.value)}
+              onChange={(event) => updateField("artist", event.target.value)}
             >
               <option value="">Select the artist</option>
-              <option value="JEAN-HONORE FRAGONARD">Jean-Honore Fragonard</option>
-              <option value="VINCENT VAN GOGH">Vincent Van Gogh</option>
-              <option value="ILYA REPIN">Ilya Repin</option>
+              {artists.map((artist) => (
+                <option key={artist} value={artist}>
+                  {artist}
+                </option>
+              ))}
             </select>
           </div>
         </FilterGroup>
@@ -42,17 +46,19 @@ export default function FilterPanel({
         <FilterGroup
           title="LOCATION"
           isOpen={accordionState.location}
-          onToggle={() => onToggleAccordion('location')}
+          onToggle={() => onToggleAccordion("location")}
         >
           <div className="custom-select">
             <select
               value={filters.location}
-              onChange={(event) => updateField('location', event.target.value)}
+              onChange={(event) => updateField("location", event.target.value)}
             >
               <option value="">Select the location</option>
-              <option value="LOUVRE MUSEUM">Louvre Museum</option>
-              <option value="THE HERMITAGE">The Hermitage</option>
-              <option value="TATE MODERN">Tate Modern</option>
+              {locations.map((location) => (
+                <option key={location} value={location}>
+                  {location}
+                </option>
+              ))}
             </select>
           </div>
         </FilterGroup>
@@ -60,21 +66,21 @@ export default function FilterPanel({
         <FilterGroup
           title="YEARS"
           isOpen={accordionState.years}
-          onToggle={() => onToggleAccordion('years')}
+          onToggle={() => onToggleAccordion("years")}
         >
           <div className="year-inputs">
             <input
               type="text"
               placeholder="From"
               value={filters.from}
-              onChange={(event) => updateField('from', event.target.value)}
+              onChange={(event) => updateField("from", event.target.value.replace(/[^0-9]/g, ""))}
             />
             <span className="separator">—</span>
             <input
               type="text"
               placeholder="To"
               value={filters.to}
-              onChange={(event) => updateField('to', event.target.value)}
+              onChange={(event) => updateField("to", event.target.value.replace(/[^0-9]/g, ""))}
             />
           </div>
         </FilterGroup>

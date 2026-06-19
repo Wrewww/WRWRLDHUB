@@ -1,6 +1,6 @@
-import SearchBox from './SearchBox';
-import FilterButton from './FilterButton';
-import FilterPanel from './FilterPanel';
+import SearchBox from "./SearchBox";
+import FilterButton from "./FilterButton";
+import FilterPanel from "./FilterPanel";
 
 export default function GalleryControls(props) {
   return (
@@ -18,6 +18,8 @@ export default function GalleryControls(props) {
         filters={props.filters}
         onChangeFilters={props.onChangeFilters}
         onClearFilters={props.onClearFilters}
+        artists={props.artists}
+        locations={props.locations}
       />
     </>
   );
